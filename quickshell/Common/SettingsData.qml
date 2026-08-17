@@ -1029,7 +1029,9 @@ Singleton {
             "spacing": 4,
             "innerPadding": 4,
             "barInsetPadding": -1,
+            "barLengthPadding": 0,
             "bottomGap": 0,
+            "attachToScreenEdge": false,
             "transparency": 1.0,
             "widgetTransparency": 1.0,
             "squareCorners": false,
@@ -1805,6 +1807,7 @@ Singleton {
         return {
             "shadowIntensity": config?.shadowIntensity ?? 0,
             "squareCorners": config?.squareCorners ?? false,
+            "attachToScreenEdge": config?.attachToScreenEdge ?? false,
             "gothCornersEnabled": config?.gothCornersEnabled ?? false,
             "borderEnabled": config?.borderEnabled ?? false
         };
@@ -1878,7 +1881,7 @@ Singleton {
             updateBarConfigs();
     }
 
-    // Zeroes out connected-mode-hostile fields (shadow, square/goth corners, border).
+    // Zeroes out connected-mode-hostile fields (shadow, square/goth corners, edge attach, border).
     // Returns { configs, changed } — `configs` is the same ref when no change.
     function _sanitizeBarConfigsForConnectedFrame(configs) {
         if (!connectedFrameModeActive || !Array.isArray(configs))
@@ -1899,6 +1902,10 @@ Singleton {
             }
             if (s.squareCorners ?? false) {
                 s.squareCorners = false;
+                dirty = true;
+            }
+            if (s.attachToScreenEdge ?? false) {
+                s.attachToScreenEdge = false;
                 dirty = true;
             }
             if (s.gothCornersEnabled ?? false) {
