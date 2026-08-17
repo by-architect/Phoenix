@@ -461,7 +461,7 @@ Singleton {
                     settingsModal.hide();
                     return;
                 }
-                toplevel.activate();
+                CompositorService.activateToplevel(toplevel);
                 return;
             }
         }
@@ -480,7 +480,7 @@ Singleton {
                 }
                 var idx = settingsModal.resolveTabIndex(tabName);
                 settingsModal.setTabIndex(idx);
-                toplevel.activate();
+                CompositorService.activateToplevel(toplevel);
                 return;
             }
         }
