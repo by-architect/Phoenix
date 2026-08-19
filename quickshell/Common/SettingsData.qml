@@ -115,6 +115,7 @@ Singleton {
     property bool clipboardUseOverlayLayer: false
     property string clipboardTypeFilter: "all"
     property var clipboardVisibleEntryActions: ["pin", "edit", "delete"]
+    property var clipboardActions: []
 
     property var launcherPluginVisibility: ({})
 
@@ -3024,6 +3025,103 @@ Singleton {
 
     function resetNotificationRules() {
         notificationRules = JSON.parse(JSON.stringify(Spec.SPEC.notificationRules.def));
+        saveSettings();
+    }
+
+    function addClipboardAction(group) {
+        var actions = JSON.parse(JSON.stringify(clipboardActions || []));
+        actions.push({
+            enabled: true,
+            name: "",
+            icon: {
+                type: "material",
+                value: "bolt"
+            },
+            group: group || "text",
+            extensions: "",
+            conditions: [],
+            command: ""
+        });
+        clipboardActions = actions;
+        saveSettings();
+        return actions.length - 1;
+    }
+
+    function updateClipboardAction(index, actionData) {
+        var actions = JSON.parse(JSON.stringify(clipboardActions || []));
+        if (index < 0 || index >= actions.length)
+            return;
+        actions[index] = Object.assign({}, actions[index] || {}, actionData || {});
+        clipboardActions = actions;
+        saveSettings();
+    }
+
+    function updateClipboardActionField(index, key, value) {
+        if (key === undefined || key === null || key === "")
+            return;
+        var patch = {};
+        patch[key] = value;
+        updateClipboardAction(index, patch);
+    }
+
+    function removeClipboardAction(index) {
+        var actions = JSON.parse(JSON.stringify(clipboardActions || []));
+        if (index < 0 || index >= actions.length)
+            return;
+        actions.splice(index, 1);
+        clipboardActions = actions;
+        saveSettings();
+    }
+
+    function addClipboardActionCondition(index) {
+        var actions = JSON.parse(JSON.stringify(clipboardActions || []));
+        if (index < 0 || index >= actions.length)
+            return;
+        var conditions = actions[index].conditions || [];
+        conditions.push({
+            op: "includes",
+            value: "",
+            caseSensitive: false
+        });
+        actions[index].conditions = conditions;
+        clipboardActions = actions;
+        saveSettings();
+    }
+
+    function updateClipboardActionConditionField(index, conditionIndex, key, value) {
+        if (key === undefined || key === null || key === "")
+            return;
+        var actions = JSON.parse(JSON.stringify(clipboardActions || []));
+        if (index < 0 || index >= actions.length)
+            return;
+        var conditions = actions[index].conditions || [];
+        if (conditionIndex < 0 || conditionIndex >= conditions.length)
+            return;
+        conditions[conditionIndex][key] = value;
+        actions[index].conditions = conditions;
+        clipboardActions = actions;
+        saveSettings();
+    }
+
+    function removeClipboardActionCondition(index, conditionIndex) {
+        var actions = JSON.parse(JSON.stringify(clipboardActions || []));
+        if (index < 0 || index >= actions.length)
+            return;
+        var conditions = actions[index].conditions || [];
+        if (conditionIndex < 0 || conditionIndex >= conditions.length)
+            return;
+        conditions.splice(conditionIndex, 1);
+        actions[index].conditions = conditions;
+        clipboardActions = actions;
+        saveSettings();
+    }
+
+    function getDefaultClipboardActions() {
+        return Spec.SPEC.clipboardActions.def;
+    }
+
+    function resetClipboardActions() {
+        clipboardActions = JSON.parse(JSON.stringify(Spec.SPEC.clipboardActions.def));
         saveSettings();
     }
 

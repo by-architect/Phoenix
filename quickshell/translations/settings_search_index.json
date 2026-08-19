@@ -11791,5 +11791,113 @@
     ],
     "description": "Choose a shortcut key to cycle between keyboard layouts",
     "conditionKey": "isNiri"
+  },
+  {
+    "section": "_tab_46",
+    "label": "Clipboard Actions",
+    "tabIndex": 46,
+    "category": "System",
+    "keywords": [
+      "actions",
+      "clipboard",
+      "cliphist",
+      "copy",
+      "history",
+      "linux",
+      "os",
+      "paste",
+      "system"
+    ],
+    "icon": "bolt",
+    "conditionKey": "dmsConnected"
+  },
+  {
+    "section": "clipboardActionsColor",
+    "label": "Color",
+    "tabIndex": 46,
+    "category": "System",
+    "keywords": [
+      "actions",
+      "clipboard",
+      "color",
+      "colour",
+      "hex",
+      "hue",
+      "linux",
+      "os",
+      "rgb",
+      "system",
+      "tint"
+    ],
+    "icon": "palette"
+  },
+  {
+    "section": "clipboardActionsIntro",
+    "label": "How it works",
+    "tabIndex": 46,
+    "category": "System",
+    "keywords": [
+      "actions",
+      "clipboard",
+      "command",
+      "how",
+      "linux",
+      "os",
+      "run",
+      "script",
+      "system",
+      "works"
+    ],
+    "icon": "info"
+  },
+  {
+    "section": "clipboardActionsPath",
+    "label": "Path & File",
+    "tabIndex": 46,
+    "category": "System",
+    "keywords": [
+      "actions",
+      "clipboard",
+      "extension",
+      "file",
+      "linux",
+      "os",
+      "path",
+      "system"
+    ],
+    "icon": "folder"
+  },
+  {
+    "section": "clipboardActionsText",
+    "label": "Text",
+    "tabIndex": 46,
+    "category": "System",
+    "keywords": [
+      "actions",
+      "clipboard",
+      "linux",
+      "os",
+      "string",
+      "system",
+      "text"
+    ],
+    "icon": "text_fields"
+  },
+  {
+    "section": "clipboardActionsUrl",
+    "label": "URL",
+    "tabIndex": 46,
+    "category": "System",
+    "keywords": [
+      "actions",
+      "clipboard",
+      "download",
+      "link",
+      "linux",
+      "os",
+      "system",
+      "url"
+    ],
+    "icon": "link"
   }
 ]

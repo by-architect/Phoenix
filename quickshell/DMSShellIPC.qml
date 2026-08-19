@@ -1426,6 +1426,34 @@ Item {
         target: "clipboard"
     }
 
+    IpcHandler {
+        function open(): string {
+            if (!PopoutService.clipboardActionsModal) {
+                return "CLIPBOARD_ACTIONS_NOT_AVAILABLE";
+            }
+            PopoutService.clipboardActionsModal.show();
+            return "CLIPBOARD_ACTIONS_OPEN_SUCCESS";
+        }
+
+        function close(): string {
+            if (!PopoutService.clipboardActionsModal) {
+                return "CLIPBOARD_ACTIONS_NOT_AVAILABLE";
+            }
+            PopoutService.clipboardActionsModal.hide();
+            return "CLIPBOARD_ACTIONS_CLOSE_SUCCESS";
+        }
+
+        function toggle(): string {
+            if (!PopoutService.clipboardActionsModal) {
+                return "CLIPBOARD_ACTIONS_NOT_AVAILABLE";
+            }
+            PopoutService.clipboardActionsModal.toggle();
+            return "CLIPBOARD_ACTIONS_TOGGLE_SUCCESS";
+        }
+
+        target: "clipboard-actions"
+    }
+
     // ! spotlight and launcher should be synonymous for backwards compat
     IpcHandler {
         function open(): string {

@@ -581,6 +581,21 @@ FocusScope {
         }
 
         Loader {
+            id: clipboardActionsLoader
+            anchors.fill: parent
+            active: root.currentIndex === 46
+            visible: active
+            focus: active
+
+            sourceComponent: ClipboardActionsTab {}
+
+            onActiveChanged: {
+                if (active && item)
+                    Qt.callLater(() => item.forceActiveFocus());
+            }
+        }
+
+        Loader {
             id: desktopWidgetsLoader
             anchors.fill: parent
             active: root.currentIndex === 27

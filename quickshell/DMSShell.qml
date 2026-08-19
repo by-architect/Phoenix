@@ -732,6 +732,14 @@ Item {
         }
     }
 
+    ClipboardActionsModal {
+        id: clipboardActionsModalPopup
+
+        Component.onCompleted: {
+            PopoutService.clipboardActionsModal = clipboardActionsModalPopup;
+        }
+    }
+
     NotificationModal {
         id: notificationModal
 

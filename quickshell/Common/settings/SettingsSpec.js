@@ -675,6 +675,7 @@ var SPEC = {
     clipboardUseOverlayLayer: { def: false },
     clipboardTypeFilter: { def: "all" },
     clipboardVisibleEntryActions: { def: ["pin", "edit", "delete"] },
+    clipboardActions: { def: [] },
 
     launcherPluginVisibility: { def: {} },
     launcherPluginOrder: { def: [] },

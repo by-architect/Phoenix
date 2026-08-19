@@ -347,6 +347,13 @@ Rectangle {
                     "clipboardOnly": true
                 },
                 {
+                    "id": "clipboard-actions",
+                    "text": I18n.tr("Clipboard Actions"),
+                    "icon": "bolt",
+                    "tabIndex": 46,
+                    "clipboardOnly": true
+                },
+                {
                     "id": "printers",
                     "text": I18n.tr("Printers"),
                     "icon": "print",
