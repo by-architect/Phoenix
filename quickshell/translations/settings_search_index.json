@@ -12763,5 +12763,97 @@
       "weather"
     ],
     "description": "Weather icon and temperature open the weather activity"
+  },
+  {
+    "section": "chatMediaCacheMaxMB",
+    "label": "Attachment cache limit",
+    "tabIndex": 47,
+    "category": "Chats",
+    "keywords": [
+      "attachment",
+      "bridge",
+      "cache",
+      "cached",
+      "chat",
+      "chats",
+      "demand",
+      "downloaded",
+      "evicted",
+      "files",
+      "images",
+      "limit",
+      "mail",
+      "message",
+      "messaging",
+      "once",
+      "provider",
+      "signal",
+      "whatsapp"
+    ],
+    "description": "Cached images and files are re-downloaded on demand once evicted"
+  },
+  {
+    "section": "_tab_47",
+    "label": "Chats",
+    "tabIndex": 47,
+    "category": "Chats",
+    "keywords": [
+      "bridge",
+      "chat",
+      "chats",
+      "mail",
+      "message",
+      "messaging",
+      "provider",
+      "signal",
+      "whatsapp"
+    ],
+    "icon": "forum"
+  },
+  {
+    "section": "chatHistoryRetentionDays",
+    "label": "Keep message history for",
+    "tabIndex": 47,
+    "category": "Chats",
+    "keywords": [
+      "bridge",
+      "chat",
+      "chats",
+      "forever",
+      "history",
+      "keep",
+      "kept",
+      "mail",
+      "message",
+      "messages",
+      "messaging",
+      "provider",
+      "signal",
+      "whatsapp"
+    ],
+    "description": "Messages are kept forever"
+  },
+  {
+    "section": "chatStorage",
+    "label": "Storage",
+    "tabIndex": 47,
+    "category": "Chats",
+    "keywords": [
+      "bridge",
+      "chat",
+      "chats",
+      "forever",
+      "kept",
+      "mail",
+      "message",
+      "messages",
+      "messaging",
+      "provider",
+      "signal",
+      "storage",
+      "whatsapp"
+    ],
+    "icon": "database",
+    "description": "Messages are kept forever"
   }
 ]

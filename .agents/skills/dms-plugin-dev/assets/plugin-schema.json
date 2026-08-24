@@ -42,7 +42,26 @@
     "type": {
       "type": "string",
       "description": "Plugin type. Use 'composite' (or any value) together with 'components' to provide multiple surfaces from one plugin.",
-      "enum": ["widget", "daemon", "launcher", "desktop", "composite"]
+      "enum": [
+        "widget",
+        "daemon",
+        "launcher",
+        "desktop",
+        "composite",
+        "chat"
+      ]
+    },
+    "bridge": {
+      "type": "array",
+      "description": "Argv for the chat provider bridge executable, resolved relative to the plugin directory. Required for type 'chat'. The bridge is a separate process supervised by the DMS backend, speaking newline-delimited JSON on stdin/stdout. See docs/CHAT-PLUGINS.md.",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "warning": {
+      "type": "string",
+      "description": "A caveat about this provider shown prominently in its settings, e.g. that using it may put the account at risk. Declared by the plugin so the shell never hardcodes anything provider-specific."
     },
     "capabilities": {
       "type": "array",
@@ -146,31 +165,60 @@
         }
       },
       "then": {
-        "required": ["trigger"]
+        "required": [
+          "trigger"
+        ]
       }
     },
     {
       "if": {
-        "required": ["components"],
+        "required": [
+          "components"
+        ],
         "properties": {
           "components": {
-            "required": ["launcher"]
+            "required": [
+              "launcher"
+            ]
           }
         }
       },
       "then": {
-        "required": ["trigger"]
+        "required": [
+          "trigger"
+        ]
       }
     },
     {
-      "anyOf": [
-        {
-          "required": ["component"]
-        },
-        {
-          "required": ["components"]
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "chat"
+          }
         }
-      ]
+      },
+      "then": {
+        "required": [
+          "bridge"
+        ]
+      },
+      "else": {
+        "anyOf": [
+          {
+            "required": [
+              "component"
+            ]
+          },
+          {
+            "required": [
+              "components"
+            ]
+          }
+        ]
+      }
     }
   ],
   "additionalProperties": true

@@ -5,6 +5,7 @@ import Quickshell
 import qs.Common
 import qs.Modals
 import qs.Modals.Changelog
+import qs.Modals.Chats
 import qs.Modals.Clipboard
 import qs.Modals.Common
 import qs.Modals.Greeter
@@ -776,6 +777,22 @@ Item {
 
         Component.onCompleted: {
             PopoutService.clipboardHistoryModal = clipboardHistoryModalPopup;
+        }
+    }
+
+    ChatsModal {
+        id: chatsModal
+
+        Component.onCompleted: {
+            PopoutService.chatsModal = chatsModal;
+        }
+    }
+
+    ChatPopout {
+        id: chatPopout
+
+        Component.onCompleted: {
+            PopoutService.chatPopout = chatPopout;
         }
     }
 

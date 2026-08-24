@@ -35,6 +35,8 @@ Singleton {
     property var settingsModal: null
     property var settingsModalLoader: null
     property var clipboardHistoryModal: null
+    property var chatsModal: null
+    property var chatPopout: null
     property var dankLauncherV2Modal: null
     property var dankLauncherV2ModalLoader: null
     property var dankIslandRouter: null
@@ -582,6 +584,40 @@ Singleton {
             }
             settingsModal?.toggle();
         }
+    }
+
+    function openChats() {
+        chatsModal?.show();
+    }
+
+    function closeChats() {
+        chatsModal?.hide();
+    }
+
+    function toggleChats() {
+        chatsModal?.toggle();
+    }
+
+    // openChat jumps straight into a conversation, for the launcher plugin and
+    // the Super+Tab rotation.
+    function openChat(provider, chatId) {
+        chatsModal?.showChat(provider, chatId);
+    }
+
+    // openChatPopout shows a single conversation, resolved from whatever
+    // identifier the caller has: a name, a phone number, or provider:chatId.
+    function openChatPopout(query) {
+        chatPopout?.openQuery(query);
+    }
+
+    // openChatPopoutFor opens a conversation already identified, skipping
+    // resolution. Used by the runner, which has picked an exact row.
+    function openChatPopoutFor(provider, chatId) {
+        chatPopout?.openResolved(provider, chatId);
+    }
+
+    function closeChatPopout() {
+        chatPopout?.hidePopout();
     }
 
     function openClipboardHistory() {
