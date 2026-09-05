@@ -8,7 +8,9 @@ import Quickshell.Io
 import qs.Common
 import qs.DankCommon.Common as DankCommon
 import qs.Services
+import qs.Modules.Greetd
 import "StockThemes.js" as StockThemes
+import "GSettings.js" as GSettings
 
 Singleton {
     id: root
@@ -143,13 +145,11 @@ Singleton {
 
     Component.onCompleted: {
         Quickshell.execDetached(["mkdir", "-p", stateDir]);
-        // shellDir may be an embedded-UI extraction, which is read-only and
-        // unexecutable (dankgo shellapp/shellfs makeReadOnly chmods 0444)
-        Quickshell.execDetached(["bash", shellDir + "/scripts/gtk.sh", configDir, "assets", "", shellDir]);
         Proc.runCommand("matugenCheck", ["sh", "-c", "command -v matugen"], (output, code) => {
             matugenAvailable = (code === 0) && !envDisableMatugen;
+            const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode);
 
-            if (!matugenAvailable) {
+            if (!matugenAvailable || isGreeterMode) {
                 return;
             }
 
@@ -325,7 +325,22 @@ Singleton {
         }
     }
 
-    readonly property var availableMatugenSchemes: [({
+    readonly property var availableMatugenSchemes: {
+        const schemes = _matugenSchemeDefs;
+        const seen = {};
+        for (let i = 0; i < schemes.length; i++) {
+            const label = schemes[i].label;
+            if (seen[label] === undefined) {
+                seen[label] = true;
+                continue;
+            }
+            // duplicate translations otherwise collapse the label-keyed dropdown onto one scheme (#3154)
+            schemes[i].label = label + " (" + schemes[i].value.replace("scheme-", "") + ")";
+        }
+        return schemes;
+    }
+
+    readonly property var _matugenSchemeDefs: [({
                 "value": "scheme-tonal-spot",
                 "label": I18n.tr("Tonal Spot", "matugen color scheme option"),
                 "description": I18n.tr("Balanced palette with focused accents (default).")
@@ -361,6 +376,10 @@ Singleton {
                 "value": "scheme-rainbow",
                 "label": I18n.tr("Rainbow", "matugen color scheme option"),
                 "description": I18n.tr("Diverse palette spanning the full spectrum.")
+            }), ({
+                "value": "scheme-smart",
+                "label": I18n.tr("Smart", "matugen color scheme option"),
+                "description": I18n.tr("Automatically picks the scheme variant based on the wallpaper.")
             })]
 
     function getMatugenScheme(value) {
@@ -370,6 +389,38 @@ Singleton {
                 return schemes[i];
         }
         return schemes[0];
+    }
+
+    readonly property var availableSourceModes: [({
+                "value": "dominant",
+                "label": I18n.tr("Dominant", "matugen source color option")
+            }), ({
+                "value": "colorful",
+                "label": I18n.tr("Colorful", "matugen source color option")
+            }), ({
+                "value": "darkness",
+                "label": I18n.tr("Darkest", "matugen source color option")
+            }), ({
+                "value": "lightness",
+                "label": I18n.tr("Lightest", "matugen source color option")
+            }), ({
+                "value": "saturation",
+                "label": I18n.tr("Most Saturated", "matugen source color option")
+            }), ({
+                "value": "less-saturation",
+                "label": I18n.tr("Least Saturated", "matugen source color option")
+            }), ({
+                "value": "value",
+                "label": I18n.tr("Most Vivid", "matugen source color option")
+            })]
+
+    function getSourceMode(value) {
+        const modes = availableSourceModes;
+        for (var i = 0; i < modes.length; i++) {
+            if (modes[i].value === value)
+                return modes[i];
+        }
+        return modes[0];
     }
 
     property color primary: currentThemeData.primary
@@ -1009,6 +1060,34 @@ Singleton {
         };
     }
 
+    // Expressive spatial spring presets ([stiffness, damping], unit mass) tuned to a
+    // 500ms reference transition; runtime values scale via springPreset().
+    readonly property var springSpecs: {
+        "expressive": [560, 37],
+        "fast": [220, 23],
+        "default": [100, 16]
+    }
+
+    // Damping multipliers for the user-facing spring bounce setting:
+    // crisp settles without overshoot, playful adds visible bounce.
+    readonly property var springDampingScales: [1.22, 1.0, 0.82]
+
+    function tunedSpring(spec, baseDuration) {
+        const f = Math.max(0.05, baseDuration / 500);
+        const bounce = typeof SettingsData !== "undefined" && SettingsData.springBounce >= 0 && SettingsData.springBounce < springDampingScales.length ? springDampingScales[Math.round(SettingsData.springBounce)] : 1;
+        return {
+            "stiffness": spec[0] / (f * f),
+            "damping": spec[1] / f * bounce,
+            "mass": 1
+        };
+    }
+
+    function springPreset(name, baseDuration) {
+        return tunedSpring(springSpecs[name] ?? springSpecs["default"], baseDuration);
+    }
+
+    readonly property bool springMotionDisabled: currentAnimationBaseDuration <= 0
+
     readonly property int notificationAnimationBaseDuration: {
         if (typeof SettingsData === "undefined")
             return 200;
@@ -1083,11 +1162,26 @@ Singleton {
         return presetMap[SettingsData.modalAnimationSpeed] ?? 150;
     }
 
-    property real cornerRadius: typeof SettingsData !== "undefined" ? SettingsData.cornerRadius : 12
+    property real cornerRadius: {
+        if (typeof SessionData !== "undefined" && SessionData.isGreeterMode && typeof GreetdSettings !== "undefined") {
+            return GreetdSettings.cornerRadius;
+        }
+        return typeof SettingsData !== "undefined" ? SettingsData.cornerRadius : 12;
+    }
 
-    property string fontFamily: typeof SettingsData !== "undefined" ? resolvedFontFamily(SettingsData.fontFamily) : DankCommon.Fonts.sans
+    property string fontFamily: {
+        if (typeof SessionData !== "undefined" && SessionData.isGreeterMode && typeof GreetdSettings !== "undefined") {
+            return resolvedFontFamily(GreetdSettings.getEffectiveFontFamily());
+        }
+        return typeof SettingsData !== "undefined" ? resolvedFontFamily(SettingsData.fontFamily) : DankCommon.Fonts.sans;
+    }
 
-    property string monoFontFamily: typeof SettingsData !== "undefined" ? resolvedMonoFontFamily(SettingsData.monoFontFamily) : DankCommon.Fonts.mono
+    property string monoFontFamily: {
+        if (typeof SessionData !== "undefined" && SessionData.isGreeterMode && typeof GreetdSettings !== "undefined") {
+            return resolvedMonoFontFamily(GreetdSettings.monoFontFamily);
+        }
+        return typeof SettingsData !== "undefined" ? resolvedMonoFontFamily(SettingsData.monoFontFamily) : DankCommon.Fonts.mono;
+    }
 
     function resolvedFontFamily(family) {
         if (family === defaultFontFamily)
@@ -1101,9 +1195,19 @@ Singleton {
         return family;
     }
 
-    property int fontWeight: typeof SettingsData !== "undefined" ? SettingsData.fontWeight : Font.Normal
+    property int fontWeight: {
+        if (typeof SessionData !== "undefined" && SessionData.isGreeterMode && typeof GreetdSettings !== "undefined") {
+            return GreetdSettings.fontWeight;
+        }
+        return typeof SettingsData !== "undefined" ? SettingsData.fontWeight : Font.Normal;
+    }
 
-    property real fontScale: typeof SettingsData !== "undefined" ? SettingsData.fontScale : 1.0
+    property real fontScale: {
+        if (typeof SessionData !== "undefined" && SessionData.isGreeterMode && typeof GreetdSettings !== "undefined") {
+            return GreetdSettings.fontScale;
+        }
+        return typeof SettingsData !== "undefined" ? SettingsData.fontScale : 1.0;
+    }
 
     property real spacingXXS: 2
     property real spacingXS: 4
@@ -1161,15 +1265,30 @@ Singleton {
                 currentThemeCategory = "generic";
             }
         }
-        if (savePrefs && typeof SettingsData !== "undefined") {
+        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode);
+        if (savePrefs && typeof SettingsData !== "undefined" && !isGreeterMode) {
             SettingsData.set("currentThemeCategory", currentThemeCategory);
             SettingsData.set("currentThemeName", currentTheme);
         }
 
-        generateSystemThemesFromCurrentTheme();
+        if (!isGreeterMode) {
+            generateSystemThemesFromCurrentTheme();
+        }
+    }
+
+    function applyGreeterTheme(themeName) {
+        switchTheme(themeName, false, false);
+        if (themeName === dynamic && dynamicColorsFileView.path) {
+            dynamicColorsFileView.reload();
+        }
     }
 
     function setLightMode(light, savePrefs = true, enableTransition = false) {
+        if (typeof SettingsData !== "undefined" && SettingsData.matugenSmartMode) {
+            SettingsData.matugenSmartMode = false;
+            SettingsData.saveSettings();
+        }
+
         if (enableTransition) {
             screenTransition();
             lightModeTransitionTimer.lightMode = light;
@@ -1178,14 +1297,17 @@ Singleton {
             return;
         }
 
-        if (savePrefs && typeof SessionData !== "undefined") {
+        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode);
+        if (savePrefs && typeof SessionData !== "undefined" && !isGreeterMode) {
             SessionData.setLightMode(light);
         }
 
-        if (typeof SettingsData !== "undefined") {
-            SettingsData.updateCosmicThemeMode(light);
+        if (!isGreeterMode) {
+            if (typeof SettingsData !== "undefined") {
+                SettingsData.updateCosmicThemeMode(light);
+            }
+            generateSystemThemesFromCurrentTheme();
         }
-        generateSystemThemesFromCurrentTheme();
     }
 
     function toggleLightMode(savePrefs = true) {
@@ -1223,7 +1345,8 @@ Singleton {
             if (themeData.variants.type === "multi" && themeData.variants.flavors && themeData.variants.accents) {
                 const defaults = themeData.variants.defaults || {};
                 const modeDefaults = defaults[colorMode] || defaults.dark || {};
-                const stored = typeof SettingsData !== "undefined" ? SettingsData.getRegistryThemeMultiVariant(themeId, modeDefaults, colorMode) : modeDefaults;
+                const isGreeterMode = typeof SessionData !== "undefined" && SessionData.isGreeterMode;
+                const stored = isGreeterMode ? (GreetdSettings.registryThemeVariants[themeId]?.[colorMode] || modeDefaults) : (typeof SettingsData !== "undefined" ? SettingsData.getRegistryThemeMultiVariant(themeId, modeDefaults, colorMode) : modeDefaults);
                 var flavorId = stored.flavor || modeDefaults.flavor || "";
                 const accentId = stored.accent || modeDefaults.accent || "";
                 var flavor = findVariant(themeData.variants.flavors, flavorId);
@@ -1249,7 +1372,8 @@ Singleton {
             }
 
             if (themeData.variants.options && themeData.variants.options.length > 0) {
-                const selectedVariantId = typeof SettingsData !== "undefined" ? SettingsData.getRegistryThemeVariant(themeId, themeData.variants.default) : themeData.variants.default;
+                const isGreeterMode = typeof SessionData !== "undefined" && SessionData.isGreeterMode;
+                const selectedVariantId = isGreeterMode ? (typeof GreetdSettings.registryThemeVariants[themeId] === "string" ? GreetdSettings.registryThemeVariants[themeId] : themeData.variants.default) : (typeof SettingsData !== "undefined" ? SettingsData.getRegistryThemeVariant(themeId, themeData.variants.default) : themeData.variants.default);
                 const variant = findVariant(themeData.variants.options, selectedVariantId);
                 if (variant) {
                     const variantColors = variant[colorMode] || variant.dark || variant.light || {};
@@ -1369,6 +1493,8 @@ Singleton {
         }
     }
 
+    property color widgetInactiveIconColor: withAlpha(widgetIconColor, 0.6)
+
     property color widgetTextColor: {
         if (typeof SettingsData === "undefined") {
             return surfaceText;
@@ -1388,7 +1514,7 @@ Singleton {
         const size = (maximizeIcon ?? false) ? iconSizeLarge : iconSize;
         const s = iconScale !== undefined ? iconScale : 1.0;
 
-        return Math.round((barThickness / 48) * (size + defaultOffset) * s);
+        return 2 * Math.round((barThickness / 48) * (size + defaultOffset) * s / 2);
     }
 
     function barTextSize(barThickness, fontScale, maximizeText) {
@@ -1497,7 +1623,7 @@ Singleton {
         const desired = {
             "kind": kind,
             "value": value,
-            "mode": isLight ? "light" : "dark",
+            "mode": (typeof SettingsData !== "undefined" && SettingsData.matugenSmartMode && kind === "image" && !stockColors) ? "smart" : (isLight ? "light" : "dark"),
             "iconTheme": iconTheme || "System Default",
             "matugenType": matugenType || "scheme-tonal-spot",
             "runUserTemplates": (typeof SettingsData !== "undefined") ? SettingsData.runUserMatugenTemplates : true
@@ -1522,6 +1648,13 @@ Singleton {
         }
         if (typeof SettingsData !== "undefined" && SettingsData.matugenContrast !== 0) {
             args.push("--contrast", SettingsData.matugenContrast.toString());
+        }
+        // Only sent when it would change something. A shell newer than the dms
+        // binary is a supported setup (DMS_SHELL_DIR / -c), and an older binary
+        // exits with "unknown flag: --source-mode" rather than ignoring it, so
+        // the default must not put the flag on the command line at all.
+        if (typeof SettingsData !== "undefined" && SettingsData.matugenSourceMode && SettingsData.matugenSourceMode !== "dominant") {
+            args.push("--source-mode", SettingsData.matugenSourceMode);
         }
 
         if (typeof SettingsData !== "undefined") {
@@ -1590,7 +1723,8 @@ Singleton {
     }
 
     function generateSystemThemesFromCurrentTheme() {
-        if (!matugenAvailable)
+        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode);
+        if (!matugenAvailable || isGreeterMode)
             return;
 
         _lastGenerateMs = Date.now();
@@ -1761,30 +1895,19 @@ Singleton {
         const theme = isLight ? "adw-gtk3" : "adw-gtk3-dark";
         const schema = "org.gnome.desktop.interface";
         const key = "gtk-theme";
+        const reset = GSettings.setCmd(schema, key, "");
+        const apply = GSettings.setCmd(schema, key, theme);
 
-        const makeCmd = (tool, schema, val) => {
-            if (tool === "gsettings") {
-                return `gsettings set ${schema} ${key} '' && gsettings set ${schema} ${key} ${val}`;
-            } else {
-                const dconfPath = `/${schema.replace(/\./g, "/")}`;
-                return `dconf write ${dconfPath}/${key} "''" && dconf write ${dconfPath}/${key} "'${val}'"`;
-            }
-        };
-
-        Proc.runCommand("gtkRefresher", ["sh", "-c", makeCmd("gsettings", schema, theme)], (output, exitCode) => {
+        Proc.runCommand("gtkRefresher", ["sh", "-c", `${reset}; ${apply}`], (output, exitCode) => {
             if (exitCode !== 0) {
-                Proc.runCommand("gtkRefreshFallback", ["sh", "-c", makeCmd("dconf", schema, theme)], (output, exitCode) => {
-                    if (exitCode !== 0) {
-                        log.warn("Failed to refresh gtk-theme");
-                    }
-                });
+                log.warn("Failed to refresh gtk-theme");
             }
         });
     }
 
     function patchGtk3colors() {
         const isLight = (typeof SessionData !== "undefined" && SessionData.isLightMode);
-        Proc.runCommand("gtk3Patcher", ["bash", shellDir + "/scripts/gtk.sh", configDir, "patch", isLight, shellDir], (output, exitCode) => {
+        Proc.runCommand("gtk3Patcher", ["bash", shellDir + "/scripts/gtk.sh", configDir, "patch", isLight], (output, exitCode) => {
             switch (exitCode) {
             case 0:
                 refreshGtkTheme();
@@ -1806,7 +1929,7 @@ Singleton {
         }
 
         const isLight = (typeof SessionData !== "undefined" && SessionData.isLightMode) ? "true" : "false";
-        Proc.runCommand("gtkApplier", ["bash", shellDir + "/scripts/gtk.sh", configDir, "apply", isLight, shellDir], (output, exitCode) => {
+        Proc.runCommand("gtkApplier", ["bash", shellDir + "/scripts/gtk.sh", configDir, "apply", isLight], (output, exitCode) => {
             if (exitCode === 0) {
                 if (typeof ToastService !== "undefined" && !root.matugenToastSuppressed) {
                     ToastService.showInfo(I18n.tr("GTK colors applied successfully"));
@@ -1915,17 +2038,26 @@ Singleton {
     // Returns numeric fillMode value for shader use (matches shader calculateUV logic)
     function getShaderFillMode(modeName) {
         switch (modeName) {
-        case "Stretch": return 0;
+        case "Stretch":
+            return 0;
         case "Fit":
-        case "PreserveAspectFit": return 1;
+        case "PreserveAspectFit":
+            return 1;
         case "Fill":
-        case "PreserveAspectCrop": return 2;
-        case "Tile": return 3;
-        case "TileVertically": return 4;
-        case "TileHorizontally": return 5;
-        case "Pad": return 6;
-        case "Scrolling": return 7;
-        default: return 2;
+        case "PreserveAspectCrop":
+            return 2;
+        case "Tile":
+            return 3;
+        case "TileVertically":
+            return 4;
+        case "TileHorizontally":
+            return 5;
+        case "Pad":
+            return 6;
+        case "Scrolling":
+            return 7;
+        default:
+            return 2;
         }
     }
 
@@ -1934,9 +2066,23 @@ Singleton {
         return Math.round(value * s) / s;
     }
 
+    // Qt rounds a centred anchor offset to whole pixels, so a box must share its content's parity
+    function snapEven(value, dpr) {
+        const s = dpr || 1;
+        return 2 * Math.round(value * s / 2) / s;
+    }
+
     function px(value, dpr) {
         const s = dpr || 1;
         return Math.round(value * s) / s;
+    }
+
+    function barWidgetThickness(innerPadding, dpr) {
+        return snapEven(Math.max(20, 26 + innerPadding * 0.6), dpr);
+    }
+
+    function barThickness(innerPadding, dpr) {
+        return snapEven(Math.max(barWidgetThickness(innerPadding, dpr) + innerPadding + 4, barHeight - 4 - (8 - innerPadding)), dpr);
     }
 
     function hairline(dpr) {
@@ -2071,17 +2217,45 @@ Singleton {
         }
     }
 
+    readonly property string _greeterCacheDir: Quickshell.env("DMS_GREET_CFG_DIR") || "/var/cache/dms-greeter"
+
+    property string greeterColorsBaseDir: root._greeterCacheDir
+
+    function setGreeterColorsBaseDir(dir) {
+        const next = dir || root._greeterCacheDir;
+        if (greeterColorsBaseDir === next)
+            return;
+        greeterColorsBaseDir = next;
+        if (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
+            dynamicColorsFileView.reload();
+    }
+
+    function resetGreeterColorsBaseDir() {
+        setGreeterColorsBaseDir(root._greeterCacheDir);
+    }
+
     FileView {
         id: dynamicColorsFileView
-        path: stateDir + "/dms-colors.json"
+        path: {
+            if (SessionData.isGreeterMode)
+                return root.greeterColorsBaseDir ? (root.greeterColorsBaseDir + "/colors.json") : "";
+            return stateDir + "/dms-colors.json";
+        }
         blockLoading: false
-        watchChanges: true
+        watchChanges: !SessionData.isGreeterMode
 
         function parseAndLoadColors() {
             try {
                 const colorsText = dynamicColorsFileView.text();
                 if (colorsText) {
                     root.matugenColors = JSON.parse(colorsText);
+                    if (typeof SettingsData !== "undefined" && SettingsData.matugenSmartMode && currentTheme === dynamic && root.matugenColors && root.matugenColors.mode && typeof SessionData !== "undefined" && !SessionData.isSwitchingMode) {
+                        const resolvedLight = root.matugenColors.mode === "light";
+                        if (SessionData.isLightMode !== resolvedLight) {
+                            SessionData.setLightMode(resolvedLight, true);
+                            SettingsData.updateCosmicThemeMode(resolvedLight);
+                        }
+                    }
                     if (typeof ToastService !== "undefined") {
                         ToastService.clearWallpaperError();
                     }
@@ -2108,6 +2282,9 @@ Singleton {
 
         onLoadFailed: function (error) {
             if (currentTheme !== dynamic)
+                return;
+
+            if (SessionData.isGreeterMode)
                 return;
 
             if (workerRunning) {

@@ -341,42 +341,19 @@ Item {
                     spacing: Theme.spacingS
                     visible: SessionService.hibernateSupported
 
-                    StyledText {
-                        text: I18n.tr("Suspend behavior")
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.surfaceText
-                        leftPadding: Theme.spacingM
-                    }
-
-                    DankButtonGroup {
+                    SettingsDropdownRow {
                         id: suspendBehaviorSelector
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        model: [I18n.tr("Suspend"), I18n.tr("Hibernate"), I18n.tr("Suspend then Hibernate")]
-                        selectionMode: "single"
-                        checkEnabled: false
 
-                        Connections {
-                            target: powerCategory
-                            function onCurrentIndexChanged() {
-                                const behavior = powerCategory.currentIndex === 0 ? SettingsData.acSuspendBehavior : SettingsData.batterySuspendBehavior;
-                                suspendBehaviorSelector.currentIndex = behavior;
-                            }
-                        }
+                        readonly property bool onAc: powerCategory.currentIndex === 0
 
-                        Component.onCompleted: {
-                            const behavior = powerCategory.currentIndex === 0 ? SettingsData.acSuspendBehavior : SettingsData.batterySuspendBehavior;
-                            currentIndex = behavior;
-                        }
-
-                        onSelectionChanged: (index, selected) => {
-                            if (!selected)
+                        text: I18n.tr("Suspend behavior")
+                        options: [I18n.tr("Suspend"), I18n.tr("Hibernate"), I18n.tr("Suspend then Hibernate")]
+                        currentValue: options[onAc ? SettingsData.acSuspendBehavior : SettingsData.batterySuspendBehavior] ?? options[0]
+                        onValueChanged: value => {
+                            const index = suspendBehaviorSelector.options.indexOf(value);
+                            if (index < 0)
                                 return;
-                            currentIndex = index;
-                            if (powerCategory.currentIndex === 0) {
-                                SettingsData.set("acSuspendBehavior", index);
-                            } else {
-                                SettingsData.set("batterySuspendBehavior", index);
-                            }
+                            SettingsData.set(suspendBehaviorSelector.onAc ? "acSuspendBehavior" : "batterySuspendBehavior", index);
                         }
                     }
                 }

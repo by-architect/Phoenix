@@ -118,8 +118,10 @@ Column {
                 const status = NetworkService.networkStatus;
                 if (status === "ethernet")
                     return "settings_ethernet";
+                if (status === "cellular")
+                    return "network_cell";
                 if (status === "vpn")
-                    return NetworkService.ethernetConnected ? "settings_ethernet" : NetworkService.wifiSignalIcon;
+                    return NetworkService.ethernetConnected ? "settings_ethernet" : (NetworkService.cellularConnected ? "network_cell" : NetworkService.wifiSignalIcon);
                 if (status === "wifi")
                     return NetworkService.wifiSignalIcon;
                 return "wifi";
@@ -150,8 +152,10 @@ Column {
                 const status = NetworkService.networkStatus;
                 if (status === "ethernet")
                     return true;
+                if (status === "cellular")
+                    return true;
                 if (status === "vpn")
-                    return NetworkService.ethernetConnected || NetworkService.wifiConnected;
+                    return NetworkService.ethernetConnected || NetworkService.wifiConnected || NetworkService.cellularConnected;
                 if (status === "wifi")
                     return true;
                 return NetworkService.wifiEnabled;
@@ -171,14 +175,14 @@ Column {
         switch (id) {
         case "wifi":
             {
-                if (NetworkService.networkStatus !== "ethernet" && !NetworkService.wifiToggling) {
+                if (NetworkService.networkStatus !== "ethernet" && NetworkService.networkStatus !== "cellular" && !NetworkService.wifiToggling) {
                     NetworkService.toggleWifiRadio();
                 }
                 break;
             }
         case "bluetooth":
             {
-                BluetoothService.setBluetoothEnabled(!BluetoothService.enabled);
+                BluetoothService.toggleBluetooth();
                 break;
             }
         case "audioOutput":
@@ -473,9 +477,13 @@ Column {
                         const status = NetworkService.networkStatus;
                         if (status === "ethernet")
                             return I18n.tr("Ethernet", "network status");
+                        if (status === "cellular")
+                            return I18n.tr("Cellular", "network status");
                         if (status === "vpn") {
                             if (NetworkService.ethernetConnected)
                                 return I18n.tr("Ethernet", "network status");
+                            if (NetworkService.cellularConnected)
+                                return I18n.tr("Cellular", "network status");
                             if (NetworkService.wifiConnected && NetworkService.currentWifiSSID)
                                 return NetworkService.currentWifiSSID;
                         }
@@ -515,9 +523,13 @@ Column {
                         const status = NetworkService.networkStatus;
                         if (status === "ethernet")
                             return I18n.tr("Connected", "network status");
+                        if (status === "cellular")
+                            return NetworkService.cellularIP || I18n.tr("Connected", "network status");
                         if (status === "vpn") {
                             if (NetworkService.ethernetConnected)
                                 return I18n.tr("Connected", "network status");
+                            if (NetworkService.cellularConnected)
+                                return NetworkService.cellularIP || I18n.tr("Connected", "network status");
                             if (NetworkService.wifiConnected)
                                 return NetworkService.wifiSignalStrength > 0 ? NetworkService.wifiSignalStrength + "%" : I18n.tr("Connected", "network status");
                         }
@@ -545,8 +557,18 @@ Column {
                                 }
                                 return null;
                             })();
-                        if (primaryDevice)
-                            return primaryDevice.name || primaryDevice.alias || primaryDevice.deviceName || I18n.tr("Connected Device", "bluetooth status");
+                        if (primaryDevice) {
+                            const name = primaryDevice.name || primaryDevice.alias || primaryDevice.deviceName || I18n.tr("Connected Device", "bluetooth status");
+                            // A reported 0% is valid; batteryAvailable distinguishes missing data.
+                            // https://quickshell.org/docs/v0.3.1/types/Quickshell.Bluetooth/BluetoothDevice/
+                            // https://bluez.readthedocs.io/en/latest/battery-api/
+                            if (primaryDevice.batteryAvailable)
+                                return `${name} • ${Math.round(primaryDevice.battery * 100)}%`;
+                            const btBattery = BatteryService.bluetoothDevices.find(dev => dev.name === name || dev.name.toLowerCase().includes(name.toLowerCase()) || name.toLowerCase().includes(dev.name.toLowerCase()));
+                            if (btBattery)
+                                return `${name} • ${btBattery.percentage}%`;
+                            return name;
+                        }
                         return I18n.tr("No devices", "bluetooth status");
                     }
                 case "audioOutput":
@@ -734,7 +756,11 @@ Column {
                 case "nightMode":
                     return I18n.tr("Night Mode");
                 case "darkMode":
-                    return I18n.tr("Dark Mode");
+                    {
+                        if (SettingsData.matugenSmartMode && Theme.currentTheme === Theme.dynamic)
+                            return SessionData.isLightMode ? I18n.tr("Auto (Light Mode)", "dark mode toggle label when matugen smart mode resolved light") : I18n.tr("Auto (Dark Mode)", "dark mode toggle label when matugen smart mode resolved dark");
+                        return I18n.tr("Dark Mode");
+                    }
                 case "idleInhibitor":
                     return SessionService.idleInhibited ? I18n.tr("Keeping Awake") : I18n.tr("Keep Awake");
                 default:
@@ -1118,9 +1144,15 @@ Column {
                     }
                 }
                 function onPluginLoaded(loadedPluginId) {
-                    if (loadedPluginId !== pluginId || pluginInstance)
+                    if (loadedPluginId !== pluginId)
                         return;
-                    Qt.callLater(() => tryCreatePluginInstance());
+                    Qt.callLater(() => {
+                        if (pluginInstance) {
+                            pluginInstance.destroy();
+                            pluginInstance = null;
+                        }
+                        tryCreatePluginInstance();
+                    });
                 }
             }
 

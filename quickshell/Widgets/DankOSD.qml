@@ -140,8 +140,7 @@ PanelWindow {
             if (!SettingsData.barConfigCoversScreen(bc, screen))
                 continue;
             const innerPadding = bc.innerPadding ?? (defaultBar?.innerPadding ?? 4);
-            const widgetThickness = Math.max(20, 26 + innerPadding * 0.6);
-            const thickness = Math.max(widgetThickness + innerPadding + 4, Theme.barHeight - 4 - (8 - innerPadding));
+            const thickness = Theme.barThickness(innerPadding, dpr);
             const spacing = bc.spacing ?? (defaultBar?.spacing ?? 4);
             const bottomGap = bc.bottomGap ?? (defaultBar?.bottomGap ?? 0);
             const offset = thickness + spacing + bottomGap;
@@ -163,6 +162,8 @@ PanelWindow {
         // Legacy OSDs still instantiate on island screens, so the strip has to be reserved for them.
         offsets.top = Math.max(offsets.top, SettingsData.dankIslandEdgeOffset(screen, "top"));
         offsets.bottom = Math.max(offsets.bottom, SettingsData.dankIslandEdgeOffset(screen, "bottom"));
+        offsets.left = Math.max(offsets.left, SettingsData.dankIslandEdgeOffset(screen, "left"));
+        offsets.right = Math.max(offsets.right, SettingsData.dankIslandEdgeOffset(screen, "right"));
         return offsets;
     }
 
@@ -235,6 +236,22 @@ PanelWindow {
     implicitWidth: alignedWidth + (shadowBuffer * 2)
     implicitHeight: alignedHeight + (shadowBuffer * 2)
 
+    readonly property var scaleSpringParams: Theme.springPreset("default", animationDuration)
+
+    SpringMotion {
+        id: osdScaleSpring
+        reducedMotion: root.animationDuration <= 0
+        positionEpsilon: 0.001
+        velocityEpsilon: 0.001
+        stiffness: root.scaleSpringParams.stiffness
+        damping: root.scaleSpringParams.damping
+        value: root.shouldBeVisible ? 1 : 0.9
+
+        Component.onCompleted: snapTo(root.shouldBeVisible ? 1 : 0.9)
+    }
+
+    onShouldBeVisibleChanged: osdScaleSpring.retarget(root.shouldBeVisible ? 1 : 0.9)
+
     Timer {
         id: hideTimer
 
@@ -251,7 +268,7 @@ PanelWindow {
 
     Timer {
         id: closeTimer
-        interval: animationDuration + 50
+        interval: Math.max(animationDuration + 50, Math.round(osdScaleSpring.settleDurationMs) + 50)
         onTriggered: {
             if (!shouldBeVisible) {
                 visible = false;
@@ -267,7 +284,7 @@ PanelWindow {
         width: alignedWidth
         height: alignedHeight
         opacity: shouldBeVisible ? 1 : 0
-        scale: shouldBeVisible ? 1 : 0.9
+        scale: osdScaleSpring.value
 
         property bool childHovered: false
         readonly property real popupSurfaceAlpha: Theme.popupTransparency
@@ -315,13 +332,6 @@ PanelWindow {
         }
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: animationDuration
-                easing.type: animationEasing
-            }
-        }
-
-        Behavior on scale {
             NumberAnimation {
                 duration: animationDuration
                 easing.type: animationEasing

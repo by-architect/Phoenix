@@ -67,14 +67,14 @@ Item {
         if (!_barIsVertical)
             return 0;
         if (_usesFrameBarChrome)
-            return hasAdjacentTopBarLive ? (_edgeBaseMargin + SettingsData.frameBarSize + _frameInsetExtra) : _frameInsetResolved;
+            return hasAdjacentTopBarLive ? (_edgeBaseMargin + SettingsData.frameEdgeReservation(barWindow.screen, "top") + _frameInsetExtra) : _frameInsetResolved;
         return Math.max(0, _barInsetPadding);
     }
     readonly property real _bottomMargin: {
         if (!_barIsVertical)
             return 0;
         if (_usesFrameBarChrome)
-            return hasAdjacentBottomBarLive ? (_edgeBaseMargin + SettingsData.frameBarSize + _frameInsetExtra) : _frameInsetResolved;
+            return hasAdjacentBottomBarLive ? (_edgeBaseMargin + SettingsData.frameEdgeReservation(barWindow.screen, "bottom") + _frameInsetExtra) : _frameInsetResolved;
         return Math.max(0, _barInsetPadding);
     }
 
@@ -440,8 +440,8 @@ Item {
         hoverController.resetForBarGeometryChange();
     }
 
-    function _dashTriggerSource(section, tabIndex) {
-        return hoverController.dashTriggerSource(section, tabIndex);
+    function _dashTriggerSource(section, tabId) {
+        return hoverController.dashTriggerSource(section, tabId);
     }
 
     function getBarPosition() {
@@ -493,7 +493,7 @@ Item {
         if (loader.item)
             return loader.item;
 
-        const pairs = [[PopoutService.appDrawerLoader, PopoutService.appDrawerPopout], [PopoutService.batteryPopoutLoader, PopoutService.batteryPopout], [PopoutService.clipboardHistoryPopoutLoader, PopoutService.clipboardHistoryPopout], [PopoutService.controlCenterLoader, PopoutService.controlCenterPopout], [PopoutService.dankDashPopoutLoader, PopoutService.dankDashPopout], [PopoutService.layoutPopoutLoader, PopoutService.layoutPopout], [PopoutService.notificationCenterLoader, PopoutService.notificationCenterPopout], [PopoutService.processListPopoutLoader, PopoutService.processListPopout], [PopoutService.systemUpdateLoader, PopoutService.systemUpdatePopout], [PopoutService.vpnPopoutLoader, PopoutService.vpnPopout], [PopoutService.colorPickerPopoutLoader, PopoutService.colorPickerPopout]];
+        const pairs = [[PopoutService.appDrawerLoader, PopoutService.appDrawerPopout], [PopoutService.batteryPopoutLoader, PopoutService.batteryPopout], [PopoutService.clipboardHistoryPopoutLoader, PopoutService.clipboardHistoryPopout], [PopoutService.controlCenterLoader, PopoutService.controlCenterPopout], [PopoutService.dankDashPopoutLoader, PopoutService.dankDashPopout], [PopoutService.layoutPopoutLoader, PopoutService.layoutPopout], [PopoutService.notificationCenterLoader, PopoutService.notificationCenterPopout], [PopoutService.processListPopoutLoader, PopoutService.processListPopout], [PopoutService.systemUpdateLoader, PopoutService.systemUpdatePopout], [PopoutService.vpnPopoutLoader, PopoutService.vpnPopout], [PopoutService.colorPickerPopoutLoader, PopoutService.colorPickerPopout], [PopoutService.powerMenuPopoutLoader, PopoutService.powerMenuPopout]];
         for (let i = 0; i < pairs.length; i++) {
             if (loader === pairs[i][0] && pairs[i][1])
                 return pairs[i][1];
@@ -932,23 +932,21 @@ Item {
         id: powerMenuButtonComponent
 
         PowerMenuButton {
+            id: powerMenuWidget
             widgetThickness: barWindow.widgetThickness
             barThickness: barWindow.effectiveBarThickness
             axis: barWindow.axis
             section: topBarContent.getWidgetSection(parent)
             parentScreen: barWindow.screen
+            isActive: PopoutService.powerMenuPopoutLoader?.item ? PopoutService.powerMenuPopoutLoader?.item.shouldBeVisible : false
             onClicked: {
-                const loader = PopoutService.powerMenuModalLoader;
-                if (!loader)
-                    return;
-                loader.active = true;
-                if (!loader.item)
-                    return;
-                if (loader.item.shouldBeVisible) {
-                    loader.item.close();
-                    return;
-                }
-                loader.item.openCentered();
+                topBarContent.openWidgetPopout({
+                    loader: PopoutService.powerMenuPopoutLoader,
+                    widgetItem: powerMenuWidget,
+                    section: topBarContent.getWidgetSection(parent) || "right",
+                    triggerSource: "powerMenu",
+                    mode: "click"
+                });
             }
         }
     }
@@ -1040,8 +1038,19 @@ Item {
         id: focusedWindowComponent
 
         FocusedApp {
+            id: focusedWindowWidget
             axis: barWindow.axis
-            availableWidth: topBarContent.leftToMediaGap
+            availableWidth: {
+                const configuredWidth = focusedWindowWidget.maxWidth;
+                const focusedWidgetContainer = focusedWindowWidget.parent?.parent;
+                if (barWindow.axis?.isVertical || topBarContent.getWidgetSection(focusedWindowWidget) !== "left" || hCenterSection.contentSize <= 0 || !focusedWidgetContainer)
+                    return configuredWidth;
+
+                // Read Row coordinates directly so this binding tracks reflow.
+                const focusedWidgetLeft = hLeftSection.x + focusedWidgetContainer.x;
+                const centerContentLeft = hCenterSection.x + hCenterSection.contentStart;
+                return Math.max(0, centerContentLeft - focusedWidgetLeft);
+            }
             widgetThickness: barWindow.widgetThickness
             barThickness: barWindow.effectiveBarThickness
             barSpacing: barConfig?.spacing ?? 4

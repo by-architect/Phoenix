@@ -77,6 +77,9 @@
   "%1 online": {
     "%1 online": "%1 متصل"
   },
+  "%1 position": {
+    "%1 position": "موضع %1"
+  },
   "%1 tasks": {
     "%1 tasks": "%1 مهام"
   },
@@ -311,6 +314,9 @@
   "A separate minimal launcher action that works in Standalone, Separate Frame Mode, and Connected Frame Mode.": {
     "A separate minimal launcher action that works in Standalone, Separate Frame Mode, and Connected Frame Mode.": "إجراء مشغل مصغر منفصل يعمل في الوضع المستقل، وضع الإطار المنفصل، ووضع الإطار المتصل."
   },
+  "A slight natural settle, DMS default": {
+    "A slight natural settle, DMS default": "استقرار طبيعي طفيف، الإعداد الافتراضي لـ DMS"
+  },
   "A user with that name already exists.": {
     "A user with that name already exists.": "يوجد مستخدم بهذا الاسم بالفعل."
   },
@@ -488,6 +494,9 @@
   "Add to Autostart": {
     "Add to Autostart": "إضافة إلى التشغيل التلقائي"
   },
+  "Additional settings are managed by the Island": {
+    "Additional settings are managed by the Island": "تتم إدارة الإعدادات الإضافية بواسطة الجزيرة"
+  },
   "Adjust pointer sensitivity speed": {
     "Adjust pointer sensitivity speed": "ضبط سرعة حساسية المؤشر"
   },
@@ -542,6 +551,9 @@
   "Allow": {
     "Allow": "سماح"
   },
+  "Allow %1 in Do Not Disturb": {
+    "Allow %1 in Do Not Disturb": "السماح بـ %1 في وضع عدم الإزعاج"
+  },
   "Allow LAN access": {
     "Allow LAN access": "السماح بالوصول إلى الشبكة المحلية (LAN)"
   },
@@ -556,6 +568,9 @@
   },
   "Allow greeter login access": {
     "Allow greeter login access": "السماح بوصول تسجيل الدخول لشاشة الترحيب"
+  },
+  "Allow in Do Not Disturb": {
+    "Allow in Do Not Disturb": "السماح في وضع عدم الإزعاج"
   },
   "Already on that session": {
     "Already on that session": "أنت بالفعل في تلك الجلسة"
@@ -683,6 +698,9 @@
   "Applications and commands to start automatically when you log in": {
     "Applications and commands to start automatically when you log in": "التطبيقات والأوامر التي تبدأ تلقائياً عند تسجيل الدخول"
   },
+  "Applied independently of night mode": {
+    "Applied independently of night mode": ""
+  },
   "Applies on the next greeter sync": {
     "Applies on the next greeter sync": "يُطبق عند مزامنة الgreeter التالية"
   },
@@ -703,6 +721,9 @@
   },
   "Apply inverse concave corner cutouts to the bar": {
     "Apply inverse concave corner cutouts to the bar": "تطبيق قصات الزوايا المقعرة المعكوسة على الشريط"
+  },
+  "Apply island geometry changes immediately without spring overshoot": {
+    "Apply island geometry changes immediately without spring overshoot": "تطبيق تغييرات هندسة الجزيرة فوراً بدون تجاوز النوابض"
   },
   "Apply to Hardware": {
     "Apply to Hardware": "تطبيق على الجهاز"
@@ -727,6 +748,9 @@
   },
   "Apps Icon": {
     "Apps Icon": "ايقونة التطبيقات"
+  },
+  "Apps allowed to show popups while Do Not Disturb is on. Right-click a notification and choose \"Allow in Do Not Disturb\" to add one here.": {
+    "Apps allowed to show popups while Do Not Disturb is on. Right-click a notification and choose \"Allow in Do Not Disturb\" to add one here.": "التطبيقات المسموح لها بعرض النوافذ المنبثقة أثناء تفعيل وضع عدم الإزعاج. انقر بزر الماوس الأيمن على إشعار واختر \"السماح في وضع عدم الإزعاج\" لإضافته هنا."
   },
   "Apps are ordered by usage frequency, then last used, then alphabetically.": {
     "Apps are ordered by usage frequency, then last used, then alphabetically.": "يتم ترتيب التطبيقات حسب تكرار الاستخدام، ثم حسب آخر استخدام، ثم أبجديًا."
@@ -839,11 +863,20 @@
   "Auto (Bar-aware)": {
     "Auto (Bar-aware)": "تلقائي (حسب الشريط)"
   },
+  "Auto (Dark Mode)": {
+    "Auto (Dark Mode)": "تلقائي (الوضع الداكن)"
+  },
+  "Auto (Light Mode)": {
+    "Auto (Light Mode)": "تلقائي (الوضع الفاتح)"
+  },
   "Auto (Wide)": {
     "Auto (Wide)": "تلقائي (عريض)"
   },
   "Auto Compositor Gaps": {
     "Auto Compositor Gaps": "فجوات مدير النوافذ التلقائية"
+  },
+  "Auto From Wallpaper": {
+    "Auto From Wallpaper": "تلقائي من الخلفية"
   },
   "Auto Location": {
     "Auto Location": "الموقع التلقائي"
@@ -876,7 +909,7 @@
     "Auto-Hide Timeout": "مهلة الإخفاء التلقائي"
   },
   "Auto-close Niri overview when DMS launches or focuses a window.": {
-    "Auto-close Niri overview when DMS launches or focuses a window.": ""
+    "Auto-close Niri overview when DMS launches or focuses a window.": "إغلاق نظرة عامة لـ Niri تلقائياً عند تشغيل DMS أو التركيز على نافذة."
   },
   "Auto-close Niri overview when launching apps.": {
     "Auto-close Niri overview when launching apps.": "إغلاق نظرة Niri العامة تلقائياً عند تشغيل التطبيقات."
@@ -952,6 +985,9 @@
   },
   "Automatically lock the screen when the system prepares to suspend": {
     "Automatically lock the screen when the system prepares to suspend": "قفل الشاشة تلقائياً عندما يستعد النظام لدخول وضع السكون"
+  },
+  "Automatically picks the scheme variant based on the wallpaper.": {
+    "Automatically picks the scheme variant based on the wallpaper.": "يختار تلقائياً نوع المخطط بناءً على الخلفية."
   },
   "Automatically save changes to opened files as you type": {
     "Automatically save changes to opened files as you type": "حفظ التغييرات تلقائيًا في الملفات المفتوحة أثناء الكتابة"
@@ -1047,7 +1083,7 @@
     "Bar Inset Padding": "حاشية الشريط"
   },
   "Bar Length Padding": {
-    "Bar Length Padding": ""
+    "Bar Length Padding": "حشوة طول الشريط"
   },
   "Bar Opacity": {
     "Bar Opacity": "عتامة الشريط"
@@ -1058,11 +1094,20 @@
   "Bar Spacing": {
     "Bar Spacing": "تباعد الشريط"
   },
+  "Bar border and shadow": {
+    "Bar border and shadow": "حد الظل للشريط"
+  },
+  "Bar corners": {
+    "Bar corners": "زوايا الشريط"
+  },
   "Bar corners and background": {
     "Bar corners and background": "زوايا الشريط والخلفية"
   },
   "Bar shadow, border, and corners": {
     "Bar shadow, border, and corners": "ظل الشريط، والحدود، والزوايا"
+  },
+  "Bar visibility": {
+    "Bar visibility": "رؤية الشريط"
   },
   "Base color for shadows (opacity is applied automatically)": {
     "Base color for shadows (opacity is applied automatically)": "اللون الأساسي للظلال (يتم تطبيق الشفافية تلقائيًا)"
@@ -1076,6 +1121,9 @@
   "Battery %1": {
     "Battery %1": "البطارية %1"
   },
+  "Battery / Control Center": {
+    "Battery / Control Center": "البطارية / مركز التحكم"
+  },
   "Battery Charge Limit": {
     "Battery Charge Limit": "حد شحن البطارية"
   },
@@ -1087,6 +1135,9 @@
   },
   "Battery and power management": {
     "Battery and power management": "إدارة البطارية والطاقة"
+  },
+  "Battery gauge opens Control Center": {
+    "Battery gauge opens Control Center": "مقياس البطارية يفتح مركز التحكم"
   },
   "Battery has charged to your set limit of %1%": {
     "Battery has charged to your set limit of %1%": "وصلت البطارية إلى حد الشحن المحدد %1%"
@@ -1120,6 +1171,9 @@
   },
   "Blend between Surface High and the selected custom color": {
     "Blend between Surface High and the selected custom color": "مزج بين السطح العالي واللون المخصص المحدد"
+  },
+  "Block %1 in Do Not Disturb": {
+    "Block %1 in Do Not Disturb": "حظر %1 في وضع عدم الإزعاج"
   },
   "Block Out": {
     "Block Out": "حجب"
@@ -1166,6 +1220,9 @@
   "Body": {
     "Body": "الجسم"
   },
+  "Body Click Runs Default Action": {
+    "Body Click Runs Default Action": "النقر على الجسم يشغل الإجراء الافتراضي"
+  },
   "Body Font Size": {
     "Body Font Size": "حجم خط النص"
   },
@@ -1205,6 +1262,9 @@
   "Border with Background": {
     "Border with Background": "حدود مع خلفية"
   },
+  "Both": {
+    "Both": ""
+  },
   "Bottom": {
     "Bottom": "أسفل"
   },
@@ -1223,11 +1283,17 @@
   "Bottom dock for pinned and running applications": {
     "Bottom dock for pinned and running applications": "شريط تطبيقات سفلي للتطبيقات المثبتة والمشغلة"
   },
+  "Bright": {
+    "Bright": "ساطع"
+  },
   "Brightness": {
     "Brightness": "السطوع"
   },
   "Brightness Slider": {
     "Brightness Slider": "شريط تمرير السطوع"
+  },
+  "Brightness Style": {
+    "Brightness Style": ""
   },
   "Brightness Value": {
     "Brightness Value": "قيمة السطوع"
@@ -1251,7 +1317,7 @@
     "Browse and set wallpapers": "تصفح وتعيين خلفيات الشاشة"
   },
   "Browse or search plugins": {
-    "Browse or search plugins": "تصفح أو ابحث عن الإضافات"
+    "Browse or search plugins": "تصفح أو ابحث عن الملحقات"
   },
   "Button Color": {
     "Button Color": "لون الزر"
@@ -1346,8 +1412,20 @@
   "Category": {
     "Category": "الفئة"
   },
+  "Cellular": {
+    "Cellular": "خلوي"
+  },
+  "Cellular disabled": {
+    "Cellular disabled": "تم تعطيل الشبكة الخلوية"
+  },
+  "Cellular enabled": {
+    "Cellular enabled": "تم تمكين الشبكة الخلوية"
+  },
   "Center Section": {
     "Center Section": "القسم الأوسط"
+  },
+  "Center Section - Reserved by Dank Island": {
+    "Center Section - Reserved by Dank Island": "القسم الأوسط - محجوز بواسطة Dank Island"
   },
   "Center Single Column": {
     "Center Single Column": "توسيط عمود واحد"
@@ -1437,7 +1515,7 @@
     "Choose colors from palette": "اختر ألواناً من اللوحة"
   },
   "Choose how the bar meets the screen edge": {
-    "Choose how the bar meets the screen edge": ""
+    "Choose how the bar meets the screen edge": "اختر كيفية ملاقاة الشريط لحافة الشاشة"
   },
   "Choose how the weather widget is displayed": {
     "Choose how the weather widget is displayed": "اختر كيفية عرض أداة الطقس"
@@ -1487,6 +1565,9 @@
   "Choose which monitors show the lock screen interface. Other monitors will display a solid color for OLED burn-in protection.": {
     "Choose which monitors show the lock screen interface. Other monitors will display a solid color for OLED burn-in protection.": "اختر الشاشات التي تعرض واجهة شاشة القفل. ستعرض الشاشات الأخرى لوناً مصمتاً للحماية من احتراق شاشات OLED."
   },
+  "Choose which shortcuts sit left or right of the clock": {
+    "Choose which shortcuts sit left or right of the clock": "اختر الاختصارات التي تظهر على يمين أو يسار الساعة"
+  },
   "Chroma Style": {
     "Chroma Style": "نمط كروما"
   },
@@ -1511,6 +1592,12 @@
   "Clear All Jobs": {
     "Clear All Jobs": "مسح جميع المهام"
   },
+  "Clear Badge on Open": {
+    "Clear Badge on Open": "مسح الشارة عند الفتح"
+  },
+  "Clear Filtered": {
+    "Clear Filtered": "مسح التصفية"
+  },
   "Clear History?": {
     "Clear History?": "مسح السجل؟"
   },
@@ -1522,6 +1609,12 @@
   },
   "Clear at Startup": {
     "Clear at Startup": "المسح عند بدء التشغيل"
+  },
+  "Clears the badge on open but keeps notifications active": {
+    "Clears the badge on open but keeps notifications active": "مسح الشارة عند الفتح مع إبقاء الإشعارات نشطة"
+  },
+  "Click": {
+    "Click": "نقر"
   },
   "Click 'Setup' to create %1 and add include to your compositor config.": {
     "Click 'Setup' to create %1 and add include to your compositor config.": "انقر على 'إعداد' لإنشاء %1 وإضافة التضمين إلى ملف تكوين مدير النوافذ الخاص بك."
@@ -1541,6 +1634,12 @@
   "Click any shortcut to edit. Changes save to %1": {
     "Click any shortcut to edit. Changes save to %1": "انقر على أي اختصار للتعديل. سيتم حفظ التغييرات في %1"
   },
+  "Click expands only on an intentional press. Hybrid peeks the current compact face on hover": {
+    "Click expands only on an intentional press. Hybrid peeks the current compact face on hover": "النقر يوسع الجزيرة فقط عند الضغط المتعمد. الوضع الهجين يعرض الواجهة المدمجة الحالية عند التمرير"
+  },
+  "Click the icon to mute": {
+    "Click the icon to mute": "انقر على الأيقونة لكتم الصوت"
+  },
   "Click to Paste": {
     "Click to Paste": "انقر للصق"
   },
@@ -1549,6 +1648,9 @@
   },
   "Click to select a custom theme JSON file": {
     "Click to select a custom theme JSON file": "انقر لتحديد ملف JSON لسمة مخصصة"
+  },
+  "Clicking a popup runs its first action instead of expanding the body": {
+    "Clicking a popup runs its first action instead of expanding the body": "النقر على النافذة المنبثقة يشغل إجراءها الأول بدلاً من توسيع الجسم"
   },
   "Clip": {
     "Clip": "قص"
@@ -1590,7 +1692,7 @@
     "Close All Windows": "إغلاق كل النوافذ"
   },
   "Close Niri Overview on Window Focus": {
-    "Close Niri Overview on Window Focus": ""
+    "Close Niri Overview on Window Focus": "إغلاق نظرة عامة لـ Niri عند التركيز على النافذة"
   },
   "Close Overview on Launch": {
     "Close Overview on Launch": "إغلاق نظرة عامة عند التشغيل"
@@ -1691,14 +1793,26 @@
   "Commands": {
     "Commands": "الأوامر"
   },
+  "Community favorites to get you started": {
+    "Community favorites to get you started": "مفضلات المجتمع لتبدأ بها"
+  },
   "Community themes": {
     "Community themes": "سمات المجتمع"
   },
   "Compact": {
     "Compact": "مدمج"
   },
+  "Compact Clock Pill": {
+    "Compact Clock Pill": "كبسولة الساعة المدمجة"
+  },
+  "Compact Island Height": {
+    "Compact Island Height": "ارتفاع الجزيرة المدمج"
+  },
   "Compact Mode": {
     "Compact Mode": "وضع المكثف"
+  },
+  "Compact home clock pill in both width and height": {
+    "Compact home clock pill in both width and height": "كبسولة ساعة الشاشة الرئيسية المدمجة في العرض والارتفاع"
   },
   "Completed": {
     "Completed": "مكتمل"
@@ -1753,6 +1867,9 @@
   },
   "Configure which displays show \"%1": {
     "Configure which displays show \"%1\"": "تكوين الشاشات التي تعرض \"%1\""
+  },
+  "Configure which displays show Dank Island as \"%1": {
+    "Configure which displays show Dank Island as \"%1\"": "تهيئة شاشات العرض التي تظهر Dank Island كـ \"%1\""
   },
   "Configure which displays show shell components": {
     "Configure which displays show shell components": "تحديد الشاشات التي تعرض مكونات واجهة النظام"
@@ -1923,7 +2040,7 @@
     "Copy Text": "نسخ النص"
   },
   "Copy target (%1)": {
-    "Copy target (%1)": ""
+    "Copy target (%1)": "نسخ الهدف (%1)"
   },
   "Corner Radius": {
     "Corner Radius": "نصف قطر الزاوية"
@@ -1932,13 +2049,19 @@
     "Corner Radius Override": "تجاوز نصف قطر الزوايا الخارجية للشريط"
   },
   "Corner Style": {
-    "Corner Style": ""
+    "Corner Style": "نمط الزاوية"
+  },
+  "Corner style applies to the bar surface": {
+    "Corner style applies to the bar surface": "نمط الزاوية يطبق على سطح الشريط"
   },
   "Corners & Background": {
     "Corners & Background": "الزوايا والخلفية"
   },
   "Couldn't load hotspot password": {
     "Couldn't load hotspot password": "تعذر تحميل كلمة مرور نقطة الاتصال"
+  },
+  "Couldn't load plugins": {
+    "Couldn't load plugins": "تعذر تحميل الملحقات"
   },
   "Count Only": {
     "Count Only": "العد فقط"
@@ -2045,6 +2168,12 @@
   "Current Workspace": {
     "Current Workspace": "سطح المكتب الحالي"
   },
+  "Current display brightness on the home face": {
+    "Current display brightness on the home face": ""
+  },
+  "Current output volume on the home face": {
+    "Current output volume on the home face": ""
+  },
   "Current time and date display": {
     "Current time and date display": "عرض الوقت والتاريخ الحاليين"
   },
@@ -2062,6 +2191,9 @@
   },
   "Curve": {
     "Curve": "منحنى"
+  },
+  "Curve rasterizer.": {
+    "Curve rasterizer.": "راستر المنحنيات."
   },
   "Curve: curve rasterizer.": {
     "Curve: curve rasterizer.": "منحنى: مصير منحنيات."
@@ -2192,6 +2324,9 @@
   "Daily at:": {
     "Daily at:": "يوميًا في:"
   },
+  "Damped springs settle straight to their target with no overshoot": {
+    "Damped springs settle straight to their target with no overshoot": "النوابض المخمدة تستقر مباشرة عند هدفها بدون تجاوز"
+  },
   "Dank": {
     "Dank": "Dank"
   },
@@ -2203,6 +2338,12 @@
   },
   "Dank Dash": {
     "Dank Dash": "Dank Dash"
+  },
+  "Dank Island - Beta": {
+    "Dank Island - Beta": "Dank Island - إصدار تجريبي"
+  },
+  "Dank Island instance": {
+    "Dank Island instance": "مثيل Dank Island"
   },
   "DankBar": {
     "DankBar": "DankBar"
@@ -2234,8 +2375,14 @@
   "Dark mode harmony": {
     "Dark mode harmony": "تناغم الوضع الداكن"
   },
+  "Dark or light mode follows the wallpaper brightness": {
+    "Dark or light mode follows the wallpaper brightness": "الوضع الداكن أو الفاتح يتبع سطوع الخلفية"
+  },
   "Darken Modal Background": {
     "Darken Modal Background": "عتيم خلفية النافذة المنبثقة"
+  },
+  "Dashboard": {
+    "Dashboard": "لوحة التحكم"
   },
   "Date First": {
     "Date First": "التاريخ أولاً"
@@ -2294,8 +2441,14 @@
   "Default Opens": {
     "Default Opens": "يفتح افتراضيًا"
   },
+  "Default Task List": {
+    "Default Task List": "قائمة المهام الافتراضية"
+  },
   "Default Width (%)": {
     "Default Width (%)": "العرض الافتراضي (%)"
+  },
+  "Default launcher shortcuts open a native launcher activity inside Dank Island. Spotlight is used when the focused screen has no DankIsland.": {
+    "Default launcher shortcuts open a native launcher activity inside Dank Island. Spotlight is used when the focused screen has no DankIsland.": "اختصارات المشغل الافتراضية تفتح نشاط مشغل أصلي داخل Dank Island. يُستخدم Spotlight عندما لا تحتوي الشاشة المركزة على DankIsland."
   },
   "Default launcher shortcuts open the full launcher with mode tabs, grid view, and action panel.": {
     "Default launcher shortcuts open the full launcher with mode tabs, grid view, and action panel.": "تفتح اختصارات المشغل الافتراضية المشغل الكامل مع علامات تبويب الوضع، وعرض الشبكة، ولوحة الإجراءات."
@@ -2420,6 +2573,9 @@
   "Digital": {
     "Digital": "رقمي"
   },
+  "Dim": {
+    "Dim": "خافت"
+  },
   "Direct path to a .xkb keymap file. Overrides layouts/variants above.": {
     "Direct path to a .xkb keymap file. Overrides layouts/variants above.": "المسار المباشر لملف خريطة المفاتيح .xkb. يتجاوز التخطيطات/المتغيرات أعلاه."
   },
@@ -2464,6 +2620,9 @@
   },
   "Disabling auto-login on startup...": {
     "Disabling auto-login on startup...": "جاري إلغاء تفعيل تسجيل الدخول التلقائي عند بدء التشغيل..."
+  },
+  "Disabling cellular...": {
+    "Disabling cellular...": "جاري تعطيل الشبكة الخلوية..."
   },
   "Disc": {
     "Disc": "قرص"
@@ -2573,6 +2732,12 @@
   "Displays the active keyboard layout and allows switching": {
     "Displays the active keyboard layout and allows switching": "عرض تخطيط لوحة المفاتيح النشط وتبديله"
   },
+  "Distance between display edge and island": {
+    "Distance between display edge and island": "المسافة بين حافة الشاشة والجزيرة"
+  },
+  "Distance-field renderer.": {
+    "Distance-field renderer.": "مُصيّر حقل المسافة."
+  },
   "Distribution": {
     "Distribution": "التوزيع"
   },
@@ -2632,6 +2797,12 @@
   },
   "Draw a connected picture-frame border around the entire display": {
     "Draw a connected picture-frame border around the entire display": "رسم حدود إطار صورة متصل حول الشاشة بأكملها"
+  },
+  "Draw an island-styled background behind satellite widgets": {
+    "Draw an island-styled background behind satellite widgets": "رسم خلفية بنمط الجزيرة خلف عناصر واجهة المستخدم الثانوية"
+  },
+  "Draw an outline and use the highest-contrast surface tone": {
+    "Draw an outline and use the highest-contrast surface tone": "رسم مخطط تفصيلي واستخدام نغمة السطح ذات التباين العالي"
   },
   "Driver": {
     "Driver": "Driver"
@@ -2750,6 +2921,9 @@
   "Enable Bar": {
     "Enable Bar": "تفعيل الشريط"
   },
+  "Enable Cellular": {
+    "Enable Cellular": "تمكين الشبكة الخلوية"
+  },
   "Enable Do Not Disturb": {
     "Enable Do Not Disturb": "تمكين 'عدم الإزعاج'"
   },
@@ -2758,6 +2932,9 @@
   },
   "Enable History": {
     "Enable History": "تمكين السجل"
+  },
+  "Enable Island": {
+    "Enable Island": "تمكين الجزيرة"
   },
   "Enable Num Lock": {
     "Enable Num Lock": "تمكين Num Lock"
@@ -2807,11 +2984,17 @@
   "Enable security key authentication": {
     "Enable security key authentication": "تفعيل مصادقة مفتاح الأمان"
   },
+  "Enable weather in Time & Weather to show this shortcut": {
+    "Enable weather in Time & Weather to show this shortcut": "تمكين الطقس في \"الوقت والطقس\" لإظهار هذا الاختصار"
+  },
   "Enabled": {
     "Enabled": "مفعّل"
   },
   "Enabling WiFi...": {
     "Enabling WiFi...": "جاري تمكين الWiFi..."
+  },
+  "Enabling cellular...": {
+    "Enabling cellular...": "جاري تمكين الشبكة الخلوية..."
   },
   "End": {
     "End": "النهاية"
@@ -2935,6 +3118,15 @@
   },
   "Exit node": {
     "Exit node": "عقدة الخروج"
+  },
+  "Expand Notifications": {
+    "Expand Notifications": "توسيع الإشعارات"
+  },
+  "Expand notifications by default instead of click or hover": {
+    "Expand notifications by default instead of click or hover": "توسيع الإشعارات افتراضياً بدلاً من النقر أو التمرير"
+  },
+  "Expansion Mode": {
+    "Expansion Mode": "وضع التوسيع"
   },
   "Experimental Feature": {
     "Experimental Feature": "ميزة تجريبية"
@@ -3164,6 +3356,12 @@
   "Failed to save clipboard setting": {
     "Failed to save clipboard setting": "فشل في حفظ إعداد الحافظة"
   },
+  "Failed to save dropped file": {
+    "Failed to save dropped file": "فشل حفظ الملف الملقى"
+  },
+  "Failed to save dropped text": {
+    "Failed to save dropped text": "فشل حفظ النص الملقى"
+  },
   "Failed to save keybind": {
     "Failed to save keybind": "فشل في حفظ اختصار لوحة المفاتيح"
   },
@@ -3217,6 +3415,12 @@
   },
   "Failed to switch codec": {
     "Failed to switch codec": "تعذر تبديل الترميز"
+  },
+  "Failed to switch port": {
+    "Failed to switch port": "فشل تبديل المنفذ"
+  },
+  "Failed to toggle cellular": {
+    "Failed to toggle cellular": "فشل تبديل حالة الشبكة الخلوية"
   },
   "Failed to unpin entry": {
     "Failed to unpin entry": "فشل في إلغاء تثبيت الإدخال"
@@ -3395,6 +3599,9 @@
   "Floating windows follow Surface Styling settings": {
     "Floating windows follow Surface Styling settings": "تتبع النوافذ العائمة إعدادات تصميم السطح"
   },
+  "Floats above windows and other content": {
+    "Floats above windows and other content": "تطفو فوق النوافذ والمحتويات الأخرى"
+  },
   "Fluent": {
     "Fluent": "سلس"
   },
@@ -3402,7 +3609,7 @@
     "Fluent: Smooth cubic deceleration in, quick snap out — clean, elegant curves.": "سلس: تباطؤ مكعب ناعم عند الدخول، وتوقف سريع عند الخروج - منحنيات نظيفة وأنيقة."
   },
   "Flush": {
-    "Flush": ""
+    "Flush": "مسطح"
   },
   "Focus": {
     "Focus": "تركيز"
@@ -3638,6 +3845,9 @@
   "Games": {
     "Games": "الالعاب"
   },
+  "Gamma": {
+    "Gamma": ""
+  },
   "Gamma Control": {
     "Gamma Control": "التحكم في دفء الألوان"
   },
@@ -3660,7 +3870,7 @@
     "Generate baseline GTK3/4 or QT5/QT6 (requires qt6ct-kde) configurations to follow DMS colors. Only needed once.<br /><br />It is recommended to configure %1 prior to applying GTK themes.": "إنشاء تكوينات أساسية لـ GTK3/4 أو QT5/QT6 (يتطلب qt6ct-kde) لتتبع ألوان DMS. مطلوب مرة واحدة فقط.<br /><br />يوصى بتهيئة %1 قبل تطبيق سمات GTK."
   },
   "Generate baseline GTK3/4, QT5/QT6, or qtengine configurations to follow DMS colors (only qt6ct requires qt6ct-kde). Only needed once.<br /><br />It is recommended to configure %1 prior to applying GTK themes.": {
-    "Generate baseline GTK3/4, QT5/QT6, or qtengine configurations to follow DMS colors (only qt6ct requires qt6ct-kde). Only needed once.<br /><br />It is recommended to configure %1 prior to applying GTK themes.": ""
+    "Generate baseline GTK3/4, QT5/QT6, or qtengine configurations to follow DMS colors (only qt6ct requires qt6ct-kde). Only needed once.<br /><br />It is recommended to configure %1 prior to applying GTK themes.": "إنشاء تكوينات أساسية لـ GTK3/4، أو QT5/QT6، أو qtengine لتتبع ألوان DMS (يتطلب qt6ct فقط qt6ct-kde). يلزم القيام بذلك مرة واحدة فقط.<br /><br />يُوصى بتهيئة %1 قبل تطبيق سمات GTK."
   },
   "Generic": {
     "Generic": "عام"
@@ -3682,6 +3892,9 @@
   },
   "Globally scale all animation durations": {
     "Globally scale all animation durations": "تغيير حجم جميع فترات الرسوم المتحركة عالميًا"
+  },
+  "Globally scale animation durations with geometric motion & spring based physics with bezier curves": {
+    "Globally scale animation durations with geometric motion & spring based physics with bezier curves": "توسيع نطاق مدة الحركة عالمياً مع الحركة الهندسية والفيزياء القائمة على النوابض مع منحنيات بيزييه"
   },
   "Golden Hour": {
     "Golden Hour": "الساعة الذهبية"
@@ -3905,8 +4118,20 @@
   "High": {
     "High": "عالي"
   },
+  "High Contrast": {
+    "High Contrast": "تباين عالٍ"
+  },
   "High-fidelity palette that preserves source hues.": {
     "High-fidelity palette that preserves source hues.": "لوحة ألوان عالية الدقة تحافظ على درجات الألوان المصدرية."
+  },
+  "Higher percentages give island more inertia": {
+    "Higher percentages give island more inertia": "النسب المئوية الأعلى تعطي الجزيرة قصوراً ذاتياً أكبر"
+  },
+  "Higher values pull island toward its target more strongly": {
+    "Higher values pull island toward its target more strongly": "القيم الأعلى تسحب الجزيرة نحو هدفها بقوة أكبر"
+  },
+  "Higher values settle island with less bounce": {
+    "Higher values settle island with less bounce": "القيم الأعلى تجعل الجزيرة تستقر بارتداد أقل"
   },
   "Highlight Active Workspace App": {
     "Highlight Active Workspace App": "إبراز تطبيق سطح المكتب النشط"
@@ -3931,6 +4156,15 @@
   },
   "Hold to Confirm Power Actions": {
     "Hold to Confirm Power Actions": "الضغط مطولاً لتأكيد إجراءات الطاقة"
+  },
+  "Home Compact": {
+    "Home Compact": "الشاشة الرئيسية المدمجة"
+  },
+  "Horizontal": {
+    "Horizontal": "أفقي"
+  },
+  "Horizontal Offset": {
+    "Horizontal Offset": "إزاحة أفقية"
   },
   "Horizontal and vertical bar thickness": {
     "Horizontal and vertical bar thickness": "سمك الشريط الأفقي والرأسي"
@@ -3995,6 +4229,12 @@
   "Humidity": {
     "Humidity": "الرطوبة"
   },
+  "Hybrid": {
+    "Hybrid": "هجين"
+  },
+  "Hybrid peeks the current compact face on hover. Click pins a destination so it stays open": {
+    "Hybrid peeks the current compact face on hover. Click pins a destination so it stays open": "الوضع الهجين يعرض الواجهة المدمجة الحالية عند التمرير. النقر يثبت الوجهة لتبقى مفتوحة"
+  },
   "Hyprland Discord Server": {
     "Hyprland Discord Server": "خادم ديسكورد الخاص بـ Hyprland"
   },
@@ -4042,6 +4282,9 @@
   },
   "Icon Size %": {
     "Icon Size %": "حجم الأيقونة %"
+  },
+  "Icon Spacing": {
+    "Icon Spacing": "تباعد الأيقونات"
   },
   "Icon Theme": {
     "Icon Theme": "مظهر الأيقونات"
@@ -4133,11 +4376,14 @@
   "Include Transitions": {
     "Include Transitions": "تضمين التأثيرات الانتقالية"
   },
+  "Include application streams and virtual sinks in the device lists": {
+    "Include application streams and virtual sinks in the device lists": "تضمين تدفقات التطبيقات والمصادر الافتراضية في قوائم الأجهزة"
+  },
   "Include desktop actions (shortcuts) in search results.": {
     "Include desktop actions (shortcuts) in search results.": "تضمين إجراءات سطح المكتب (الاختصارات) في نتائج البحث."
   },
   "Incompatible Plugins Loaded": {
-    "Incompatible Plugins Loaded": "تم تحميل إضافات غير متوافقة"
+    "Incompatible Plugins Loaded": "تم تحميل ملحقات غير متوافقة"
   },
   "Incorrect password": {
     "Incorrect password": "كلمة المرور غير صحيحة"
@@ -4178,6 +4424,9 @@
   "Inner Gaps": {
     "Inner Gaps": "الفجوات الداخلية"
   },
+  "Inner authentication": {
+    "Inner authentication": "المصادقة الداخلية"
+  },
   "Inner padding applied to each widget": {
     "Inner padding applied to each widget": "الحشوة الداخلية مطبقة على كل أداة"
   },
@@ -4200,7 +4449,7 @@
     "Install Greeter": "تثبيت شاشة الترحيب"
   },
   "Install Plugin": {
-    "Install Plugin": "تثبيت إضافة"
+    "Install Plugin": "تثبيت ملحق"
   },
   "Install Theme": {
     "Install Theme": "تثبيت سمة"
@@ -4221,7 +4470,7 @@
     "Install matugen package for dynamic theming": "تثبيت حزمة matugen للسمات الديناميكية"
   },
   "Install plugin '%1' from the DMS registry?": {
-    "Install plugin '%1' from the DMS registry?": "هل تريد تثبيت الإضافة '%1' من سجل DMS؟"
+    "Install plugin '%1' from the DMS registry?": "هل تريد تثبيت الملحق '%1' من سجل DMS؟"
   },
   "Install plugins from the DMS plugin registry": {
     "Install plugins from the DMS plugin registry": "تثبيت الملحقات من سجل ملحقات DMS"
@@ -4292,6 +4541,18 @@
   "Iris Bloom": {
     "Iris Bloom": "تفتح القزحية"
   },
+  "Island": {
+    "Island": "الجزيرة"
+  },
+  "Island Gap": {
+    "Island Gap": "فجوة الجزيرة"
+  },
+  "Island Instance": {
+    "Island Instance": "مثيل الجزيرة"
+  },
+  "Island placement": {
+    "Island placement": "موضع الجزيرة"
+  },
   "Isolate Displays": {
     "Isolate Displays": "عزل الشاشات"
   },
@@ -4313,6 +4574,9 @@
   "Keep Changes": {
     "Keep Changes": "حفظ التغييرات"
   },
+  "Keep Clock with Media": {
+    "Keep Clock with Media": "إبقاء الساعة مع الوسائط"
+  },
   "Keep My Edits": {
     "Keep My Edits": "الاحتفاظ بتعديلاتي"
   },
@@ -4328,8 +4592,14 @@
   "Keep the clipboard type filter when reopening history": {
     "Keep the clipboard type filter when reopening history": "احتفظ بفلتر نوع الحافظة عند إعادة فتح السجل"
   },
+  "Keep the dock visible above fullscreen applications": {
+    "Keep the dock visible above fullscreen applications": "اجعل الشريط مرئيًا فوق تطبيقات ملء الشاشة"
+  },
   "Keep typing": {
     "Keep typing": "استمر في الكتابة"
+  },
+  "Keep widgets beside the island or align them like a standalone bar": {
+    "Keep widgets beside the island or align them like a standalone bar": "إبقاء عناصر واجهة المستخدم بجانب الجزيرة أو محاذاتها مثل شريط مستقل"
   },
   "Keeping Awake": {
     "Keeping Awake": "منع الخمول نشط"
@@ -4544,6 +4814,9 @@
   "Loading keybinds...": {
     "Loading keybinds...": "تحميل اختصارات لوحة المفاتيح..."
   },
+  "Loading ports...": {
+    "Loading ports...": "جاري تحميل المنافذ..."
+  },
   "Loading trending...": {
     "Loading trending...": "جارٍ تحميل الرائج..."
   },
@@ -4727,6 +5000,12 @@
   "Material": {
     "Material": "المادة"
   },
+  "Material 3 Expressive bezier curves, default.": {
+    "Material 3 Expressive bezier curves, default.": "منحنيات بيزييه Material 3 التعبيرية، الافتراضي."
+  },
+  "Material 3 Expressive panels rise from below with a subtle scale, default.": {
+    "Material 3 Expressive panels rise from below with a subtle scale, default.": "لوحات Material 3 التعبيرية ترتفع من الأسفل مع مقياس دقيق، الافتراضي."
+  },
   "Material Battery Style": {
     "Material Battery Style": "نمط بطارية Material"
   },
@@ -4828,6 +5107,9 @@
   },
   "Maximum pinned entries reached": {
     "Maximum pinned entries reached": "تم الوصول إلى الحد الأقصى للإدخالات المثبتة"
+  },
+  "Media / Launcher": {
+    "Media / Launcher": "الوسائط / المشغل"
   },
   "Media Controls": {
     "Media Controls": "التحكم بالوسائط"
@@ -4973,6 +5255,12 @@
   "Morning": {
     "Morning": "الصباح"
   },
+  "Motion": {
+    "Motion": "الحركة"
+  },
+  "Motion & Accessibility": {
+    "Motion & Accessibility": "الحركة وإمكانية الوصول"
+  },
   "Motion Effects": {
     "Motion Effects": "تأثيرات الحركة"
   },
@@ -4996,6 +5284,9 @@
   },
   "Move Widget": {
     "Move Widget": "تحريك الأداة"
+  },
+  "Move island and satellites left or right from display center": {
+    "Move island and satellites left or right from display center": "تحريك الجزيرة والأقمار الصناعية يساراً أو يميناً من مركز الشاشة"
   },
   "Moving to Paused": {
     "Moving to Paused": "جاري الإيقاف المؤقت"
@@ -5056,6 +5347,9 @@
   },
   "Navigate": {
     "Navigate": "تنقل"
+  },
+  "Near Island": {
+    "Near Island": "الجزيرة القريبة"
   },
   "Network": {
     "Network": "الشبكة"
@@ -5375,6 +5669,9 @@
   "No plugins found": {
     "No plugins found": "لم يتم العثور على ملحقات"
   },
+  "No ports found": {
+    "No ports found": "لم يتم العثور على منافذ"
+  },
   "No printer found": {
     "No printer found": "لا توجد طابعة"
   },
@@ -5666,6 +5963,9 @@
   "Open From": {
     "Open From": "فتح من"
   },
+  "Open Island": {
+    "Open Island": "فتح الجزيرة"
+  },
   "Open Notepad File": {
     "Open Notepad File": "فتح ملف ملاحظات"
   },
@@ -5837,6 +6137,9 @@
   "PDF Reader": {
     "PDF Reader": "قارئ PDF"
   },
+  "PID": {
+    "PID": "معرف العملية (PID)"
+  },
   "PIN": {
     "PIN": "PIN"
   },
@@ -5875,6 +6178,15 @@
   },
   "Pairing...": {
     "Pairing...": "جاري الاقتران..."
+  },
+  "Palette": {
+    "Palette": "لوحة الألوان"
+  },
+  "Panels glide in from a larger distance at full size, no scale change, pure clean motion.": {
+    "Panels glide in from a larger distance at full size, no scale change, pure clean motion.": "تنزلق اللوحات من مسافة أكبر بحجمها الكامل، بدون تغيير في الحجم، حركة نقية ونظيفة."
+  },
+  "Panels scale up from small as they slide in, a dramatic pop-forward depth effect.": {
+    "Panels scale up from small as they slide in, a dramatic pop-forward depth effect.": "تتوسع اللوحات من حجم صغير أثناء انزلاقها للداخل، تأثير عمق درامي يبرز للأمام."
   },
   "Partial": {
     "Partial": "جزئي"
@@ -6002,17 +6314,23 @@
   "Place clipboard history on the Wayland overlay layer": {
     "Place clipboard history on the Wayland overlay layer": "ضع سجل الحافظة في طبقة تراكب Wayland"
   },
+  "Place independent widgets to left and right of island": {
+    "Place independent widgets to left and right of island": "ضع عناصر واجهة مستخدم مستقلة إلى يسار ويمين الجزيرة"
+  },
   "Place plugin directories here. Each plugin should have a plugin.json manifest file.": {
     "Place plugin directories here. Each plugin should have a plugin.json manifest file.": "ضع مجلدات الملحقات هنا. يجب أن يحتوي كل ملحق على ملف بيان باسم plugin.json."
   },
   "Place plugins in %1": {
-    "Place plugins in %1": "ضع الإضافات في %1"
+    "Place plugins in %1": "ضع الملحقات في %1"
   },
   "Place the bar on the Wayland overlay layer": {
     "Place the bar on the Wayland overlay layer": "ضع الشريط على طبقة تراكب Wayland"
   },
   "Place the dock on the Wayland overlay layer": {
     "Place the dock on the Wayland overlay layer": "ضع الشريط على طبقة تراكب Wayland"
+  },
+  "Platform renderer (FreeType).": {
+    "Platform renderer (FreeType).": "عارض المنصة (FreeType)."
   },
   "Play": {
     "Play": "تشغيل"
@@ -6038,6 +6356,9 @@
   "Playback error: ": {
     "Playback error: ": "خطأ في التشغيل: "
   },
+  "Playful": {
+    "Playful": "مرح"
+  },
   "Plays audio files": {
     "Plays audio files": "يشغل الملفات الصوتية"
   },
@@ -6051,7 +6372,7 @@
     "Plugged In": "متصل بالشاحن"
   },
   "Plugin": {
-    "Plugin": "إضافة"
+    "Plugin": "ملحق"
   },
   "Plugin Directory": {
     "Plugin Directory": "مجلد الملحقات"
@@ -6107,6 +6428,9 @@
   "Popouts and Modals follow global Animation Speed (disable to customize independently)": {
     "Popouts and Modals follow global Animation Speed (disable to customize independently)": "تتبع النوافذ المنبثقة والنوافذ المشروطة سرعة الرسوم المتحركة العالمية (عطل الخيار للتخصيص بشكل مستقل)"
   },
+  "Popular Plugins": {
+    "Popular Plugins": "الملحقات الشائعة"
+  },
   "Popup Only": {
     "Popup Only": "نافذة منبثقة فقط"
   },
@@ -6124,6 +6448,12 @@
   },
   "Port": {
     "Port": "المنفذ"
+  },
+  "Port Selection": {
+    "Port Selection": "اختيار المنفذ"
+  },
+  "Port switched": {
+    "Port switched": "تم تبديل المنفذ"
   },
   "Portal": {
     "Portal": "بوابة"
@@ -6238,6 +6568,9 @@
   },
   "Primary": {
     "Primary": "رئيسي"
+  },
+  "Primary Bar": {
+    "Primary Bar": "الشريط الأساسي"
   },
   "Primary Container": {
     "Primary Container": "حاوية أساسية"
@@ -6431,8 +6764,11 @@
   "Recommended available": {
     "Recommended available": "متوفر وموصى به"
   },
+  "Reduce Motion": {
+    "Reduce Motion": "تقليل الحركة"
+  },
   "Reduce the visible bar length from both ends": {
-    "Reduce the visible bar length from both ends": ""
+    "Reduce the visible bar length from both ends": "تقليل طول الشريط المرئي من كلا الطرفين"
   },
   "Refresh": {
     "Refresh": "إعادة تحميل"
@@ -6554,6 +6890,9 @@
   "Rename Workspace": {
     "Rename Workspace": "إعادة تسمية سطح المكتب"
   },
+  "Render Type": {
+    "Render Type": "نوع العرض"
+  },
   "Reorder & Group": {
     "Reorder & Group": "إعادة الترتيب والتجميع"
   },
@@ -6611,6 +6950,9 @@
   "Requires the DMS Theme extension from the editor marketplace": {
     "Requires the DMS Theme extension from the editor marketplace": "يتطلب امتداد DMS Theme من متجر المحرر"
   },
+  "Reserved Height": {
+    "Reserved Height": "الارتفاع المحجوز"
+  },
   "Reset": {
     "Reset": "إعادة تعيين"
   },
@@ -6631,6 +6973,9 @@
   },
   "Resize on Border": {
     "Resize on Border": "تغيير الحجم على الحدود"
+  },
+  "Resize the resting island to align with nearby widgets": {
+    "Resize the resting island to align with nearby widgets": "تغيير حجم الجزيرة الساكنة لتتراصف مع الأدوات المجاورة"
   },
   "Resize windows by dragging their edges with the mouse": {
     "Resize windows by dragging their edges with the mouse": "تغيير حجم النوافذ عن طريق سحب حوافها بالماوس"
@@ -6664,6 +7009,9 @@
   },
   "Resume": {
     "Resume": "استئناف"
+  },
+  "Retry": {
+    "Retry": "إعادة المحاولة"
   },
   "Reveal the arcs where surfaces meet the frame": {
     "Reveal the arcs where surfaces meet the frame": "كشف الأقواس حيث تلتقي الأسطح بالإطار"
@@ -6720,7 +7068,7 @@
     "Root Filesystem": "نظام ملفات الجذر"
   },
   "Rounded": {
-    "Rounded": ""
+    "Rounded": "مستدير"
   },
   "Rounded corners for windows": {
     "Rounded corners for windows": "زوايا دائرية للنوافذ"
@@ -6790,6 +7138,12 @@
   },
   "SSID": {
     "SSID": "SSID"
+  },
+  "Satellite Widgets": {
+    "Satellite Widgets": "أدوات تابعة"
+  },
+  "Satellites widget to place left or right of the island": {
+    "Satellites widget to place left or right of the island": "أداة تابعة توضع يسار أو يمين الجزيرة"
   },
   "Saturation": {
     "Saturation": "التشبع"
@@ -6875,6 +7229,9 @@
   "Score": {
     "Score": "النتيجة"
   },
+  "Screen Edges": {
+    "Screen Edges": "حواف الشاشة"
+  },
   "Screen sharing": {
     "Screen sharing": "مشاركة الشاشة"
   },
@@ -6927,7 +7284,7 @@
     "Search devices...": "البحث عن الأجهزة..."
   },
   "Search installed plugins...": {
-    "Search installed plugins...": "البحث عن الإضافات المثبتة..."
+    "Search installed plugins...": "البحث عن الملحقات المثبتة..."
   },
   "Search keybinds...": {
     "Search keybinds...": "البحث في اختصارات لوحة المفاتيح..."
@@ -6946,6 +7303,9 @@
   },
   "Search themes...": {
     "Search themes...": "البحث عن سمات..."
+  },
+  "Search when idle, visualizer when media is playing": {
+    "Search when idle, visualizer when media is playing": "البحث عند الخمول، ومُصور عند تشغيل الوسائط"
   },
   "Search widgets...": {
     "Search widgets...": "بحث عن الأدوات..."
@@ -7280,14 +7640,23 @@
   "Show CPU Temp": {
     "Show CPU Temp": "إظهار درجة حرارة المعالج"
   },
+  "Show Charge Rate": {
+    "Show Charge Rate": "إظهار معدل الشحن"
+  },
   "Show Date": {
     "Show Date": "إظهار التاريخ"
+  },
+  "Show Discharge Rate": {
+    "Show Discharge Rate": "إظهار معدل التفريغ"
   },
   "Show Disk": {
     "Show Disk": "إظهار القرص"
   },
   "Show Dock": {
     "Show Dock": "إظهار شريط التطبيقات"
+  },
+  "Show Dock Over Fullscreen": {
+    "Show Dock Over Fullscreen": "إظهار الشريط فوق ملء الشاشة"
   },
   "Show Feels Like Temperature": {
     "Show Feels Like Temperature": "عرض درجة الحرارة المحسوسة"
@@ -7400,6 +7769,9 @@
   "Show Restart DMS": {
     "Show Restart DMS": "تفعيل خيار إعادة تشغيل DMS"
   },
+  "Show Satellite Widgets": {
+    "Show Satellite Widgets": "إظهار الأدوات التابعة"
+  },
   "Show Saved Items": {
     "Show Saved Items": "إظهار العناصر المحفوظة"
   },
@@ -7436,6 +7808,9 @@
   "Show Trash in Dock": {
     "Show Trash in Dock": "إظهار المهملات في شريط التطبيقات"
   },
+  "Show Virtual Devices": {
+    "Show Virtual Devices": "إظهار الأجهزة الافتراضية"
+  },
   "Show Weather Condition": {
     "Show Weather Condition": "عرض حالة الطقس"
   },
@@ -7453,6 +7828,9 @@
   },
   "Show a bar that drains as the popup's auto-dismiss timer runs": {
     "Show a bar that drains as the popup's auto-dismiss timer runs": "إظهار شريط يفرغ أثناء تشغيل مؤقت الإغلاق التلقائي للنافذة المنبثقة"
+  },
+  "Show a clickable clock beside compact media details": {
+    "Show a clickable clock beside compact media details": "إظهار ساعة قابلة للنقر بجانب تفاصيل الوسائط المدمجة"
   },
   "Show a notification when battery reaches the charge limit.": {
     "Show a notification when battery reaches the charge limit.": "إظهار إشعار عندما تصل البطارية إلى حد الشحن."
@@ -7474,6 +7852,9 @@
   },
   "Show cava audio visualizer in media widget": {
     "Show cava audio visualizer in media widget": "إظهار مصور صوت cava في أداة الوسائط"
+  },
+  "Show critical priority popups while Do Not Disturb is on": {
+    "Show critical priority popups while Do Not Disturb is on": "عرض الإشعارات ذات الأولوية الحرجة أثناء تفعيل وضع عدم الإزعاج"
   },
   "Show darkened overlay behind modal dialogs": {
     "Show darkened overlay behind modal dialogs": "يعرض طبقة معتمة خلف نوافذ الحوار"
@@ -7537,6 +7918,9 @@
   },
   "Show weather information in top bar and control center": {
     "Show weather information in top bar and control center": "إظهار معلومات الطقس في الشريط العلوي ومركز التحكم"
+  },
+  "Show weather on the login screen": {
+    "Show weather on the login screen": "إظهار الطقس على شاشة تسجيل الدخول"
   },
   "Show workspace index numbers in the top bar workspace switcher": {
     "Show workspace index numbers in the top bar workspace switcher": "إظهار أرقام أسطح المكتب في مبدل أسطح المكتب بالشريط العلوي"
@@ -7610,11 +7994,23 @@
   "Small": {
     "Small": "صغير"
   },
+  "Smart": {
+    "Smart": "ذكي"
+  },
   "Smartcard Authentication": {
     "Smartcard Authentication": "مصادقة البطاقة الذكية"
   },
+  "Smooth": {
+    "Smooth": "سلس"
+  },
+  "Smooth cubic deceleration in, quick snap out, clean, elegant curves.": {
+    "Smooth cubic deceleration in, quick snap out, clean, elegant curves.": "تباطؤ مكعب سلس عند الدخول، سرعة عند الخروج، منحنيات أنيقة ونظيفة."
+  },
   "Snap": {
     "Snap": "محاذاة (Snap)"
+  },
+  "Snap spring-driven motion straight to its target without physics travel": {
+    "Snap spring-driven motion straight to its target without physics travel": "حركة زنبركية مباشرة إلى هدفها دون تنقل فيزيائي"
   },
   "Snow": {
     "Snow": "ثلوج"
@@ -7622,8 +8018,17 @@
   "Soft Reboot": {
     "Soft Reboot": "إعادة تشغيل برمجية"
   },
+  "Solid": {
+    "Solid": "صلب"
+  },
+  "Solid material type or Outline": {
+    "Solid material type or Outline": "نوع المادة الصلبة أو المخططة"
+  },
   "Some plugins require a newer version of DMS:": {
-    "Some plugins require a newer version of DMS:": "تتطلب بعض الإضافات إصدارًا أحدث من DMS:"
+    "Some plugins require a newer version of DMS:": "تتطلب بعض الملحقات إصدارًا أحدث من DMS:"
+  },
+  "Some settings are managed by the island": {
+    "Some settings are managed by the island": "تتم إدارة بعض الإعدادات بواسطة الجزيرة"
   },
   "Sort Alphabetically": {
     "Sort Alphabetically": "الترتيب أبجديًا"
@@ -7644,7 +8049,7 @@
     "Source: %1": "المصدر: %1"
   },
   "Sources for plugins and themes. Registries are git repositories with a plugins/ or themes/ directory.": {
-    "Sources for plugins and themes. Registries are git repositories with a plugins/ or themes/ directory.": "مصادر الإضافات والسمات. السجلات هي مستودعات git تحتوي على دليل plugins/ أو themes/."
+    "Sources for plugins and themes. Registries are git repositories with a plugins/ or themes/ directory.": "مصادر الملحقات والسمات. السجلات هي مستودعات git تحتوي على دليل plugins/ أو themes/."
   },
   "Space between the bar and screen edges": {
     "Space between the bar and screen edges": "المسافة بين الشريط وحواف الشاشة"
@@ -7654,6 +8059,9 @@
   },
   "Space between windows and screen edges": {
     "Space between windows and screen edges": "المسافة بين النوافذ وحواف الشاشة"
+  },
+  "Space kept clear for compact island and satellites": {
+    "Space kept clear for compact island and satellites": "مساحة فارغة للجزيرة المدمجة والأدوات التابعة"
   },
   "Spacer": {
     "Spacer": "مباعد"
@@ -7682,14 +8090,35 @@
   "Spotlight Search": {
     "Spotlight Search": "بحث Spotlight"
   },
+  "Spring Damping": {
+    "Spring Damping": "تخميد الزنبرك"
+  },
+  "Spring Mass": {
+    "Spring Mass": "كتلة الزنبرك"
+  },
+  "Spring Motion": {
+    "Spring Motion": "حركة الزنبرك"
+  },
+  "Spring Stiffness": {
+    "Spring Stiffness": "صلابة الزنبرك"
+  },
+  "Spring bezier with overshoot, entry briefly exceeds its target then settles.": {
+    "Spring bezier with overshoot, entry briefly exceeds its target then settles.": "منحنى بيزييه زنبركي مع تجاوز، يتجاوز الدخول هدفه لفترة وجيزة ثم يستقر."
+  },
+  "Springs carry extra energy and visibly bounce before settling": {
+    "Springs carry extra energy and visibly bounce before settling": "تحمل الزنبركات طاقة إضافية وترتد بشكل مرئي قبل الاستقرار"
+  },
   "Square": {
-    "Square": ""
+    "Square": "مربع"
   },
   "Square Corners": {
     "Square Corners": "زوايا حادة"
   },
   "Stacked": {
     "Stacked": "مكدس"
+  },
+  "Stage the Wayland overlay layer to remain visible over fullscreen apps": {
+    "Stage the Wayland overlay layer to remain visible over fullscreen apps": "تهيئة طبقة تراكب Wayland لتظل مرئية فوق التطبيقات بملء الشاشة"
   },
   "Standard": {
     "Standard": "قياسي"
@@ -7832,6 +8261,9 @@
   "Sway Website": {
     "Sway Website": "موقع Sway"
   },
+  "Sweep the background into the screen edges": {
+    "Sweep the background into the screen edges": "مسح الخلفية إلى حواف الشاشة"
+  },
   "Switch Layout Shortcut": {
     "Switch Layout Shortcut": "اختصار تبديل التخطيط"
   },
@@ -7970,6 +8402,9 @@
   "Tap to Click": {
     "Tap to Click": "النقر للنقر"
   },
+  "Task list used when adding tasks from the dash calendar": {
+    "Task list used when adding tasks from the dash calendar": "قائمة المهام المستخدمة عند إضافة مهام من تقويم لوحة التحكم"
+  },
   "Terminal": {
     "Terminal": "محطة طرفية"
   },
@@ -8030,6 +8465,12 @@
   "The DMS_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the DMS_SOCKET.": {
     "The DMS_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the DMS_SOCKET.": "متغير البيئة DMS_SOCKET غير معين أو أن المقبس غير متاح. تتطلب الإدارة التلقائية للملحقات وجود DMS_SOCKET."
   },
+  "The Island anchors to the top or bottom edge": {
+    "The Island anchors to the top or bottom edge": "ترسو الجزيرة على الحافة العلوية أو السفلية"
+  },
+  "The Island holds this edge on a display this bar covers, so the bar stays hidden there": {
+    "The Island holds this edge on a display this bar covers, so the bar stays hidden there": "تتمسك الجزيرة بهذه الحافة على شاشة يغطيها هذا الشريط، لذا يبقى الشريط مخفيًا هناك"
+  },
   "The WiFi adapter could not start access point mode.": {
     "The WiFi adapter could not start access point mode.": "تعذر على محول WiFi بدء وضع نقطة الوصول."
   },
@@ -8037,10 +8478,16 @@
     "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": "الإعدادات أدناه ستعدل إعدادات GTK و Qt الخاصة بك. إذا كنت ترغب في الحفاظ على تكويناتك الحالية، يرجى أخذ نسخة احتياطية منها (qt5ct.conf|qt6ct.conf و ~/.config/gtk-3.0|gtk-4.0)."
   },
   "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf|qtengine/config.json and ~/.config/gtk-3.0|gtk-4.0).": {
-    "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf|qtengine/config.json and ~/.config/gtk-3.0|gtk-4.0).": ""
+    "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf|qtengine/config.json and ~/.config/gtk-3.0|gtk-4.0).": "الإعدادات أدناه ستعدل إعدادات GTK و Qt الخاصة بك. إذا كنت ترغب في الاحتفاظ بتكويناتك الحالية، يرجى نسخها احتياطياً (qt5ct.conf|qt6ct.conf|qtengine/config.json و ~/.config/gtk-3.0|gtk-4.0)."
   },
   "The custom command used when attaching to sessions (receives the session name as the first argument)": {
     "The custom command used when attaching to sessions (receives the session name as the first argument)": "الأمر المخصص المستخدم عند الاتصال بالجلسات (يستقبل اسم الجلسة كأول وسيط)"
+  },
+  "The greeter bundled with DMS is active (archinstall setup). It keeps working as is, but syncing theme and settings needs the standalone greeter. Install greetd-dms-greeter-bin from the AUR, then run Sync to migrate the login screen.": {
+    "The greeter bundled with DMS is active (archinstall setup). It keeps working as is, but syncing theme and settings needs the standalone greeter. Install greetd-dms-greeter-bin from the AUR, then run Sync to migrate the login screen.": "برنامج الترحيب (greeter) المرفق مع DMS نشط (إعداد archinstall). يستمر في العمل كما هو، ولكن مزامنة السمة والإعدادات تتطلب برنامج الترحيب المستقل. قم بتثبيت greetd-dms-greeter-bin من AUR، ثم قم بتشغيل المزامنة لنقل شاشة تسجيل الدخول."
+  },
+  "The island draws its own surface": {
+    "The island draws its own surface": "ترسم الجزيرة سطحها الخاص"
   },
   "The job queue of this printer is empty": {
     "The job queue of this printer is empty": "قائمة مهام هذه الطابعة فارغة"
@@ -8078,6 +8525,9 @@
   "These add entries to the XDG autostart directory (~/.config/autostart/*.desktop)": {
     "These add entries to the XDG autostart directory (~/.config/autostart/*.desktop)": "تضيف هذه إدخالات إلى دليل البدء التلقائي XDG (~/.config/autostart/*.desktop)"
   },
+  "These style the bar surface, which the Island replaces": {
+    "These style the bar surface, which the Island replaces": "هذه تُنسق سطح الشريط، الذي تستبدله الجزيرة"
+  },
   "Thickness": {
     "Thickness": "السُمك"
   },
@@ -8088,7 +8538,7 @@
     "Third-Party Plugin Warning": "تحذير بشأن ملحقات الطرف الثالث"
   },
   "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\n\nThese plugins may pose security and privacy risks - install at your own risk.": {
-    "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\n\nThese plugins may pose security and privacy risks - install at your own risk.": "الإضافات الخارجية تم إنشاؤها بواسطة المجتمع ولا يتم دعمها رسميًا بواسطة DankMaterialShell. قد تشكل هذه الإضافات مخاطر أمنية وخصوصية - التثبيت على مسؤوليتك الخاصة."
+    "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\n\nThese plugins may pose security and privacy risks - install at your own risk.": "الملحقات الخارجية تم إنشاؤها بواسطة المجتمع ولا يتم دعمها رسميًا بواسطة DankMaterialShell. قد تشكل هذه الملحقات مخاطر أمنية وخصوصية - التثبيت على مسؤوليتك الخاصة."
   },
   "This bind is overridden by config.kdl": {
     "This bind is overridden by config.kdl": "هذا الربط تم تجاوزه بواسطة config.kdl"
@@ -8113,6 +8563,9 @@
   },
   "This will delete all unpinned entries. %1 pinned entries will be kept.": {
     "This will delete all unpinned entries. %1 pinned entries will be kept.": "سيؤدي هذا إلى حذف جميع الإدخالات غير المثبتة. سيتم الاحتفاظ بـ %1 من الإدخالات المثبتة."
+  },
+  "This will delete the %1 entries matching the current filter. Pinned entries are kept.": {
+    "This will delete the %1 entries matching the current filter. Pinned entries are kept.": "سيؤدي هذا إلى حذف %1 من الإدخالات التي تطابق عامل التصفية الحالي. يتم الاحتفاظ بالإدخالات المثبتة."
   },
   "This will disconnect WiFi from \"%1\" — the radio can't host a hotspot and stay connected at the same time. Internet sharing will need another connection, such as Ethernet.": {
     "This will disconnect WiFi from \"%1\" — the radio can't host a hotspot and stay connected at the same time. Internet sharing will need another connection, such as Ethernet.": "سيؤدي هذا إلى قطع اتصال WiFi من \"%1\" — لا يمكن للراديو استضافة نقطة اتصال والبقاء متصلاً في الوقت نفسه. ستحتاج مشاركة الإنترنت إلى اتصال آخر، مثل إيثرنت."
@@ -8228,6 +8681,9 @@
   "Toggle fonts": {
     "Toggle fonts": "تبديل الخطوط"
   },
+  "Toggle the Island on this instance's displays": {
+    "Toggle the Island on this instance's displays": "تبديل الجزيرة على شاشات هذا المثيل"
+  },
   "Toggle visibility of this bar configuration": {
     "Toggle visibility of this bar configuration": "إظهار/إخفاء إعدادات هذا الشريط"
   },
@@ -8251,6 +8707,9 @@
   },
   "Tools": {
     "Tools": "الأدوات"
+  },
+  "Tools icon opens Control Center": {
+    "Tools icon opens Control Center": "أيقونة الأدوات تفتح مركز التحكم"
   },
   "Top": {
     "Top": "أعلى"
@@ -8293,6 +8752,9 @@
   },
   "Transform": {
     "Transform": "تحويل"
+  },
+  "Transition Duration": {
+    "Transition Duration": "مدة الانتقال"
   },
   "Transition Effect": {
     "Transition Effect": "تأثير الانتقال"
@@ -8470,6 +8932,9 @@
   },
   "Unpin from Dock": {
     "Unpin from Dock": "ازالة من الشريط"
+  },
+  "Unread notification count beside the clock": {
+    "Unread notification count beside the clock": "عدد الإشعارات غير المقروءة بجانب الساعة"
   },
   "Unsaved changes": {
     "Unsaved changes": "تغييرات غير محفوظة"
@@ -8750,6 +9215,9 @@
   "Version": {
     "Version": "الإصدار"
   },
+  "Vertical": {
+    "Vertical": "عمودي"
+  },
   "Vertical Deck": {
     "Vertical Deck": "عمودي متطابق"
   },
@@ -8807,6 +9275,9 @@
   "Volume Slider": {
     "Volume Slider": "شريط تمرير مستوى الصوت"
   },
+  "Volume Style": {
+    "Volume Style": ""
+  },
   "Volume, brightness, and other system OSDs": {
     "Volume, brightness, and other system OSDs": "مؤشرات العرض على الشاشة OSD لمستوى الصوت والسطوع وأنظمة أخرى"
   },
@@ -8863,6 +9334,9 @@
   },
   "Weather Widget": {
     "Weather Widget": "اداة الطقس"
+  },
+  "Weather icon and temperature open the weather activity": {
+    "Weather icon and temperature open the weather activity": "أيقونة الطقس ودرجة الحرارة تفتح نشاط الطقس"
   },
   "Web Browser": {
     "Web Browser": "متصفح الويب"
@@ -9081,7 +9555,7 @@
     "You need to set either:\nQT_QPA_PLATFORMTHEME=gtk3 OR\nQT_QPA_PLATFORMTHEME=qt6ct\nas environment variables, and then restart the shell.\n\nqt6ct requires qt6ct-kde to be installed.": "تحتاج إلى ضبط اما:\nQT_QPA_PLATFORMTHEME=gtk3 او\nQT_QPA_PLATFORMTHEME=qt6ct\nكمتغيرات بيئة ثم إعادة تشغيل DMS.\n\nيتطلب qt6ct تثبيت qt6ct-kde."
   },
   "You need to set one of:\nQT_QPA_PLATFORMTHEME=gtk3 OR\nQT_QPA_PLATFORMTHEME=qt6ct OR\nQT_QPA_PLATFORMTHEME=qtengine\nas environment variables, and then restart the shell.\n\nOnly qt6ct requires qt6ct-kde to be installed.": {
-    "You need to set one of:\nQT_QPA_PLATFORMTHEME=gtk3 OR\nQT_QPA_PLATFORMTHEME=qt6ct OR\nQT_QPA_PLATFORMTHEME=qtengine\nas environment variables, and then restart the shell.\n\nOnly qt6ct requires qt6ct-kde to be installed.": ""
+    "You need to set one of:\nQT_QPA_PLATFORMTHEME=gtk3 OR\nQT_QPA_PLATFORMTHEME=qt6ct OR\nQT_QPA_PLATFORMTHEME=qtengine\nas environment variables, and then restart the shell.\n\nOnly qt6ct requires qt6ct-kde to be installed.": "تحتاج إلى تعيين واحد مما يلي: QT_QPA_PLATFORMTHEME=gtk3 أو QT_QPA_PLATFORMTHEME=qt6ct أو QT_QPA_PLATFORMTHEME=qtengine كمتغيرات بيئة، ثم إعادة تشغيل الصدفة (shell). يتطلب qt6ct فقط تثبيت qt6ct-kde."
   },
   "You'll enter your password at the greeter after the next reboot.": {
     "You'll enter your password at the greeter after the next reboot.": "ستدخل كلمة مرورك في شاشة الترحيب بعد إعادة التشغيل التالية."
@@ -9157,6 +9631,9 @@
   },
   "display rotation option": {
     "Normal": "عادي"
+  },
+  "dms-greeter is not installed. Install the dms-greeter package to manage the greeter.": {
+    "dms-greeter is not installed. Install the dms-greeter package to manage the greeter.": "برنامج dms-greeter غير مثبت. قم بتثبيت حزمة dms-greeter لإدارة شاشة الترحيب."
   },
   "e.g. /usr/bin/my-script --flag": {
     "e.g. /usr/bin/my-script --flag": "مثال: /usr/bin/my-script --flag"

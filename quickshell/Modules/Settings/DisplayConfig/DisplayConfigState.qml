@@ -991,31 +991,27 @@ Singleton {
     }
 
     function initHyprlandSettingsFromConfig(parsedOutputs) {
+        const importedFields = ["colorManagement", "bitdepth", "sdrBrightness", "sdrSaturation", "supportsWideColor", "supportsHdr", "sdrEotf", "icc", "sdrMinLuminance", "sdrMaxLuminance", "minLuminance", "maxLuminance", "maxAvgLuminance"];
         const current = JSON.parse(JSON.stringify(SessionData.hyprlandOutputSettings));
         let changed = false;
 
         for (const outputName in parsedOutputs) {
-            const output = parsedOutputs[outputName];
-            const settings = output.hyprlandSettings;
+            const settings = parsedOutputs[outputName]?.hyprlandSettings;
             if (!settings)
                 continue;
 
-            if (current[outputName])
+            const entry = current[outputName] ?? {};
+            let imported = false;
+            for (const field of importedFields) {
+                if (settings[field] === undefined || entry[field] !== undefined)
+                    continue;
+                entry[field] = settings[field];
+                imported = true;
+            }
+            if (!imported)
                 continue;
 
-            const hasSettings = settings.colorManagement || settings.bitdepth || settings.sdrBrightness !== undefined || settings.sdrSaturation !== undefined;
-            if (!hasSettings)
-                continue;
-
-            current[outputName] = {};
-            if (settings.colorManagement)
-                current[outputName].colorManagement = settings.colorManagement;
-            if (settings.bitdepth)
-                current[outputName].bitdepth = settings.bitdepth;
-            if (settings.sdrBrightness !== undefined)
-                current[outputName].sdrBrightness = settings.sdrBrightness;
-            if (settings.sdrSaturation !== undefined)
-                current[outputName].sdrSaturation = settings.sdrSaturation;
+            current[outputName] = entry;
             changed = true;
         }
 
@@ -1103,9 +1099,9 @@ Singleton {
                 const serial = o.serial || "Unknown";
                 const id = (o.make + " " + o.model + " " + serial).trim();
                 liveByIdentifier[id] = true;
-                liveByIdentifier[o.make + " " + o.model] = true;
+                liveByIdentifier[(o.make + " " + o.model).trim()] = true;
                 if (CompositorService.isHyprland)
-                    liveByIdentifier[getHyprlandOutputIdentifier(o, name)] = true;
+                    liveByIdentifier[getHyprlandOutputIdentifier(o, name).trim()] = true;
             }
             liveByIdentifier[name] = true;
         }
@@ -1254,6 +1250,13 @@ Singleton {
             "sdrSaturation": hyprLuaField(line, "sdrsaturation"),
             "supportsWideColor": hyprLuaField(line, "supports_wide_color"),
             "supportsHdr": hyprLuaField(line, "supports_hdr"),
+            "sdrEotf": hyprLuaField(line, "sdr_eotf"),
+            "icc": hyprLuaField(line, "icc"),
+            "sdrMinLuminance": hyprLuaField(line, "sdr_min_luminance"),
+            "sdrMaxLuminance": hyprLuaField(line, "sdr_max_luminance"),
+            "minLuminance": hyprLuaField(line, "min_luminance"),
+            "maxLuminance": hyprLuaField(line, "max_luminance"),
+            "maxAvgLuminance": hyprLuaField(line, "max_avg_luminance"),
             "vrrFullscreenOnly": vrrMode === 2 ? true : undefined
         };
         return {
@@ -2517,6 +2520,14 @@ Singleton {
         const phys = getPhysicalSize(output);
         const scale = output.logical?.scale || 1.0;
 
+        // niri floors logical sizes (2560/1.1 -> 2327, 1600/1.3 -> 1230); rounding up by
+        // one leaves a dead seam at snapped edges (#2526).
+        if (CompositorService.isNiri) {
+            return {
+                "w": Math.floor(phys.w / scale),
+                "h": Math.floor(phys.h / scale)
+            };
+        }
         return {
             "w": Math.round(phys.w / scale),
             "h": Math.round(phys.h / scale)

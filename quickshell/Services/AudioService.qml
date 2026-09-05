@@ -8,6 +8,7 @@ import Quickshell.Io
 import Quickshell.Services.Pipewire
 import qs.Common
 import qs.Services
+import "../Common/GSettings.js" as GSettings
 
 Singleton {
     id: root
@@ -18,7 +19,9 @@ Singleton {
 
     readonly property bool soundsAvailable: MultimediaService.available
     property bool playersRequested: false
-    property bool gsettingsAvailable: false
+    property bool soundThemeSupported: false
+    property bool soundThemeResolved: false
+    property bool loginSoundPending: false
     property var availableSoundThemes: []
     property string currentSoundTheme: ""
     property var soundFilePaths: ({})
@@ -99,7 +102,7 @@ Singleton {
 
     function getAvailableSinks() {
         const hidden = SessionData.hiddenOutputDeviceNames ?? [];
-        return Pipewire.nodes.values.filter(node => node.audio && node.isSink && !node.isStream && !hidden.includes(node.name));
+        return Pipewire.nodes.values.filter(node => node.audio && node.isSink && (SettingsData.audioShowStreamDevices || !node.isStream) && !hidden.includes(node.name));
     }
 
     property list<PwNode> typedSinks: []
@@ -109,7 +112,7 @@ Singleton {
         const newSinks = [];
         const newSources = [];
         for (const node of Pipewire.nodes.values) {
-            if (!node?.audio || node.isStream)
+            if (!node?.audio || (node.isStream && !SettingsData.audioShowStreamDevices))
                 continue;
             if (node.isSink)
                 newSinks.push(node);
@@ -123,6 +126,13 @@ Singleton {
     Connections {
         target: Pipewire.nodes
         function onValuesChanged() {
+            root.rebuildTypedNodeLists();
+        }
+    }
+
+    Connections {
+        target: SettingsData
+        function onAudioShowStreamDevicesChanged() {
             root.rebuildTypedNodeLists();
         }
     }
@@ -538,13 +548,15 @@ EOFCONFIG
         }
     }
 
-    function checkGsettings() {
-        Proc.runCommand("checkGsettings", ["sh", "-c", "gsettings get org.gnome.desktop.sound theme-name 2>/dev/null"], (output, exitCode) => {
-            gsettingsAvailable = (exitCode === 0);
-            if (gsettingsAvailable) {
-                scanSoundThemes();
-                getCurrentSoundTheme();
+    function checkSoundThemeSupport() {
+        Proc.runCommand("checkSoundThemeSupport", ["sh", "-c", GSettings.getCmd("org.gnome.desktop.sound", "theme-name")], (output, exitCode) => {
+            soundThemeSupported = (output || "").trim().length > 0;
+            if (!soundThemeSupported) {
+                markSoundThemeResolved();
+                return;
             }
+            scanSoundThemes();
+            getCurrentSoundTheme();
         }, 0);
     }
 
@@ -574,17 +586,14 @@ EOFCONFIG
     }
 
     function getCurrentSoundTheme() {
-        Proc.runCommand("getCurrentSoundTheme", ["sh", "-c", "gsettings get org.gnome.desktop.sound theme-name 2>/dev/null | sed \"s/'//g\""], (output, exitCode) => {
-            if (exitCode === 0 && output.trim()) {
-                currentSoundTheme = output.trim();
-                log.debug("Current system sound theme:", currentSoundTheme);
-                if (SettingsData.useSystemSoundTheme) {
-                    discoverSoundFiles(currentSoundTheme);
-                }
-            } else {
-                currentSoundTheme = "";
-                log.debug("No system sound theme found");
+        Proc.runCommand("getCurrentSoundTheme", ["sh", "-c", GSettings.getCmd("org.gnome.desktop.sound", "theme-name")], (output, exitCode) => {
+            currentSoundTheme = output.trim();
+            log.debug("Current system sound theme:", currentSoundTheme || "none");
+            if (currentSoundTheme && SettingsData.useSystemSoundTheme) {
+                discoverSoundFiles(currentSoundTheme);
+                return;
             }
+            markSoundThemeResolved();
         }, 0);
     }
 
@@ -593,7 +602,7 @@ EOFCONFIG
             return;
         }
 
-        Proc.runCommand("setSoundTheme", ["sh", "-c", `gsettings set org.gnome.desktop.sound theme-name '${themeName}'`], (output, exitCode) => {
+        Proc.runCommand("setSoundTheme", ["sh", "-c", GSettings.setCmd("org.gnome.desktop.sound", "theme-name", themeName)], (output, exitCode) => {
             if (exitCode === 0) {
                 currentSoundTheme = themeName;
                 if (SettingsData.useSystemSoundTheme) {
@@ -606,6 +615,7 @@ EOFCONFIG
     function discoverSoundFiles(themeName) {
         if (!themeName) {
             soundFilePaths = {};
+            markSoundThemeResolved();
             return;
         }
 
@@ -634,16 +644,14 @@ EOFCONFIG
                 for theme in ${themesToSearch}; do
                     for event_name in $names; do
                         for base_path in ${searchPaths.join(" ")}; do
-                            sounds_path="$base_path/sounds"
-                            for ext in ${extensions.join(" ")}; do
-                                file_path="$sounds_path/$theme/stereo/$event_name.$ext"
-                                if [ -f "$file_path" ]; then
-                                    echo "$event_key=$file_path"
-                                    found=1
-                                    break
-                                fi
-                            done
-                            [ $found -eq 1 ] && break
+                            theme_dir="$base_path/sounds/$theme"
+                            [ -d "$theme_dir" ] || continue
+                            file_path=$(find -L "$theme_dir" \\( ${extensions.map(e => `-name "$event_name.${e}"`).join(" -o ")} \\) -print 2>/dev/null | sort | head -1)
+                            if [ -n "$file_path" ]; then
+                                echo "$event_key=$file_path"
+                                found=1
+                                break
+                            fi
                         done
                         [ $found -eq 1 ] && break
                     done
@@ -664,7 +672,16 @@ EOFCONFIG
                 }
             }
             soundFilePaths = paths;
+            markSoundThemeResolved();
         }, 0);
+    }
+
+    function markSoundThemeResolved() {
+        soundThemeResolved = true;
+        if (!loginSoundPending)
+            return;
+        loginSoundPending = false;
+        playLoginSound();
     }
 
     function getSoundPath(soundEvent) {
@@ -702,9 +719,10 @@ EOFCONFIG
         log.debug("Reloading sounds, useSystemSoundTheme:", SettingsData.useSystemSoundTheme, "currentSoundTheme:", currentSoundTheme);
         if (SettingsData.useSystemSoundTheme && currentSoundTheme) {
             discoverSoundFiles(currentSoundTheme);
-        } else {
-            soundFilePaths = {};
+            return;
         }
+        soundFilePaths = {};
+        markSoundThemeResolved();
     }
 
     function isMediaPlaying() {
@@ -759,6 +777,11 @@ EOFCONFIG
 
     function playLoginSound() {
         ensurePlayers();
+        // playing before the theme paths land swaps the player source mid-playback, which stops it
+        if (SettingsData.useSystemSoundTheme && !soundThemeResolved) {
+            loginSoundPending = true;
+            return;
+        }
         if (!soundsAvailable || !loginSound || notificationsAudioMuted || shouldMuteForMedia()) {
             return;
         }
@@ -791,6 +814,14 @@ EOFCONFIG
     }
 
     readonly property string sinkVolumeIconName: volumeIconName(sink)
+    readonly property bool sinkSilent: isSilent(sink)
+
+    function isSilent(node) {
+        const audio = node?.audio;
+        if (!audio)
+            return false;
+        return audio.muted || audio.volume === 0;
+    }
 
     function volumeIconName(node, noDeviceIcon = "volume_off") {
         const audio = node?.audio;
@@ -958,7 +989,7 @@ EOFCONFIG
     }
 
     PwObjectTracker {
-        objects: Pipewire.nodes.values.filter(node => node.audio && !node.isStream)
+        objects: Pipewire.nodes.values.filter(node => node.audio && (SettingsData.audioShowStreamDevices || !node.isStream))
     }
 
     function setVolume(percentage) {
@@ -1158,11 +1189,13 @@ EOFCONFIG
     onSoundsAvailableChanged: {
         if (!soundsAvailable)
             return;
-        checkGsettings();
+        checkSoundThemeSupport();
     }
 
     Component.onCompleted: {
         rebuildTypedNodeLists();
         loadDeviceAliases();
+        if (SettingsData.soundsEnabled && SettingsData.useSystemSoundTheme)
+            getCurrentSoundTheme();
     }
 }

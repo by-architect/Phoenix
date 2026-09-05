@@ -323,10 +323,15 @@ cat >/dev/null
 	assert.Equal(t, "1", msgs[0].Text, "batches land in chronological order")
 	assert.Equal(t, "3", msgs[2].Text)
 
-	m.mu.RLock()
-	_, syncing := m.sync["sync"]
-	m.mu.RUnlock()
-	assert.False(t, syncing, "a completed sync clears its progress")
+	// The closing sync event is a separate line, ingested after the batch, so
+	// waiting for the messages does not mean it has been seen yet. Asserting
+	// immediately here raced and failed roughly one run in three.
+	eventually(t, "the completed sync to clear its progress", func() bool {
+		m.mu.RLock()
+		defer m.mu.RUnlock()
+		_, syncing := m.sync["sync"]
+		return !syncing
+	})
 }
 
 // A line that is not JSON -- most often a bridge logging to stdout by mistake

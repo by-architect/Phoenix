@@ -77,6 +77,9 @@
   "%1 online": {
     "%1 online": ""
   },
+  "%1 position": {
+    "%1 position": ""
+  },
   "%1 tasks": {
     "%1 tasks": ""
   },
@@ -311,6 +314,9 @@
   "A separate minimal launcher action that works in Standalone, Separate Frame Mode, and Connected Frame Mode.": {
     "A separate minimal launcher action that works in Standalone, Separate Frame Mode, and Connected Frame Mode.": ""
   },
+  "A slight natural settle, DMS default": {
+    "A slight natural settle, DMS default": ""
+  },
   "A user with that name already exists.": {
     "A user with that name already exists.": ""
   },
@@ -488,6 +494,9 @@
   "Add to Autostart": {
     "Add to Autostart": ""
   },
+  "Additional settings are managed by the Island": {
+    "Additional settings are managed by the Island": ""
+  },
   "Adjust pointer sensitivity speed": {
     "Adjust pointer sensitivity speed": ""
   },
@@ -542,6 +551,9 @@
   "Allow": {
     "Allow": ""
   },
+  "Allow %1 in Do Not Disturb": {
+    "Allow %1 in Do Not Disturb": ""
+  },
   "Allow LAN access": {
     "Allow LAN access": ""
   },
@@ -556,6 +568,9 @@
   },
   "Allow greeter login access": {
     "Allow greeter login access": ""
+  },
+  "Allow in Do Not Disturb": {
+    "Allow in Do Not Disturb": ""
   },
   "Already on that session": {
     "Already on that session": ""
@@ -683,6 +698,9 @@
   "Applications and commands to start automatically when you log in": {
     "Applications and commands to start automatically when you log in": ""
   },
+  "Applied independently of night mode": {
+    "Applied independently of night mode": ""
+  },
   "Applies on the next greeter sync": {
     "Applies on the next greeter sync": ""
   },
@@ -703,6 +721,9 @@
   },
   "Apply inverse concave corner cutouts to the bar": {
     "Apply inverse concave corner cutouts to the bar": ""
+  },
+  "Apply island geometry changes immediately without spring overshoot": {
+    "Apply island geometry changes immediately without spring overshoot": ""
   },
   "Apply to Hardware": {
     "Apply to Hardware": ""
@@ -727,6 +748,9 @@
   },
   "Apps Icon": {
     "Apps Icon": "Uygulamalar"
+  },
+  "Apps allowed to show popups while Do Not Disturb is on. Right-click a notification and choose \"Allow in Do Not Disturb\" to add one here.": {
+    "Apps allowed to show popups while Do Not Disturb is on. Right-click a notification and choose \"Allow in Do Not Disturb\" to add one here.": ""
   },
   "Apps are ordered by usage frequency, then last used, then alphabetically.": {
     "Apps are ordered by usage frequency, then last used, then alphabetically.": "Uygulamalar önce kullanım sıklığına göre, daha sonra son kullanılana göre ve en son alfabetik olarak sıralanır."
@@ -839,11 +863,20 @@
   "Auto (Bar-aware)": {
     "Auto (Bar-aware)": ""
   },
+  "Auto (Dark Mode)": {
+    "Auto (Dark Mode)": ""
+  },
+  "Auto (Light Mode)": {
+    "Auto (Light Mode)": ""
+  },
   "Auto (Wide)": {
     "Auto (Wide)": "Oto (Geniş)"
   },
   "Auto Compositor Gaps": {
     "Auto Compositor Gaps": ""
+  },
+  "Auto From Wallpaper": {
+    "Auto From Wallpaper": ""
   },
   "Auto Location": {
     "Auto Location": "Otomatik Konum"
@@ -953,6 +986,9 @@
   "Automatically lock the screen when the system prepares to suspend": {
     "Automatically lock the screen when the system prepares to suspend": "Sistem askıya alınmaya hazırlanırken ekranı otomatik olarak kilitle"
   },
+  "Automatically picks the scheme variant based on the wallpaper.": {
+    "Automatically picks the scheme variant based on the wallpaper.": ""
+  },
   "Automatically save changes to opened files as you type": {
     "Automatically save changes to opened files as you type": ""
   },
@@ -1058,11 +1094,20 @@
   "Bar Spacing": {
     "Bar Spacing": ""
   },
+  "Bar border and shadow": {
+    "Bar border and shadow": ""
+  },
+  "Bar corners": {
+    "Bar corners": ""
+  },
   "Bar corners and background": {
     "Bar corners and background": ""
   },
   "Bar shadow, border, and corners": {
     "Bar shadow, border, and corners": ""
+  },
+  "Bar visibility": {
+    "Bar visibility": ""
   },
   "Base color for shadows (opacity is applied automatically)": {
     "Base color for shadows (opacity is applied automatically)": ""
@@ -1076,6 +1121,9 @@
   "Battery %1": {
     "Battery %1": ""
   },
+  "Battery / Control Center": {
+    "Battery / Control Center": ""
+  },
   "Battery Charge Limit": {
     "Battery Charge Limit": "Batarya Şarj Sınırı"
   },
@@ -1087,6 +1135,9 @@
   },
   "Battery and power management": {
     "Battery and power management": "Batarya ve güç yönetimi"
+  },
+  "Battery gauge opens Control Center": {
+    "Battery gauge opens Control Center": ""
   },
   "Battery has charged to your set limit of %1%": {
     "Battery has charged to your set limit of %1%": ""
@@ -1120,6 +1171,9 @@
   },
   "Blend between Surface High and the selected custom color": {
     "Blend between Surface High and the selected custom color": ""
+  },
+  "Block %1 in Do Not Disturb": {
+    "Block %1 in Do Not Disturb": ""
   },
   "Block Out": {
     "Block Out": ""
@@ -1166,6 +1220,9 @@
   "Body": {
     "Body": ""
   },
+  "Body Click Runs Default Action": {
+    "Body Click Runs Default Action": ""
+  },
   "Body Font Size": {
     "Body Font Size": ""
   },
@@ -1205,6 +1262,9 @@
   "Border with Background": {
     "Border with Background": ""
   },
+  "Both": {
+    "Both": ""
+  },
   "Bottom": {
     "Bottom": "Alt"
   },
@@ -1223,11 +1283,17 @@
   "Bottom dock for pinned and running applications": {
     "Bottom dock for pinned and running applications": "Sabitlenmiş ve çalışan uygulamalar için alt dock"
   },
+  "Bright": {
+    "Bright": ""
+  },
   "Brightness": {
     "Brightness": "Parlaklık"
   },
   "Brightness Slider": {
     "Brightness Slider": "Parlaklık Kaydırıcı"
+  },
+  "Brightness Style": {
+    "Brightness Style": ""
   },
   "Brightness Value": {
     "Brightness Value": "Parlaklık Değeri"
@@ -1346,8 +1412,20 @@
   "Category": {
     "Category": ""
   },
+  "Cellular": {
+    "Cellular": ""
+  },
+  "Cellular disabled": {
+    "Cellular disabled": ""
+  },
+  "Cellular enabled": {
+    "Cellular enabled": ""
+  },
   "Center Section": {
     "Center Section": "Orta Bölüm"
+  },
+  "Center Section - Reserved by Dank Island": {
+    "Center Section - Reserved by Dank Island": ""
   },
   "Center Single Column": {
     "Center Single Column": "Tek Sütunu Ortala"
@@ -1487,6 +1565,9 @@
   "Choose which monitors show the lock screen interface. Other monitors will display a solid color for OLED burn-in protection.": {
     "Choose which monitors show the lock screen interface. Other monitors will display a solid color for OLED burn-in protection.": ""
   },
+  "Choose which shortcuts sit left or right of the clock": {
+    "Choose which shortcuts sit left or right of the clock": ""
+  },
   "Chroma Style": {
     "Chroma Style": ""
   },
@@ -1511,6 +1592,12 @@
   "Clear All Jobs": {
     "Clear All Jobs": "Tüm İşleri Temizle"
   },
+  "Clear Badge on Open": {
+    "Clear Badge on Open": ""
+  },
+  "Clear Filtered": {
+    "Clear Filtered": ""
+  },
   "Clear History?": {
     "Clear History?": ""
   },
@@ -1522,6 +1609,12 @@
   },
   "Clear at Startup": {
     "Clear at Startup": "Başlangıçta Temizle"
+  },
+  "Clears the badge on open but keeps notifications active": {
+    "Clears the badge on open but keeps notifications active": ""
+  },
+  "Click": {
+    "Click": ""
   },
   "Click 'Setup' to create %1 and add include to your compositor config.": {
     "Click 'Setup' to create %1 and add include to your compositor config.": ""
@@ -1541,6 +1634,12 @@
   "Click any shortcut to edit. Changes save to %1": {
     "Click any shortcut to edit. Changes save to %1": ""
   },
+  "Click expands only on an intentional press. Hybrid peeks the current compact face on hover": {
+    "Click expands only on an intentional press. Hybrid peeks the current compact face on hover": ""
+  },
+  "Click the icon to mute": {
+    "Click the icon to mute": ""
+  },
   "Click to Paste": {
     "Click to Paste": ""
   },
@@ -1549,6 +1648,9 @@
   },
   "Click to select a custom theme JSON file": {
     "Click to select a custom theme JSON file": "Özel tema JSON dosyasını seçmek için tıklayın"
+  },
+  "Clicking a popup runs its first action instead of expanding the body": {
+    "Clicking a popup runs its first action instead of expanding the body": ""
   },
   "Clip": {
     "Clip": ""
@@ -1691,14 +1793,26 @@
   "Commands": {
     "Commands": ""
   },
+  "Community favorites to get you started": {
+    "Community favorites to get you started": ""
+  },
   "Community themes": {
     "Community themes": ""
   },
   "Compact": {
     "Compact": ""
   },
+  "Compact Clock Pill": {
+    "Compact Clock Pill": ""
+  },
+  "Compact Island Height": {
+    "Compact Island Height": ""
+  },
   "Compact Mode": {
     "Compact Mode": "Kompakt Mod"
+  },
+  "Compact home clock pill in both width and height": {
+    "Compact home clock pill in both width and height": ""
   },
   "Completed": {
     "Completed": "Tamamlandı"
@@ -1753,6 +1867,9 @@
   },
   "Configure which displays show \"%1": {
     "Configure which displays show \"%1\"": ""
+  },
+  "Configure which displays show Dank Island as \"%1": {
+    "Configure which displays show Dank Island as \"%1\"": ""
   },
   "Configure which displays show shell components": {
     "Configure which displays show shell components": "Hangi ekranların kabuk bileşenlerini göstereceğini yapılandırın"
@@ -1934,11 +2051,17 @@
   "Corner Style": {
     "Corner Style": ""
   },
+  "Corner style applies to the bar surface": {
+    "Corner style applies to the bar surface": ""
+  },
   "Corners & Background": {
     "Corners & Background": "Köşeler & Arkaplan"
   },
   "Couldn't load hotspot password": {
     "Couldn't load hotspot password": ""
+  },
+  "Couldn't load plugins": {
+    "Couldn't load plugins": ""
   },
   "Count Only": {
     "Count Only": ""
@@ -2045,6 +2168,12 @@
   "Current Workspace": {
     "Current Workspace": ""
   },
+  "Current display brightness on the home face": {
+    "Current display brightness on the home face": ""
+  },
+  "Current output volume on the home face": {
+    "Current output volume on the home face": ""
+  },
   "Current time and date display": {
     "Current time and date display": "Güncel saat ve tarih göstergesi"
   },
@@ -2062,6 +2191,9 @@
   },
   "Curve": {
     "Curve": ""
+  },
+  "Curve rasterizer.": {
+    "Curve rasterizer.": ""
   },
   "Curve: curve rasterizer.": {
     "Curve: curve rasterizer.": ""
@@ -2192,6 +2324,9 @@
   "Daily at:": {
     "Daily at:": "Her gün saat:"
   },
+  "Damped springs settle straight to their target with no overshoot": {
+    "Damped springs settle straight to their target with no overshoot": ""
+  },
   "Dank": {
     "Dank": "Dank"
   },
@@ -2203,6 +2338,12 @@
   },
   "Dank Dash": {
     "Dank Dash": ""
+  },
+  "Dank Island - Beta": {
+    "Dank Island - Beta": ""
+  },
+  "Dank Island instance": {
+    "Dank Island instance": ""
   },
   "DankBar": {
     "DankBar": ""
@@ -2234,8 +2375,14 @@
   "Dark mode harmony": {
     "Dark mode harmony": ""
   },
+  "Dark or light mode follows the wallpaper brightness": {
+    "Dark or light mode follows the wallpaper brightness": ""
+  },
   "Darken Modal Background": {
     "Darken Modal Background": "Koyu Modal Arkaplanı"
+  },
+  "Dashboard": {
+    "Dashboard": ""
   },
   "Date First": {
     "Date First": ""
@@ -2294,8 +2441,14 @@
   "Default Opens": {
     "Default Opens": ""
   },
+  "Default Task List": {
+    "Default Task List": ""
+  },
   "Default Width (%)": {
     "Default Width (%)": "Varsayılan Genişlik (%)"
+  },
+  "Default launcher shortcuts open a native launcher activity inside Dank Island. Spotlight is used when the focused screen has no DankIsland.": {
+    "Default launcher shortcuts open a native launcher activity inside Dank Island. Spotlight is used when the focused screen has no DankIsland.": ""
   },
   "Default launcher shortcuts open the full launcher with mode tabs, grid view, and action panel.": {
     "Default launcher shortcuts open the full launcher with mode tabs, grid view, and action panel.": ""
@@ -2420,6 +2573,9 @@
   "Digital": {
     "Digital": "Dijital"
   },
+  "Dim": {
+    "Dim": ""
+  },
   "Direct path to a .xkb keymap file. Overrides layouts/variants above.": {
     "Direct path to a .xkb keymap file. Overrides layouts/variants above.": ""
   },
@@ -2464,6 +2620,9 @@
   },
   "Disabling auto-login on startup...": {
     "Disabling auto-login on startup...": ""
+  },
+  "Disabling cellular...": {
+    "Disabling cellular...": ""
   },
   "Disc": {
     "Disc": ""
@@ -2573,6 +2732,12 @@
   "Displays the active keyboard layout and allows switching": {
     "Displays the active keyboard layout and allows switching": "Etkin klavye düzenini gösterir ve değiştirmeye izin verir"
   },
+  "Distance between display edge and island": {
+    "Distance between display edge and island": ""
+  },
+  "Distance-field renderer.": {
+    "Distance-field renderer.": ""
+  },
   "Distribution": {
     "Distribution": ""
   },
@@ -2632,6 +2797,12 @@
   },
   "Draw a connected picture-frame border around the entire display": {
     "Draw a connected picture-frame border around the entire display": ""
+  },
+  "Draw an island-styled background behind satellite widgets": {
+    "Draw an island-styled background behind satellite widgets": ""
+  },
+  "Draw an outline and use the highest-contrast surface tone": {
+    "Draw an outline and use the highest-contrast surface tone": ""
   },
   "Driver": {
     "Driver": "Sürücü"
@@ -2750,6 +2921,9 @@
   "Enable Bar": {
     "Enable Bar": "Barı Etkinleştir"
   },
+  "Enable Cellular": {
+    "Enable Cellular": ""
+  },
   "Enable Do Not Disturb": {
     "Enable Do Not Disturb": "Rahatsız Etmeyi Etkinleştir"
   },
@@ -2758,6 +2932,9 @@
   },
   "Enable History": {
     "Enable History": "Geçmişi Aç"
+  },
+  "Enable Island": {
+    "Enable Island": ""
   },
   "Enable Num Lock": {
     "Enable Num Lock": ""
@@ -2807,11 +2984,17 @@
   "Enable security key authentication": {
     "Enable security key authentication": ""
   },
+  "Enable weather in Time & Weather to show this shortcut": {
+    "Enable weather in Time & Weather to show this shortcut": ""
+  },
   "Enabled": {
     "Enabled": "Etkin"
   },
   "Enabling WiFi...": {
     "Enabling WiFi...": "WiFi açılıyor..."
+  },
+  "Enabling cellular...": {
+    "Enabling cellular...": ""
   },
   "End": {
     "End": "Son"
@@ -2935,6 +3118,15 @@
   },
   "Exit node": {
     "Exit node": ""
+  },
+  "Expand Notifications": {
+    "Expand Notifications": ""
+  },
+  "Expand notifications by default instead of click or hover": {
+    "Expand notifications by default instead of click or hover": ""
+  },
+  "Expansion Mode": {
+    "Expansion Mode": ""
   },
   "Experimental Feature": {
     "Experimental Feature": "Deneysel Özellik"
@@ -3164,6 +3356,12 @@
   "Failed to save clipboard setting": {
     "Failed to save clipboard setting": "Pano ayarı kaydedilemedi"
   },
+  "Failed to save dropped file": {
+    "Failed to save dropped file": ""
+  },
+  "Failed to save dropped text": {
+    "Failed to save dropped text": ""
+  },
   "Failed to save keybind": {
     "Failed to save keybind": "Tuş kombinasyonu kaydedilemedi"
   },
@@ -3217,6 +3415,12 @@
   },
   "Failed to switch codec": {
     "Failed to switch codec": ""
+  },
+  "Failed to switch port": {
+    "Failed to switch port": ""
+  },
+  "Failed to toggle cellular": {
+    "Failed to toggle cellular": ""
   },
   "Failed to unpin entry": {
     "Failed to unpin entry": ""
@@ -3394,6 +3598,9 @@
   },
   "Floating windows follow Surface Styling settings": {
     "Floating windows follow Surface Styling settings": ""
+  },
+  "Floats above windows and other content": {
+    "Floats above windows and other content": ""
   },
   "Fluent": {
     "Fluent": ""
@@ -3638,6 +3845,9 @@
   "Games": {
     "Games": "Oyunlar"
   },
+  "Gamma": {
+    "Gamma": ""
+  },
   "Gamma Control": {
     "Gamma Control": "Gama Kontrolü"
   },
@@ -3682,6 +3892,9 @@
   },
   "Globally scale all animation durations": {
     "Globally scale all animation durations": ""
+  },
+  "Globally scale animation durations with geometric motion & spring based physics with bezier curves": {
+    "Globally scale animation durations with geometric motion & spring based physics with bezier curves": ""
   },
   "Golden Hour": {
     "Golden Hour": "Altın Saat"
@@ -3905,8 +4118,20 @@
   "High": {
     "High": ""
   },
+  "High Contrast": {
+    "High Contrast": ""
+  },
   "High-fidelity palette that preserves source hues.": {
     "High-fidelity palette that preserves source hues.": "Kaynak tonları koruyan yüksek sadakatli palet"
+  },
+  "Higher percentages give island more inertia": {
+    "Higher percentages give island more inertia": ""
+  },
+  "Higher values pull island toward its target more strongly": {
+    "Higher values pull island toward its target more strongly": ""
+  },
+  "Higher values settle island with less bounce": {
+    "Higher values settle island with less bounce": ""
   },
   "Highlight Active Workspace App": {
     "Highlight Active Workspace App": ""
@@ -3931,6 +4156,15 @@
   },
   "Hold to Confirm Power Actions": {
     "Hold to Confirm Power Actions": "Güç Eylemlerini Onaylamak İçin Basılı Tutun"
+  },
+  "Home Compact": {
+    "Home Compact": ""
+  },
+  "Horizontal": {
+    "Horizontal": ""
+  },
+  "Horizontal Offset": {
+    "Horizontal Offset": ""
   },
   "Horizontal and vertical bar thickness": {
     "Horizontal and vertical bar thickness": ""
@@ -3995,6 +4229,12 @@
   "Humidity": {
     "Humidity": "Nem"
   },
+  "Hybrid": {
+    "Hybrid": ""
+  },
+  "Hybrid peeks the current compact face on hover. Click pins a destination so it stays open": {
+    "Hybrid peeks the current compact face on hover. Click pins a destination so it stays open": ""
+  },
   "Hyprland Discord Server": {
     "Hyprland Discord Server": ""
   },
@@ -4042,6 +4282,9 @@
   },
   "Icon Size %": {
     "Icon Size %": ""
+  },
+  "Icon Spacing": {
+    "Icon Spacing": ""
   },
   "Icon Theme": {
     "Icon Theme": "Simge Teması"
@@ -4133,6 +4376,9 @@
   "Include Transitions": {
     "Include Transitions": "Geçişleri Dahil Et"
   },
+  "Include application streams and virtual sinks in the device lists": {
+    "Include application streams and virtual sinks in the device lists": ""
+  },
   "Include desktop actions (shortcuts) in search results.": {
     "Include desktop actions (shortcuts) in search results.": ""
   },
@@ -4177,6 +4423,9 @@
   },
   "Inner Gaps": {
     "Inner Gaps": ""
+  },
+  "Inner authentication": {
+    "Inner authentication": ""
   },
   "Inner padding applied to each widget": {
     "Inner padding applied to each widget": ""
@@ -4292,6 +4541,18 @@
   "Iris Bloom": {
     "Iris Bloom": ""
   },
+  "Island": {
+    "Island": ""
+  },
+  "Island Gap": {
+    "Island Gap": ""
+  },
+  "Island Instance": {
+    "Island Instance": ""
+  },
+  "Island placement": {
+    "Island placement": ""
+  },
   "Isolate Displays": {
     "Isolate Displays": "İzole Ekranlar"
   },
@@ -4313,6 +4574,9 @@
   "Keep Changes": {
     "Keep Changes": "Değişiklikleri Tut"
   },
+  "Keep Clock with Media": {
+    "Keep Clock with Media": ""
+  },
   "Keep My Edits": {
     "Keep My Edits": ""
   },
@@ -4328,8 +4592,14 @@
   "Keep the clipboard type filter when reopening history": {
     "Keep the clipboard type filter when reopening history": ""
   },
+  "Keep the dock visible above fullscreen applications": {
+    "Keep the dock visible above fullscreen applications": ""
+  },
   "Keep typing": {
     "Keep typing": ""
+  },
+  "Keep widgets beside the island or align them like a standalone bar": {
+    "Keep widgets beside the island or align them like a standalone bar": ""
   },
   "Keeping Awake": {
     "Keeping Awake": "Uyanık Tutuluyor"
@@ -4544,6 +4814,9 @@
   "Loading keybinds...": {
     "Loading keybinds...": "Tuş kombinasyonları yükleniyor..."
   },
+  "Loading ports...": {
+    "Loading ports...": ""
+  },
   "Loading trending...": {
     "Loading trending...": ""
   },
@@ -4727,6 +5000,12 @@
   "Material": {
     "Material": ""
   },
+  "Material 3 Expressive bezier curves, default.": {
+    "Material 3 Expressive bezier curves, default.": ""
+  },
+  "Material 3 Expressive panels rise from below with a subtle scale, default.": {
+    "Material 3 Expressive panels rise from below with a subtle scale, default.": ""
+  },
   "Material Battery Style": {
     "Material Battery Style": ""
   },
@@ -4828,6 +5107,9 @@
   },
   "Maximum pinned entries reached": {
     "Maximum pinned entries reached": ""
+  },
+  "Media / Launcher": {
+    "Media / Launcher": ""
   },
   "Media Controls": {
     "Media Controls": "Medya Kontrolleri"
@@ -4973,6 +5255,12 @@
   "Morning": {
     "Morning": "Sabah"
   },
+  "Motion": {
+    "Motion": ""
+  },
+  "Motion & Accessibility": {
+    "Motion & Accessibility": ""
+  },
   "Motion Effects": {
     "Motion Effects": ""
   },
@@ -4996,6 +5284,9 @@
   },
   "Move Widget": {
     "Move Widget": "Widget Taşı"
+  },
+  "Move island and satellites left or right from display center": {
+    "Move island and satellites left or right from display center": ""
   },
   "Moving to Paused": {
     "Moving to Paused": "Duraklatılıyor"
@@ -5056,6 +5347,9 @@
   },
   "Navigate": {
     "Navigate": ""
+  },
+  "Near Island": {
+    "Near Island": ""
   },
   "Network": {
     "Network": "Ağ"
@@ -5375,6 +5669,9 @@
   "No plugins found": {
     "No plugins found": "Eklenti bulunamadı"
   },
+  "No ports found": {
+    "No ports found": ""
+  },
   "No printer found": {
     "No printer found": "Yazıcı Bulunamadı"
   },
@@ -5666,6 +5963,9 @@
   "Open From": {
     "Open From": ""
   },
+  "Open Island": {
+    "Open Island": ""
+  },
   "Open Notepad File": {
     "Open Notepad File": "Not Defteri Dosyası Aç"
   },
@@ -5837,6 +6137,9 @@
   "PDF Reader": {
     "PDF Reader": ""
   },
+  "PID": {
+    "PID": ""
+  },
   "PIN": {
     "PIN": "PİN"
   },
@@ -5875,6 +6178,15 @@
   },
   "Pairing...": {
     "Pairing...": "Eşleşiyor..."
+  },
+  "Palette": {
+    "Palette": ""
+  },
+  "Panels glide in from a larger distance at full size, no scale change, pure clean motion.": {
+    "Panels glide in from a larger distance at full size, no scale change, pure clean motion.": ""
+  },
+  "Panels scale up from small as they slide in, a dramatic pop-forward depth effect.": {
+    "Panels scale up from small as they slide in, a dramatic pop-forward depth effect.": ""
   },
   "Partial": {
     "Partial": ""
@@ -6002,6 +6314,9 @@
   "Place clipboard history on the Wayland overlay layer": {
     "Place clipboard history on the Wayland overlay layer": ""
   },
+  "Place independent widgets to left and right of island": {
+    "Place independent widgets to left and right of island": ""
+  },
   "Place plugin directories here. Each plugin should have a plugin.json manifest file.": {
     "Place plugin directories here. Each plugin should have a plugin.json manifest file.": "Eklenti klasörlerini buraya yerleştirin. Her eklenti plugin.json manifest dosyasına sahip olmalı."
   },
@@ -6013,6 +6328,9 @@
   },
   "Place the dock on the Wayland overlay layer": {
     "Place the dock on the Wayland overlay layer": ""
+  },
+  "Platform renderer (FreeType).": {
+    "Platform renderer (FreeType).": ""
   },
   "Play": {
     "Play": ""
@@ -6037,6 +6355,9 @@
   },
   "Playback error: ": {
     "Playback error: ": ""
+  },
+  "Playful": {
+    "Playful": ""
   },
   "Plays audio files": {
     "Plays audio files": ""
@@ -6107,6 +6428,9 @@
   "Popouts and Modals follow global Animation Speed (disable to customize independently)": {
     "Popouts and Modals follow global Animation Speed (disable to customize independently)": ""
   },
+  "Popular Plugins": {
+    "Popular Plugins": ""
+  },
   "Popup Only": {
     "Popup Only": ""
   },
@@ -6124,6 +6448,12 @@
   },
   "Port": {
     "Port": ""
+  },
+  "Port Selection": {
+    "Port Selection": ""
+  },
+  "Port switched": {
+    "Port switched": ""
   },
   "Portal": {
     "Portal": ""
@@ -6238,6 +6568,9 @@
   },
   "Primary": {
     "Primary": "Birincil"
+  },
+  "Primary Bar": {
+    "Primary Bar": ""
   },
   "Primary Container": {
     "Primary Container": ""
@@ -6431,6 +6764,9 @@
   "Recommended available": {
     "Recommended available": "Önerilen mevcut"
   },
+  "Reduce Motion": {
+    "Reduce Motion": ""
+  },
   "Reduce the visible bar length from both ends": {
     "Reduce the visible bar length from both ends": ""
   },
@@ -6554,6 +6890,9 @@
   "Rename Workspace": {
     "Rename Workspace": ""
   },
+  "Render Type": {
+    "Render Type": ""
+  },
   "Reorder & Group": {
     "Reorder & Group": ""
   },
@@ -6611,6 +6950,9 @@
   "Requires the DMS Theme extension from the editor marketplace": {
     "Requires the DMS Theme extension from the editor marketplace": ""
   },
+  "Reserved Height": {
+    "Reserved Height": ""
+  },
   "Reset": {
     "Reset": "Sıfırla"
   },
@@ -6631,6 +6973,9 @@
   },
   "Resize on Border": {
     "Resize on Border": ""
+  },
+  "Resize the resting island to align with nearby widgets": {
+    "Resize the resting island to align with nearby widgets": ""
   },
   "Resize windows by dragging their edges with the mouse": {
     "Resize windows by dragging their edges with the mouse": ""
@@ -6664,6 +7009,9 @@
   },
   "Resume": {
     "Resume": "Sürdür"
+  },
+  "Retry": {
+    "Retry": ""
   },
   "Reveal the arcs where surfaces meet the frame": {
     "Reveal the arcs where surfaces meet the frame": ""
@@ -6791,6 +7139,12 @@
   "SSID": {
     "SSID": ""
   },
+  "Satellite Widgets": {
+    "Satellite Widgets": ""
+  },
+  "Satellites widget to place left or right of the island": {
+    "Satellites widget to place left or right of the island": ""
+  },
   "Saturation": {
     "Saturation": ""
   },
@@ -6875,6 +7229,9 @@
   "Score": {
     "Score": ""
   },
+  "Screen Edges": {
+    "Screen Edges": ""
+  },
   "Screen sharing": {
     "Screen sharing": "Ekran paylaşımı"
   },
@@ -6946,6 +7303,9 @@
   },
   "Search themes...": {
     "Search themes...": "Tema ara..."
+  },
+  "Search when idle, visualizer when media is playing": {
+    "Search when idle, visualizer when media is playing": ""
   },
   "Search widgets...": {
     "Search widgets...": "Widget ara..."
@@ -7280,14 +7640,23 @@
   "Show CPU Temp": {
     "Show CPU Temp": "CPU Sıcaklığını Göster"
   },
+  "Show Charge Rate": {
+    "Show Charge Rate": ""
+  },
   "Show Date": {
     "Show Date": "Tarihi Göster"
+  },
+  "Show Discharge Rate": {
+    "Show Discharge Rate": ""
   },
   "Show Disk": {
     "Show Disk": "Diski Göster"
   },
   "Show Dock": {
     "Show Dock": "Dock'u Göster"
+  },
+  "Show Dock Over Fullscreen": {
+    "Show Dock Over Fullscreen": ""
   },
   "Show Feels Like Temperature": {
     "Show Feels Like Temperature": ""
@@ -7400,6 +7769,9 @@
   "Show Restart DMS": {
     "Show Restart DMS": "DMS'yi Yeniden Başlatı Göster"
   },
+  "Show Satellite Widgets": {
+    "Show Satellite Widgets": ""
+  },
   "Show Saved Items": {
     "Show Saved Items": ""
   },
@@ -7436,6 +7808,9 @@
   "Show Trash in Dock": {
     "Show Trash in Dock": ""
   },
+  "Show Virtual Devices": {
+    "Show Virtual Devices": ""
+  },
   "Show Weather Condition": {
     "Show Weather Condition": ""
   },
@@ -7453,6 +7828,9 @@
   },
   "Show a bar that drains as the popup's auto-dismiss timer runs": {
     "Show a bar that drains as the popup's auto-dismiss timer runs": ""
+  },
+  "Show a clickable clock beside compact media details": {
+    "Show a clickable clock beside compact media details": ""
   },
   "Show a notification when battery reaches the charge limit.": {
     "Show a notification when battery reaches the charge limit.": ""
@@ -7474,6 +7852,9 @@
   },
   "Show cava audio visualizer in media widget": {
     "Show cava audio visualizer in media widget": "Medya widget'ında cava ses görselleştiricisini göster"
+  },
+  "Show critical priority popups while Do Not Disturb is on": {
+    "Show critical priority popups while Do Not Disturb is on": ""
   },
   "Show darkened overlay behind modal dialogs": {
     "Show darkened overlay behind modal dialogs": "Modal diyalogların arkasında karartılmış kaplama göster"
@@ -7537,6 +7918,9 @@
   },
   "Show weather information in top bar and control center": {
     "Show weather information in top bar and control center": "Üst çubuk ve kontrol merkezinde hava durumu bilgisini göster"
+  },
+  "Show weather on the login screen": {
+    "Show weather on the login screen": ""
   },
   "Show workspace index numbers in the top bar workspace switcher": {
     "Show workspace index numbers in the top bar workspace switcher": "Üst çubuktaki çalışma alanı değiştiricide çalışma alanı dizin numaralarını göster"
@@ -7610,11 +7994,23 @@
   "Small": {
     "Small": ""
   },
+  "Smart": {
+    "Smart": ""
+  },
   "Smartcard Authentication": {
     "Smartcard Authentication": ""
   },
+  "Smooth": {
+    "Smooth": ""
+  },
+  "Smooth cubic deceleration in, quick snap out, clean, elegant curves.": {
+    "Smooth cubic deceleration in, quick snap out, clean, elegant curves.": ""
+  },
   "Snap": {
     "Snap": ""
+  },
+  "Snap spring-driven motion straight to its target without physics travel": {
+    "Snap spring-driven motion straight to its target without physics travel": ""
   },
   "Snow": {
     "Snow": ""
@@ -7622,8 +8018,17 @@
   "Soft Reboot": {
     "Soft Reboot": ""
   },
+  "Solid": {
+    "Solid": ""
+  },
+  "Solid material type or Outline": {
+    "Solid material type or Outline": ""
+  },
   "Some plugins require a newer version of DMS:": {
     "Some plugins require a newer version of DMS:": "Bazı eklentiler daha yeni bir DMS sürümü gerektirir:"
+  },
+  "Some settings are managed by the island": {
+    "Some settings are managed by the island": ""
   },
   "Sort Alphabetically": {
     "Sort Alphabetically": "Alfabetik Olarak Sırala"
@@ -7655,6 +8060,9 @@
   "Space between windows and screen edges": {
     "Space between windows and screen edges": ""
   },
+  "Space kept clear for compact island and satellites": {
+    "Space kept clear for compact island and satellites": ""
+  },
   "Spacer": {
     "Spacer": "Boşluklandırıcı"
   },
@@ -7682,6 +8090,24 @@
   "Spotlight Search": {
     "Spotlight Search": ""
   },
+  "Spring Damping": {
+    "Spring Damping": ""
+  },
+  "Spring Mass": {
+    "Spring Mass": ""
+  },
+  "Spring Motion": {
+    "Spring Motion": ""
+  },
+  "Spring Stiffness": {
+    "Spring Stiffness": ""
+  },
+  "Spring bezier with overshoot, entry briefly exceeds its target then settles.": {
+    "Spring bezier with overshoot, entry briefly exceeds its target then settles.": ""
+  },
+  "Springs carry extra energy and visibly bounce before settling": {
+    "Springs carry extra energy and visibly bounce before settling": ""
+  },
   "Square": {
     "Square": ""
   },
@@ -7690,6 +8116,9 @@
   },
   "Stacked": {
     "Stacked": "Yığılmış"
+  },
+  "Stage the Wayland overlay layer to remain visible over fullscreen apps": {
+    "Stage the Wayland overlay layer to remain visible over fullscreen apps": ""
   },
   "Standard": {
     "Standard": ""
@@ -7832,6 +8261,9 @@
   "Sway Website": {
     "Sway Website": ""
   },
+  "Sweep the background into the screen edges": {
+    "Sweep the background into the screen edges": ""
+  },
   "Switch Layout Shortcut": {
     "Switch Layout Shortcut": ""
   },
@@ -7970,6 +8402,9 @@
   "Tap to Click": {
     "Tap to Click": ""
   },
+  "Task list used when adding tasks from the dash calendar": {
+    "Task list used when adding tasks from the dash calendar": ""
+  },
   "Terminal": {
     "Terminal": ""
   },
@@ -8030,6 +8465,12 @@
   "The DMS_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the DMS_SOCKET.": {
     "The DMS_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the DMS_SOCKET.": "DMS_SOCKET ortam değişkeni ayarlanmamış veya soket kullanılamıyor. Otomatik eklenti yönetimi için DMS_SOCKET gereklidir."
   },
+  "The Island anchors to the top or bottom edge": {
+    "The Island anchors to the top or bottom edge": ""
+  },
+  "The Island holds this edge on a display this bar covers, so the bar stays hidden there": {
+    "The Island holds this edge on a display this bar covers, so the bar stays hidden there": ""
+  },
   "The WiFi adapter could not start access point mode.": {
     "The WiFi adapter could not start access point mode.": ""
   },
@@ -8041,6 +8482,12 @@
   },
   "The custom command used when attaching to sessions (receives the session name as the first argument)": {
     "The custom command used when attaching to sessions (receives the session name as the first argument)": ""
+  },
+  "The greeter bundled with DMS is active (archinstall setup). It keeps working as is, but syncing theme and settings needs the standalone greeter. Install greetd-dms-greeter-bin from the AUR, then run Sync to migrate the login screen.": {
+    "The greeter bundled with DMS is active (archinstall setup). It keeps working as is, but syncing theme and settings needs the standalone greeter. Install greetd-dms-greeter-bin from the AUR, then run Sync to migrate the login screen.": ""
+  },
+  "The island draws its own surface": {
+    "The island draws its own surface": ""
   },
   "The job queue of this printer is empty": {
     "The job queue of this printer is empty": "Bu yazıcının iş kuyruğu boş"
@@ -8078,6 +8525,9 @@
   "These add entries to the XDG autostart directory (~/.config/autostart/*.desktop)": {
     "These add entries to the XDG autostart directory (~/.config/autostart/*.desktop)": ""
   },
+  "These style the bar surface, which the Island replaces": {
+    "These style the bar surface, which the Island replaces": ""
+  },
   "Thickness": {
     "Thickness": "Kalınlık"
   },
@@ -8113,6 +8563,9 @@
   },
   "This will delete all unpinned entries. %1 pinned entries will be kept.": {
     "This will delete all unpinned entries. %1 pinned entries will be kept.": ""
+  },
+  "This will delete the %1 entries matching the current filter. Pinned entries are kept.": {
+    "This will delete the %1 entries matching the current filter. Pinned entries are kept.": ""
   },
   "This will disconnect WiFi from \"%1\" — the radio can't host a hotspot and stay connected at the same time. Internet sharing will need another connection, such as Ethernet.": {
     "This will disconnect WiFi from \"%1\" — the radio can't host a hotspot and stay connected at the same time. Internet sharing will need another connection, such as Ethernet.": ""
@@ -8228,6 +8681,9 @@
   "Toggle fonts": {
     "Toggle fonts": ""
   },
+  "Toggle the Island on this instance's displays": {
+    "Toggle the Island on this instance's displays": ""
+  },
   "Toggle visibility of this bar configuration": {
     "Toggle visibility of this bar configuration": "Bu bar yapılandırmasının görünürlüğünü değiştir"
   },
@@ -8251,6 +8707,9 @@
   },
   "Tools": {
     "Tools": ""
+  },
+  "Tools icon opens Control Center": {
+    "Tools icon opens Control Center": ""
   },
   "Top": {
     "Top": "Üst"
@@ -8293,6 +8752,9 @@
   },
   "Transform": {
     "Transform": "Dönüştür"
+  },
+  "Transition Duration": {
+    "Transition Duration": ""
   },
   "Transition Effect": {
     "Transition Effect": "Geçiş Efekti"
@@ -8470,6 +8932,9 @@
   },
   "Unpin from Dock": {
     "Unpin from Dock": "Dock'tan Sabitlemeyi Kaldır"
+  },
+  "Unread notification count beside the clock": {
+    "Unread notification count beside the clock": ""
   },
   "Unsaved changes": {
     "Unsaved changes": "Kaydedilmemiş değişiklikler"
@@ -8750,6 +9215,9 @@
   "Version": {
     "Version": "Sürüm"
   },
+  "Vertical": {
+    "Vertical": ""
+  },
   "Vertical Deck": {
     "Vertical Deck": "Dikey Deck"
   },
@@ -8807,6 +9275,9 @@
   "Volume Slider": {
     "Volume Slider": "Ses Seviyesi Kaydırıcı"
   },
+  "Volume Style": {
+    "Volume Style": ""
+  },
   "Volume, brightness, and other system OSDs": {
     "Volume, brightness, and other system OSDs": "Ses, parlaklık ve diğer sistem ekran üstü gösterimleri"
   },
@@ -8863,6 +9334,9 @@
   },
   "Weather Widget": {
     "Weather Widget": "Hava Durumu Widget'ı"
+  },
+  "Weather icon and temperature open the weather activity": {
+    "Weather icon and temperature open the weather activity": ""
   },
   "Web Browser": {
     "Web Browser": ""
@@ -9157,6 +9631,9 @@
   },
   "display rotation option": {
     "Normal": ""
+  },
+  "dms-greeter is not installed. Install the dms-greeter package to manage the greeter.": {
+    "dms-greeter is not installed. Install the dms-greeter package to manage the greeter.": ""
   },
   "e.g. /usr/bin/my-script --flag": {
     "e.g. /usr/bin/my-script --flag": ""

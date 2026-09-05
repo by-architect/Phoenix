@@ -5,10 +5,12 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.Common
+import qs.Modules.Greetd
 import "../Common/suncalc.js" as SunCalc
 
 Singleton {
     id: root
+    readonly property var log: Log.scoped("WeatherService")
 
     property int refCount: 0
 
@@ -47,7 +49,7 @@ Singleton {
 
     // ionice is util-linux only; the BSDs get plain nice
     readonly property var lowPriorityCmd: Qt.platform.os === "linux" ? ["nice", "-n", "19", "ionice", "-c3"] : ["nice", "-n", "19"]
-    readonly property var curlBaseCmd: ["curl", "-sS", "--fail", "--connect-timeout", "3", "--max-time", "6", "--limit-rate", "100k", "--compressed"]
+    readonly property var fetchCmd: [Proc.dmsBin, "dl", "--connect-timeout", "8", "--timeout", "20"]
 
     property var weatherIcons: ({
             "0": "clear_day",
@@ -469,7 +471,7 @@ Singleton {
     }
 
     function getConfiguredLocationName() {
-        return SettingsData.weatherLocation;
+        return SessionData.isGreeterMode ? SessionData.weatherLocation : SettingsData.weatherLocation;
     }
 
     function setLocation(lat, lon, city, country) {
@@ -522,9 +524,9 @@ Singleton {
     }
 
     function updateLocation() {
-        const useAuto = SettingsData.useAutoLocation;
-        const coords = SettingsData.weatherCoordinates;
-        const cityName = SettingsData.weatherLocation;
+        const useAuto = SessionData.isGreeterMode ? GreetdSettings.useAutoLocation : SettingsData.useAutoLocation;
+        const coords = SessionData.isGreeterMode ? SessionData.weatherCoordinates : SettingsData.weatherCoordinates;
+        const cityName = SessionData.isGreeterMode ? SessionData.weatherLocation : SettingsData.weatherLocation;
 
         if (useAuto) {
             getLocationFromService();
@@ -564,7 +566,7 @@ Singleton {
     }
 
     function getLocationFromCity(city) {
-        cityGeocodeFetcher.command = lowPriorityCmd.concat(curlBaseCmd).concat([getGeocodingUrl(city)]);
+        cityGeocodeFetcher.command = lowPriorityCmd.concat(fetchCmd, [getGeocodingUrl(city)]);
         cityGeocodeFetcher.running = true;
     }
 
@@ -610,21 +612,21 @@ Singleton {
 
     function tryNominatim(lat, lon, reqId) {
         const url = "https://nominatim.openstreetmap.org/reverse?lat=" + lat + "&lon=" + lon + "&format=json&addressdetails=1&accept-language=en";
-        nominatimFetcher.command = lowPriorityCmd.concat(curlBaseCmd).concat(["-H", "User-Agent: DankMaterialShell Weather Widget", url]);
+        nominatimFetcher.command = lowPriorityCmd.concat(fetchCmd, ["--user-agent", "DankMaterialShell Weather Widget", url]);
         nominatimFetcher.reqId = reqId;
         nominatimFetcher.running = true;
     }
 
     function tryPhoton(lat, lon, reqId) {
         const url = "https://photon.komoot.io/reverse?lat=" + lat + "&lon=" + lon + "&lang=en";
-        photonFetcher.command = lowPriorityCmd.concat(curlBaseCmd).concat([url]);
+        photonFetcher.command = lowPriorityCmd.concat(fetchCmd, [url]);
         photonFetcher.reqId = reqId;
         photonFetcher.running = true;
     }
 
     function tryBigDataCloud(lat, lon, reqId) {
         const url = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + lat + "&longitude=" + lon + "&localityLanguage=zh";
-        bigDataCloudFetcher.command = lowPriorityCmd.concat(curlBaseCmd).concat([url]);
+        bigDataCloudFetcher.command = lowPriorityCmd.concat(fetchCmd, [url]);
         bigDataCloudFetcher.reqId = reqId;
         bigDataCloudFetcher.running = true;
     }
@@ -659,8 +661,7 @@ Singleton {
 
         root.lastFetchTime = now;
         root.weather.loading = true;
-        const weatherCmd = lowPriorityCmd.concat(["curl", "-sS", "--fail", "--connect-timeout", "3", "--max-time", "6", "--limit-rate", "150k", "--compressed"]);
-        weatherFetcher.command = weatherCmd.concat([apiUrl]);
+        weatherFetcher.command = lowPriorityCmd.concat(root.fetchCmd, [apiUrl]);
         weatherFetcher.running = true;
     }
 
@@ -685,12 +686,17 @@ Singleton {
         }
     }
 
-    function handleWeatherFailure() {
+    property string lastFetchError: ""
+
+    function handleWeatherFailure(reason) {
+        if (reason)
+            root.lastFetchError = reason;
         root.retryAttempts++;
         if (root.retryAttempts < root.maxRetryAttempts) {
             retryTimer.start();
         } else {
             root.retryAttempts = 0;
+            log.warn("Weather fetch failed:", root.lastFetchError || "no output from fetcher");
             if (!root.weather.available) {
                 root.weather.loading = false;
             }
@@ -817,7 +823,7 @@ Singleton {
     Process {
         id: ipLocationFetcher
         running: false
-        command: lowPriorityCmd.concat(curlBaseCmd).concat(["http://ip-api.com/json/"])
+        command: lowPriorityCmd.concat(fetchCmd, ["http://ip-api.com/json/"])
 
         stdout: StdioCollector {
             onStreamFinished: {
@@ -842,7 +848,7 @@ Singleton {
                         throw new Error("Missing or invalid location data");
                     }
 
-                    setLocation(lat, lon, city, data.countryName || "");
+                    setLocation(lat, lon, city, data.country || "");
                     fetchWeather(lat, lon);
                 } catch (e) {
                     root.handleWeatherFailure();
@@ -905,11 +911,15 @@ Singleton {
         id: weatherFetcher
         running: false
 
+        stderr: StdioCollector {
+            id: weatherFetchErr
+        }
+
         stdout: StdioCollector {
             onStreamFinished: {
                 const raw = text.trim();
                 if (!raw || raw[0] !== "{") {
-                    root.handleWeatherFailure();
+                    root.handleWeatherFailure(weatherFetchErr.text.trim());
                     return;
                 }
 
@@ -990,6 +1000,7 @@ Singleton {
                     const feelsLikeC = current.apparent_temperature || tempC;
                     const feelsLikeF = feelsLikeC * 9 / 5 + 32;
 
+                    root.lastFetchError = "";
                     root.weather = {
                         "available": true,
                         "loading": false,
@@ -1030,7 +1041,7 @@ Singleton {
     Timer {
         id: updateTimer
         interval: nextInterval()
-        running: root.refCount > 0 && SettingsData.weatherEnabled
+        running: root.refCount > 0 && SettingsData.weatherEnabled && !SessionData.isGreeterMode
         repeat: true
         triggeredOnStart: true
         onTriggered: {

@@ -44,6 +44,7 @@ Item {
     readonly property real baseAppHeight: iconSize
 
     clip: false
+    property bool _switchingPosition: false
     implicitWidth: isVertical ? appLayout.height : appLayout.width
     implicitHeight: isVertical ? appLayout.width : appLayout.height
 
@@ -77,6 +78,7 @@ Item {
         height: layoutFlow.height
 
         Behavior on width {
+            enabled: !root._switchingPosition
             NumberAnimation {
                 duration: Theme.shortDuration
                 easing.type: Easing.OutCubic
@@ -84,16 +86,13 @@ Item {
         }
 
         Behavior on height {
+            enabled: !root._switchingPosition
             NumberAnimation {
                 duration: Theme.shortDuration
                 easing.type: Easing.OutCubic
             }
         }
-        anchors.horizontalCenter: root.isVertical ? undefined : parent.horizontalCenter
-        anchors.verticalCenter: root.isVertical ? parent.verticalCenter : undefined
-        anchors.left: root.isVertical && SettingsData.dockPosition === SettingsData.Position.Left ? parent.left : undefined
-        anchors.right: root.isVertical && SettingsData.dockPosition === SettingsData.Position.Right ? parent.right : undefined
-        anchors.top: root.isVertical ? undefined : parent.top
+        anchors.centerIn: parent
 
         Flow {
             id: layoutFlow
@@ -587,25 +586,40 @@ Item {
                         return 0;
                     }
 
+                    readonly property var shiftSpringParams: Theme.springPreset("fast", 150)
+
+                    SpringMotion {
+                        id: shiftXSpring
+                        enabled: !root.suppressShiftAnimation
+                        positionEpsilon: 0.05
+                        velocityEpsilon: 0.05
+                        stiffness: delegateItem.shiftSpringParams.stiffness
+                        damping: delegateItem.shiftSpringParams.damping
+                        value: delegateItem.shiftOffset
+
+                        Component.onCompleted: snapTo(delegateItem.shiftOffset)
+                    }
+
+                    SpringMotion {
+                        id: shiftYSpring
+                        enabled: !root.suppressShiftAnimation
+                        positionEpsilon: 0.05
+                        velocityEpsilon: 0.05
+                        stiffness: delegateItem.shiftSpringParams.stiffness
+                        damping: delegateItem.shiftSpringParams.damping
+                        value: delegateItem.shiftOffset
+
+                        Component.onCompleted: snapTo(delegateItem.shiftOffset)
+                    }
+
+                    onShiftOffsetChanged: {
+                        shiftXSpring.retarget(shiftOffset);
+                        shiftYSpring.retarget(shiftOffset);
+                    }
+
                     transform: Translate {
-                        x: root.isVertical ? 0 : delegateItem.shiftOffset
-                        y: root.isVertical ? delegateItem.shiftOffset : 0
-
-                        Behavior on x {
-                            enabled: !root.suppressShiftAnimation
-                            NumberAnimation {
-                                duration: 150
-                                easing.type: Easing.OutCubic
-                            }
-                        }
-
-                        Behavior on y {
-                            enabled: !root.suppressShiftAnimation
-                            NumberAnimation {
-                                duration: 150
-                                easing.type: Easing.OutCubic
-                            }
-                        }
+                        x: root.isVertical ? 0 : shiftXSpring.value
+                        y: root.isVertical ? shiftYSpring.value : 0
                     }
 
                     Rectangle {
@@ -707,6 +721,12 @@ Item {
 
     Connections {
         target: SettingsData
+        function onDockPositionChanged() {
+            root._switchingPosition = true;
+            Qt.callLater(() => {
+                root._switchingPosition = false;
+            });
+        }
         function onDockIsolateDisplaysChanged() {
             repeater.updateModel();
         }

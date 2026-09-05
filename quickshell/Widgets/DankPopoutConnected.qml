@@ -72,8 +72,7 @@ Item {
     readonly property real effectiveBarThickness: {
         if (root.usesConnectedSurfaceChrome)
             return Math.max(0, storedBarThickness);
-        const padding = storedBarConfig ? (storedBarConfig.innerPadding !== undefined ? storedBarConfig.innerPadding : 4) : 4;
-        return Math.max(26 + padding * 0.6, Theme.barHeight - 4 - (8 - padding)) + storedBarSpacing;
+        return Theme.barThickness(storedBarConfig?.innerPadding ?? 4, dpr) + storedBarSpacing;
     }
 
     readonly property var barBounds: {
@@ -113,30 +112,30 @@ Item {
         active: contentWindow.visible || root.shouldBeVisible
         presented: contentWindow.visible || root.shouldBeVisible
         renewTokenOnRecovery: false
-        isCurrentOwner: function(name) {
+        isCurrentOwner: function (name) {
             return PopoutManager.isCurrentPopout(root.popoutHandle, name);
         }
-        hasOwner: function(_name, ownerId) {
+        hasOwner: function (_name, ownerId) {
             return ConnectedModeState.hasPopoutOwner(ownerId);
         }
-        statePresent: function(name, ownerId) {
+        statePresent: function (name, ownerId) {
             return ConnectedModeState.hasPopoutOwner(ownerId) && ConnectedModeState.hasSurfaceDescriptor(name, "popout", ownerId);
         }
-        claimState: function(_name, state, ownerId) {
+        claimState: function (_name, state, ownerId) {
             return ConnectedModeState.claimPopout(ownerId, state);
         }
-        ensureState: function(_name, state, ownerId) {
+        ensureState: function (_name, state, ownerId) {
             if (!ConnectedModeState.hasPopoutOwner(ownerId))
                 return false;
             return ConnectedModeState.updatePopout(ownerId, state);
         }
-        releaseState: function(_name, ownerId) {
+        releaseState: function (_name, ownerId) {
             return ConnectedModeState.releasePopout(ownerId);
         }
-        updateAnimationState: function(_name, ownerId, animX, animY) {
+        updateAnimationState: function (_name, ownerId, animX, animY) {
             return ConnectedModeState.setPopoutAnim(ownerId, animX, animY);
         }
-        updateBodyState: function(_name, ownerId, bodyX, bodyY, bodyW, bodyH) {
+        updateBodyState: function (_name, ownerId, bodyX, bodyY, bodyW, bodyH) {
             return ConnectedModeState.setPopoutBody(ownerId, bodyX, bodyY, bodyW, bodyH);
         }
         onClaimIdChanged: root._resetPublishedBody()
@@ -370,7 +369,6 @@ Item {
     }
 
     onAlignedXChanged: _queueFullSync()
-    onAlignedYChanged: _queueFullSync()
     onAlignedWidthChanged: _queueFullSync()
     // Cheap deduped scalar writes: publish synchronously to stay in the same frame.
     onContentAnimXChanged: _syncPopoutAnim("x")
@@ -426,7 +424,7 @@ Item {
     }
 
     readonly property bool frameOwnsConnectedChrome: CompositorService.usesConnectedFrameChromeForScreen(root.screen)
-    readonly property bool usesConnectedSurfaceChrome: Theme.isConnectedEffect && !CompositorService.connectedFrameBlockedOnScreen(root.screen)
+    readonly property bool usesConnectedSurfaceChrome: Theme.isConnectedEffect
     readonly property bool usesLocalConnectedSurfaceChrome: usesConnectedSurfaceChrome && !frameOwnsConnectedChrome
     onFrameOwnsConnectedChromeChanged: _syncPopoutChromeState()
 
@@ -467,7 +465,7 @@ Item {
 
         if (contentContainer) {
             if (!shouldBeVisible)
-                morph.openProgress = 0;
+                morph.retarget(0);
             _captureChromeAnimTravel();
         }
 
@@ -476,7 +474,7 @@ Item {
 
         // Skip emerge animation on morph switch.
         if (morphTravelEnabled)
-            morph.openProgress = 1;
+            morph.retarget(1);
 
         if (root.frameOwnsConnectedChrome) {
             chromeLease.beginClaim();
@@ -522,6 +520,21 @@ Item {
         closeTimer.restart();
     }
 
+    function instantClose() {
+        closeTimer.stop();
+        _endMorphTravel();
+        _resetPublishedBody();
+        animationsEnabled = false;
+        isClosing = false;
+        shouldBeVisible = false;
+        _keyboardReady = false;
+        _primeContent = false;
+        contentWindow.visible = false;
+        PopoutManager.hidePopout(popoutHandle);
+        popoutClosed();
+        Qt.callLater(() => animationsEnabled = true);
+    }
+
     function toggle() {
         shouldBeVisible ? close() : open();
     }
@@ -549,7 +562,7 @@ Item {
 
     Timer {
         id: closeTimer
-        interval: Theme.variantCloseInterval(animationDuration)
+        interval: Math.max(Theme.variantCloseInterval(animationDuration), morph.settleDurationMs + 32)
         onTriggered: {
             if (!shouldBeVisible) {
                 contentWindow.visible = false;
@@ -679,11 +692,14 @@ Item {
     readonly property real shadowBuffer: Theme.snap(shadowRenderPadding + shadowMotionPadding, dpr)
     readonly property real alignedWidth: Theme.px(popupWidth, dpr)
     readonly property real alignedHeight: Theme.px(popupHeight, dpr)
+    readonly property var _geometrySpringParams: Theme.springPreset("default", root.animationDuration)
+
     property real renderedAlignedY: alignedY
     property real renderedAlignedHeight: alignedHeight
     readonly property bool renderedGeometryGrowing: alignedHeight >= renderedAlignedHeight
-    readonly property bool _settlingToOpen: fullHeightSurface && shouldBeVisible && morphAnim.running
+    readonly property bool _settlingToOpen: fullHeightSurface && shouldBeVisible && morph.running
 
+    // content animates on these curves; springs here drift and overshoot it
     Behavior on renderedAlignedY {
         enabled: root.animationsEnabled && contentWindow.visible && root.shouldBeVisible && !root._settlingToOpen
         NumberAnimation {
@@ -702,39 +718,37 @@ Item {
         }
     }
 
+    onAlignedYChanged: _queueFullSync()
+
     // Morph transition coordinates to animate travel between popouts during switch.
     property bool morphTravelEnabled: false
     property real morphSeedX: 0
     property real morphSeedY: 0
     property real morphSeedW: 0
     property real morphSeedH: 0
-    property real morphProgress: 1
-    // Distance-scaled duration for morph travel.
-    property int _morphTravelDuration: animationDuration
 
-    Behavior on morphProgress {
+    SpringMotion {
+        id: travelSpring
         enabled: root.morphTravelEnabled && root.animationsEnabled
-        NumberAnimation {
-            duration: root._morphTravelDuration
-            easing.type: Easing.BezierSpline
-            // M3 Expressive spatial motion starts with momentum and settles gently,
-            // which keeps rapid hover retargets from pausing between surfaces.
-            easing.bezierCurve: Theme.variantEnterCurve
-        }
+        reducedMotion: root.animationDuration <= 0
+        positionEpsilon: 0.001
+        velocityEpsilon: 0.001
+        stiffness: Theme.springPreset("fast", root.animationDuration).stiffness
+        damping: Theme.springPreset("fast", root.animationDuration).damping
+        value: 1
+        onValueChanged: root._syncPopoutBody()
     }
+
+    readonly property real morphProgress: travelSpring.value
 
     readonly property real pubBodyX: morphSeedX + (alignedX - morphSeedX) * morphProgress
     readonly property real pubBodyY: morphSeedY + (renderedAlignedY - morphSeedY) * morphProgress
     readonly property real pubBodyW: morphSeedW + (alignedWidth - morphSeedW) * morphProgress
     readonly property real pubBodyH: morphSeedH + (renderedAlignedHeight - morphSeedH) * morphProgress
 
-    // One animation drives all four coordinates, so publish once per progress
-    // tick instead of reacting independently to each derived property.
-    onMorphProgressChanged: _syncPopoutBody()
-
     function _beginMorphTravel() {
         morphTravelEnabled = false;
-        morphProgress = 1;
+        travelSpring.snapTo(1);
         if (!root.frameOwnsConnectedChrome || !root.screen)
             return;
         if (!root.hoverDismissEnabled)
@@ -751,18 +765,12 @@ Item {
         morphSeedY = ConnectedModeState.popoutBodyY;
         morphSeedW = w;
         morphSeedH = h;
-        // Scale spatial motion with both travel and shape change. Never shorten the
-        // configured enter duration; cap long sweeps so hover switching stays responsive.
-        const base = Math.max(0, Theme.variantDuration(root.animationDuration, true));
-        const travel = Math.hypot(root.alignedX - morphSeedX, root.renderedAlignedY - morphSeedY);
-        const resize = Math.hypot(root.alignedWidth - morphSeedW, root.renderedAlignedHeight - morphSeedH);
-        const spatialDistance = travel + resize * 0.35;
-        _morphTravelDuration = Math.round(Math.min(base * 1.6, base + spatialDistance * 0.15));
-        morphProgress = 0;
+        // Seed rectangle lands instantly, then travel carries momentum to target.
         morphTravelEnabled = true;
+        travelSpring.snapTo(0);
         Qt.callLater(() => {
             if (root.shouldBeVisible)
-                root.morphProgress = 1;
+                travelSpring.retarget(1);
         });
     }
 
@@ -775,19 +783,18 @@ Item {
         // A third hover can supersede a morph before it settles. Freeze the outgoing
         // content at the live rectangle so it fades in place while the next surface
         // inherits exactly the same geometry.
-        morphTravelEnabled = false;
         morphSeedX = x;
         morphSeedY = y;
         morphSeedW = w;
         morphSeedH = h;
-        morphProgress = 0;
         morphTravelEnabled = true;
+        travelSpring.snapTo(0);
         _syncPopoutBody();
     }
 
     function _endMorphTravel() {
         morphTravelEnabled = false;
-        morphProgress = 1;
+        travelSpring.snapTo(1);
         morphSeedX = 0;
         morphSeedY = 0;
         morphSeedW = 0;
@@ -1132,35 +1139,31 @@ Item {
                 trackingEnabled: root.hoverDismissEnabled && root.shouldBeVisible
             }
 
-            QtObject {
+            // openProgress spring: 0 = collapsed, 1 = open.
+            SpringMotion {
                 id: morph
-                property real openProgress: 0
-                Behavior on openProgress {
-                    enabled: root.animationsEnabled
-                    NumberAnimation {
-                        id: morphAnim
-                        duration: Theme.variantDuration(root.animationDuration, root.shouldBeVisible)
-                        easing.type: Easing.BezierSpline
-                        easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                    }
-                }
+                enabled: root.animationsEnabled
+                reducedMotion: root.animationDuration <= 0
+                positionEpsilon: 0.001
+                velocityEpsilon: 0.001
+                stiffness: root._geometrySpringParams.stiffness
+                damping: root._geometrySpringParams.damping
+
+                Component.onCompleted: snapTo(root.shouldBeVisible ? 1 : 0)
             }
 
-            readonly property real animX: contentContainer.offsetX * (1 - morph.openProgress)
-            readonly property real animY: contentContainer.offsetY * (1 - morph.openProgress)
-            readonly property real scaleValue: contentContainer.computedScaleCollapsed + (1.0 - contentContainer.computedScaleCollapsed) * morph.openProgress
+            readonly property real animX: contentContainer.offsetX * (1 - morph.value)
+            readonly property real animY: contentContainer.offsetY * (1 - morph.value)
+            readonly property real scaleValue: contentContainer.computedScaleCollapsed + (1.0 - contentContainer.computedScaleCollapsed) * morph.value
 
-            Component.onCompleted: {
-                morph.openProgress = root.shouldBeVisible ? 1 : 0;
-                root._captureChromeAnimTravel();
-            }
+            Component.onCompleted: root._captureChromeAnimTravel()
 
             Connections {
                 target: root
                 function onShouldBeVisibleChanged() {
                     root._captureChromeAnimTravel();
                     // Skip reverse emerge animation during a superseded close.
-                    morph.openProgress = (root.shouldBeVisible || root._supersededClose) ? 1 : 0;
+                    morph.retarget((root.shouldBeVisible || root._supersededClose) ? 1 : 0);
                 }
             }
 
