@@ -75,6 +75,10 @@ type ProviderStatus struct {
 	// AuthMethod is "qr", "code" or "url"; AuthPayload is what to render.
 	AuthMethod  string `json:"authMethod,omitempty"`
 	AuthPayload string `json:"authPayload,omitempty"`
+	// For AuthMethod "form": what to ask the user for. The answers are sent
+	// straight back to the bridge with chat.authSubmit and never stored here.
+	AuthTitle  string          `json:"authTitle,omitempty"`
+	AuthFields []wireAuthField `json:"authFields,omitempty"`
 }
 
 // discoverProviders scans the plugin directories for type "chat" plugins.

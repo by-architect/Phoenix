@@ -327,7 +327,8 @@ if providers:
 
 # --- methods exist ------------------------------------------------------
 for method in ("chat.rescan", "chat.setProviderConfig", "chat.deleteLocal",
-               "chat.revoke", "chat.authQrCode", "chat.setFocus"):
+               "chat.revoke", "chat.authQrCode", "chat.authSubmit",
+               "chat.setFocus"):
     r = call(method, {})
     # A missing method says so; a present one complains about its arguments.
     check(f"{method} is implemented",

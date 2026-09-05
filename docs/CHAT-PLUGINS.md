@@ -140,6 +140,7 @@ delivery receipt that arrives later. DMS has already written a `pending` row; yo
 {"id":7,"method":"login"}
 {"id":8,"method":"logout"}
 {"id":9,"method":"shutdown"}
+{"id":10,"method":"authSubmit","params":{"values":{"user":"…","password":"…"}}}
 ```
 
 `history` asks you to backfill older messages — answer `ok:true` and emit them as `message` events;
@@ -167,7 +168,35 @@ are still alive shortly after, then SIGKILL.
 `state` is one of `connecting`, `connected`, `disconnected`, `needsLogin`.
 
 `auth` drives the sign-in panel: `method` is `qr` (with `qr`, a string DMS renders as a QR code),
-`code` (with `code`, shown as text to type elsewhere), or `url` (with `url`, opened in a browser).
+`code` (with `code`, shown as text to type elsewhere), `url` (with `url`, opened in a browser), or
+`form` — for services that sign in with typed credentials rather than a scannable code.
+
+```json
+{"event":"auth","method":"form","title":"Sign in to your homeserver.","fields":[
+  {"key":"homeserver","label":"Homeserver","type":"url","value":"https://matrix.org","required":true},
+  {"key":"user","label":"User ID","type":"text","placeholder":"@you:example.org","required":true},
+  {"key":"password","label":"Password","type":"password","required":true}
+]}
+```
+
+DMS renders the fields inside the provider's card in **Settings → Chats** and sends the answers back:
+
+```json
+{"id":11,"method":"authSubmit","params":{"values":{"homeserver":"…","user":"…","password":"…"}}}
+→ {"id":11,"ok":true}
+→ {"id":11,"ok":false,"error":{"code":"login_failed","message":"Invalid password"}}
+```
+
+`type` is advisory: `password` is masked, anything else is a plain box, and an unrecognised type
+degrades to text rather than rendering nothing. `value` pre-fills the field. Answer `ok:false` with a
+message a person can act on — "Invalid password" rather than "login failed" — because that message is
+what the user is shown.
+
+**The values are never stored.** They pass through the socket and the backend in memory, reach your
+bridge, and are dropped. Exchange them for whatever token your service issues and keep that yourself,
+under your own directory. Nothing a user types in this form is written to `plugin_settings.json`,
+logged, or kept after the call returns — which is the whole reason this exists rather than asking
+providers to put a password field in their settings.
 
 `chat` and `message` are **upserts** — send the same object again with new fields and it merges. Use
 the batch forms (`chats`, `messages`) for history sync; DMS writes a batch in one transaction and

@@ -76,6 +76,8 @@ func HandleRequest(conn *models.Conn, req models.Request, manager *Manager) {
 		handlePurge(ctx, conn, req, manager)
 	case "chat.authQrCode":
 		handleAuthQRCode(conn, req, manager)
+	case "chat.authSubmit":
+		handleAuthSubmit(ctx, conn, req, manager)
 	case "chat.tap":
 		// Streams until the client disconnects, so it must not run under the
 		// request timeout the other methods share.
@@ -685,6 +687,41 @@ func handleAuth(ctx context.Context, conn *models.Conn, req models.Request, m *M
 	}
 
 	if _, err := b.call(ctx, method, nil); err != nil {
+		models.RespondError(conn, req.ID, err.Error())
+		return
+	}
+	models.Respond(conn, req.ID, models.SuccessResult{Success: true})
+}
+
+// handleAuthSubmit passes typed sign-in details to a provider's bridge.
+//
+// For providers that sign in with credentials rather than a scannable code --
+// Matrix, a mail account, anything with an API key. The values go straight
+// through to the bridge and are deliberately not stored, not logged and not
+// written to settings: the bridge exchanges them for whatever token it keeps and
+// they are gone from this process the moment the call returns.
+func handleAuthSubmit(ctx context.Context, conn *models.Conn, req models.Request, m *Manager) {
+	provider, ok := models.Get[string](req, "provider")
+	if !ok || provider == "" {
+		models.RespondError(conn, req.ID, "provider is required")
+		return
+	}
+
+	values, ok := models.Get[map[string]any](req, "values")
+	if !ok || len(values) == 0 {
+		models.RespondError(conn, req.ID, "values are required")
+		return
+	}
+
+	b, err := m.bridgeFor(provider)
+	if err != nil {
+		models.RespondError(conn, req.ID, err.Error())
+		return
+	}
+
+	if _, err := b.call(ctx, MethodAuthSubmit, map[string]any{"values": values}); err != nil {
+		// The bridge's message is the useful one -- "wrong password", not
+		// "call failed" -- so it is passed through rather than replaced.
 		models.RespondError(conn, req.ID, err.Error())
 		return
 	}

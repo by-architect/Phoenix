@@ -23,6 +23,7 @@ const (
 	MethodHistory    = "history"
 	MethodSearch     = "search"
 	MethodLogin      = "login"
+	MethodAuthSubmit = "authSubmit"
 	MethodLogout     = "logout"
 	MethodRevoke     = "revoke"
 	MethodShutdown   = "shutdown"
@@ -106,6 +107,11 @@ type bridgeFrame struct {
 	QR     string `json:"qr"`
 	Code   string `json:"code"`
 	URL    string `json:"url"`
+	// Fields are for method "form": a provider that signs in with typed
+	// credentials rather than a scannable code. The host renders them, sends
+	// the values straight back with authSubmit, and never stores them.
+	Title  string          `json:"title"`
+	Fields []wireAuthField `json:"fields"`
 
 	// Payloads. Singular and batch forms are both accepted; the batch forms
 	// exist so a history sync costs one transaction instead of thousands.
@@ -206,4 +212,19 @@ type fetchMediaResult struct {
 	Path  string `json:"path"`
 	Bytes string `json:"bytes"`
 	Mime  string `json:"mime"`
+}
+
+// wireAuthField is one input in a form-based sign-in.
+//
+// Type is advisory and drives how the host renders the input: "password" is
+// masked, "url" and "text" are not. Anything unrecognised is treated as text,
+// so a bridge asking for something new degrades to a plain box rather than
+// showing nothing.
+type wireAuthField struct {
+	Key         string `json:"key"`
+	Label       string `json:"label"`
+	Type        string `json:"type"`
+	Value       string `json:"value"`
+	Placeholder string `json:"placeholder"`
+	Required    bool   `json:"required"`
 }

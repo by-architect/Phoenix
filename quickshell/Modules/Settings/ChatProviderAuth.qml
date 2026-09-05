@@ -21,6 +21,37 @@ StyledRect {
     readonly property var provider: ChatService.providerById(root.providerId)
     readonly property string method: provider?.authMethod ?? ""
     readonly property string payload: provider?.authPayload ?? ""
+    readonly property string authTitle: provider?.authTitle ?? ""
+    readonly property var authFields: provider?.authFields ?? []
+
+    // Typed values live here and nowhere else. They are handed to the bridge on
+    // submit and cleared; nothing writes them to settings or to disk.
+    property var fieldValues: ({})
+    property bool submitting: false
+
+    function submitForm() {
+        if (root.submitting)
+            return;
+
+        let values = {};
+        for (const field of root.authFields) {
+            const value = root.fieldValues[field.key] || field.value || "";
+            if (field.required && value === "") {
+                ToastService.showError(I18n.tr("Sign-in failed"), I18n.tr("%1 is required").arg(field.label));
+                return;
+            }
+            values[field.key] = value;
+        }
+
+        root.submitting = true;
+        ChatService.authSubmit(root.providerId, values, (succeeded, error) => {
+            root.submitting = false;
+            if (succeeded) {
+                // Never keep a password around after it has been used.
+                root.fieldValues = ({});
+            }
+        });
+    }
 
     property string qrImagePath: ""
     property bool requesting: false
@@ -87,9 +118,71 @@ StyledRect {
                     return I18n.tr("Enter this code in the app on your other device.");
                 case "url":
                     return I18n.tr("Open this link to finish signing in.");
+                case "form":
+                    return root.authTitle !== "" ? root.authTitle : I18n.tr("Enter your account details to sign in.");
                 default:
                     return I18n.tr("Start sign-in to link this device.");
                 }
+            }
+        }
+
+        // ----------------------------------------------------------- form
+
+        // For providers that sign in with credentials rather than a code.
+        // The fields are whatever the bridge asked for -- the shell knows
+        // nothing about homeservers, mailboxes or API keys.
+        Column {
+            width: parent.width
+            spacing: Theme.spacingS
+            visible: root.method === "form" && root.authFields.length > 0
+
+            Repeater {
+                model: root.authFields
+
+                Column {
+                    required property var modelData
+
+                    width: parent ? parent.width : 0
+                    spacing: Theme.spacingXS
+
+                    StyledText {
+                        width: parent.width
+                        text: modelData.label || modelData.key
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.surfaceVariantText
+                    }
+
+                    DankTextField {
+                        width: parent.width
+                        placeholderText: modelData.placeholder || ""
+                        text: root.fieldValues[modelData.key] !== undefined ? root.fieldValues[modelData.key] : (modelData.value || "")
+                        // Masked for anything the bridge marked secret. Any
+                        // unrecognised type falls through to a plain box, so a
+                        // bridge asking for something new still renders.
+                        echoMode: modelData.type === "password" ? TextInput.Password : TextInput.Normal
+                        onTextChanged: {
+                            let next = root.fieldValues;
+                            next[modelData.key] = text;
+                            root.fieldValues = next;
+                        }
+                        onAccepted: root.submitForm()
+                    }
+                }
+            }
+
+            Item {
+                width: 1
+                height: Theme.spacingXS
+            }
+
+            DankButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                enabled: !root.submitting
+                text: root.submitting ? I18n.tr("Signing in…") : I18n.tr("Sign in")
+                iconName: "login"
+                backgroundColor: Theme.primary
+                textColor: Theme.onPrimary
+                onClicked: root.submitForm()
             }
         }
 
@@ -166,9 +259,11 @@ StyledRect {
         }
 
         // Always offered: a challenge may have expired, and asking again is the
-        // only way forward.
+        // only way forward. Hidden for a form, which has its own submit button
+        // and nothing to re-request.
         DankButton {
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: root.method !== "form"
             text: root.payload === "" ? I18n.tr("Start sign-in") : I18n.tr("Get a new code")
             iconName: root.payload === "" ? "login" : "refresh"
             backgroundColor: root.payload === "" ? Theme.primary : "transparent"

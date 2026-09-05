@@ -65,6 +65,10 @@ type bridge struct {
 	// one-shot push, but the panel showing it may be opened long afterwards.
 	authMethod  string
 	authPayload string
+	// authTitle and authFields describe a form-based sign-in. The values the
+	// user types are never kept here -- they go straight back to the bridge.
+	authTitle  string
+	authFields []wireAuthField
 
 	// stderrTail keeps the last few lines the bridge complained about, so a
 	// crash can be explained without the user having to reproduce it under
@@ -307,6 +311,7 @@ func (b *bridge) handleEvent(f bridgeFrame) {
 		if f.State == chat.StateConnected {
 			b.mu.Lock()
 			b.authMethod, b.authPayload = "", ""
+			b.authTitle, b.authFields = "", nil
 			b.mu.Unlock()
 		}
 
@@ -327,6 +332,8 @@ func (b *bridge) handleEvent(f bridgeFrame) {
 		b.mu.Lock()
 		b.authMethod = method
 		b.authPayload = payload
+		b.authTitle = f.Title
+		b.authFields = f.Fields
 		b.mu.Unlock()
 
 	case EventLog:
@@ -600,6 +607,8 @@ func (b *bridge) Status() ProviderStatus {
 		StderrTail:   tail,
 		AuthMethod:   b.authMethod,
 		AuthPayload:  b.authPayload,
+		AuthTitle:    b.authTitle,
+		AuthFields:   b.authFields,
 	}
 }
 

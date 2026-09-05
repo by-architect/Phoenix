@@ -592,6 +592,26 @@ Singleton {
         });
     }
 
+    // authSubmit hands typed sign-in details to a provider that asked for them.
+    //
+    // The values are passed straight through to the bridge and never stored:
+    // not here, not in the backend, and not in plugin settings. A password
+    // exists only for the duration of this call.
+    function authSubmit(providerId, values, onDone) {
+        if (!available)
+            return;
+        DMSService.sendRequest("chat.authSubmit", {
+            "provider": providerId,
+            "values": values
+        }, response => {
+            if (response.error) {
+                ToastService.showError(I18n.tr("Sign-in failed"), response.error);
+            }
+            if (onDone)
+                onDone(!response.error, response.error || "");
+        });
+    }
+
     function logout(providerId) {
         if (!available)
             return;
